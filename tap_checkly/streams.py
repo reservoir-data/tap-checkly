@@ -93,7 +93,7 @@ class AlertNotifications(ChecklyStream):
             th.StringType,
             description=(
                 "The result of sending the alert notification. For example, this could "
-                "be the response body of the Webhook.",
+                "be the response body of the Webhook."
             ),
         ),
         th.Property(
@@ -215,7 +215,7 @@ class Checks(ChecklyStream):
             th.BooleanType,
             description=(
                 "Determines if any notifications will be send out when a check fails "
-                "and/or recovers.",
+                "and/or recovers."
             ),
         ),
         th.Property(

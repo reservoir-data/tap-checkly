@@ -567,6 +567,16 @@ class Dashboards(ChecklyStream):
     ).to_dict()
 
 
+class EnvironmentVariables(ChecklyStream):
+    """Environment variables."""
+
+    name = "variables"
+    path = "/variables"
+    primary_keys = ["key"]
+
+    schema = th.PropertiesList(*KEY_VALUE_OBJECT.wrapped).to_dict()
+
+
 class Locations(ChecklyStream):
     """Locations."""
 

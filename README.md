@@ -2,7 +2,7 @@
 
 Singer tap for Checkly.
 
-Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
+Built with the [Meltano SDK](https://sdk.meltano.com) for Singer Taps and Targets.
 
 ## Capabilities
 
@@ -11,10 +11,37 @@ Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
 * `discover`
 * `about`
 * `stream-maps`
+* `schema-flattening`
 
 ## Settings
 
-- [ ] `Developer TODO:` Declare tap settings here.
+| Setting             | Required | Default | Description                                                                   |
+|:--------------------|:--------:|:-------:|:------------------------------------------------------------------------------|
+| account_id          | True     | None    | Checkly Account ID                                                            |
+| token               | True     | None    | API Token for Checkly                                                         |
+| start_date          | False    | None    | Earliest datetime to get data from                                            |
+| stream_maps         | False    | None    | Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html). |
+| stream_map_config   | False    | None    | User-defined config values to be used within map expressions.                  |
+| flattening_enabled  | False    | None    | 'True' to enable schema flattening and automatically expand nested properties. |
+| flattening_max_depth| False    | None    | The max depth to flatten schemas.                                              |
+
+## API Coverage
+
+| API Endpoint                  | Supported | Notes |
+| :---------------------------- | :-------: | :---- |
+| `/v1/alert-channels`          |    ✅     |       |
+| `/v1/alert-notifications`     |    ✅     |       |
+| `/v1/checks`                  |    ✅     |       |
+| `/v1/check-alerts`            |    ✅     |       |
+| `/v1/check-groups`            |    N/A    |       |
+| `/v1/check-results/{checkId}` |    N/A    |       |
+| `/v1/dashboards`              |    ✅     |       |
+| `/v1/locations`               |    ✅     |       |
+| `/v1/maintenance-windows`     |    N/A    |       |
+| `/v1/private-locations`       |    N/A    |       |
+| `/v1/runtimes`                |    ✅     |       |
+| `/v1/snippets`                |    ✅     |       |
+| `/v1/variables`               |    ✅     |       |
 
 A full list of supported settings and capabilities is available by running: `tap-checkly --about`
 

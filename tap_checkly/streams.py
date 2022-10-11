@@ -477,7 +477,14 @@ class Checks(ChecklyStream):
                                 "method",
                                 th.StringType,
                                 default="POST",
-                                # enum=["GET", "POST", "PUT", "HEAD", "DELETE", "PATCH"],
+                                # enum=[
+                                #     "GET",
+                                #     "POST",
+                                #     "PUT",
+                                #     "HEAD",
+                                #     "DELETE",
+                                #     "PATCH",
+                                # ],
                             ),
                             th.Property("headers", th.ArrayType(KEY_VALUE_OBJECT)),
                             th.Property(

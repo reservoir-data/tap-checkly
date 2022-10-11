@@ -588,3 +588,95 @@ class Locations(ChecklyStream):
             # example="N. Virginia",
         ),
     ).to_dict()
+
+
+class Runtimes(ChecklyStream):
+    """Runtimes."""
+
+    name = "runtimes"
+    path = "/runtimes"
+    primary_keys = ["name"]
+
+    schema = th.PropertiesList(
+        th.Property(
+            "name",
+            th.StringType,
+            description="The unique name of this runtime.",
+            # example="2021.10",
+            required=True,
+        ),
+        th.Property(
+            "stage",
+            th.StringType,
+            description="Current life stage of a runtime.",
+            # example="STABLE",
+            # enum=["BETA", "CURRENT", "DEPRECATED", "REMOVED", "STABLE"],
+        ),
+        th.Property(
+            "runtimeEndOfLife",
+            th.StringType,
+            description="Date which a runtime wil…oved from our platform.",
+            # example="12/31/2022",
+        ),
+        th.Property(
+            "default",
+            th.BooleanType,
+            description="Indicates if this is the…me provided by Checkly.",
+            required=True,
+        ),
+        th.Property(
+            "description",
+            th.StringType,
+            description=(
+                "A short, human readable description of the main updates in this "
+                "runtime."
+            ),
+        ),
+        th.Property(
+            "dependencies",
+            th.ObjectType(additional_properties=th.StringType),
+            description=(
+                "An object with all dependency package names and versions as in a "
+                "standard package.json."
+            ),
+            required=True,
+        ),
+    ).to_dict()
+
+
+class Snippets(ChecklyStream):
+    """Snippets."""
+
+    name = "snippets"
+    path = "/snippets"
+    primary_keys = ["id"]
+    replication_key = "updated_at"
+
+    schema = th.PropertiesList(
+        th.Property(
+            "id",
+            th.IntegerType,
+        ),
+        th.Property(
+            "name",
+            th.StringType,
+            description="The snippet name.",
+        ),
+        th.Property(
+            "script",
+            th.StringType,
+            description=(
+                "Your Node.js code that interacts with the API check lifecycle, or "
+                "functions as a partial for browser checks."
+            ),
+            # example="request.url = request.url + '/extra'",
+        ),
+        th.Property(
+            "created_at",
+            th.DateTimeType,
+        ),
+        th.Property(
+            "updated_at",
+            th.DateTimeType,
+        ),
+    ).to_dict()

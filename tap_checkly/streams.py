@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from tap_checkly.client import ChecklyStream
+from tap_checkly.client import ChecklyPaginatedStream, ChecklyStream
 
 
-class AlertChannels(ChecklyStream):
+class AlertChannels(ChecklyPaginatedStream):
     """Alert channels."""
 
     name = "alert_channels"
@@ -15,7 +15,7 @@ class AlertChannels(ChecklyStream):
     openapi_ref = "AlertChannel"
 
 
-class AlertNotifications(ChecklyStream):
+class AlertNotifications(ChecklyPaginatedStream):
     """Alert notification.
 
     Alert notifications that have been sent for your account.
@@ -28,7 +28,7 @@ class AlertNotifications(ChecklyStream):
     openapi_ref = "AlertNotification"
 
 
-class Checks(ChecklyStream):
+class Checks(ChecklyPaginatedStream):
     """Checks."""
 
     name = "checks"
@@ -38,7 +38,7 @@ class Checks(ChecklyStream):
     openapi_ref = "Check"
 
 
-class CheckAlerts(ChecklyStream):
+class CheckAlerts(ChecklyPaginatedStream):
     """Check alerts."""
 
     name = "check_alerts"
@@ -47,7 +47,7 @@ class CheckAlerts(ChecklyStream):
     openapi_ref = "CheckAlert"
 
 
-class CheckGroups(ChecklyStream):
+class CheckGroups(ChecklyPaginatedStream):
     """Check groups."""
 
     name = "check_groups"
@@ -56,7 +56,7 @@ class CheckGroups(ChecklyStream):
     openapi_ref = "CheckGroup"
 
 
-class Dashboards(ChecklyStream):
+class Dashboards(ChecklyPaginatedStream):
     """Dashboards.
 
     All current dashboards in your account.
@@ -69,7 +69,10 @@ class Dashboards(ChecklyStream):
 
 
 class EnvironmentVariables(ChecklyStream):
-    """Environment variables."""
+    """Environment variables.
+
+    Note: Pagination seems to be broken for this endpoint.
+    """
 
     name = "variables"
     path = "/variables"
@@ -86,7 +89,7 @@ class Locations(ChecklyStream):
     openapi_ref = "Location"
 
 
-class MaintenanceWindows(ChecklyStream):
+class MaintenanceWindows(ChecklyPaginatedStream):
     """Maintenance windows."""
 
     name = "maintenance_windows"
@@ -113,7 +116,7 @@ class Runtimes(ChecklyStream):
     openapi_ref = "Runtime"
 
 
-class Snippets(ChecklyStream):
+class Snippets(ChecklyPaginatedStream):
     """Snippets."""
 
     name = "snippets"

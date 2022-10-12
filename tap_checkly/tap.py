@@ -44,9 +44,11 @@ class TapCheckly(Tap):
             streams.AlertNotifications(tap=self),
             streams.Checks(tap=self),
             streams.CheckAlerts(tap=self),
+            streams.CheckGroups(tap=self),
             streams.Dashboards(tap=self),
             streams.EnvironmentVariables(tap=self),
             streams.Locations(tap=self),
+            streams.MaintenanceWindows(tap=self),
             streams.Runtimes(tap=self),
             streams.Snippets(tap=self),
         ]

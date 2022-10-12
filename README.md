@@ -33,11 +33,11 @@ Built with the [Meltano SDK](https://sdk.meltano.com) for Singer Taps and Target
 | `/v1/alert-notifications`     |    ✅     |       |
 | `/v1/checks`                  |    ✅     |       |
 | `/v1/check-alerts`            |    ✅     |       |
-| `/v1/check-groups`            |    N/A    |       |
+| `/v1/check-groups`            |    ✅     |       |
 | `/v1/check-results/{checkId}` |    N/A    |       |
 | `/v1/dashboards`              |    ✅     |       |
 | `/v1/locations`               |    ✅     |       |
-| `/v1/maintenance-windows`     |    N/A    |       |
+| `/v1/maintenance-windows`     |    ✅     |       |
 | `/v1/private-locations`       |    N/A    |       |
 | `/v1/runtimes`                |    ✅     |       |
 | `/v1/snippets`                |    ✅     |       |

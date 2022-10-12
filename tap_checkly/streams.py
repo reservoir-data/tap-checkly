@@ -2,7 +2,11 @@
 
 from __future__ import annotations
 
-from tap_checkly.client import ChecklyPaginatedStream, ChecklyStream
+from tap_checkly.client import (
+    ChecklyIncrementalStream,
+    ChecklyPaginatedStream,
+    ChecklyStream,
+)
 
 
 class AlertChannels(ChecklyPaginatedStream):
@@ -15,7 +19,7 @@ class AlertChannels(ChecklyPaginatedStream):
     openapi_ref = "AlertChannel"
 
 
-class AlertNotifications(ChecklyPaginatedStream):
+class AlertNotifications(ChecklyIncrementalStream):
     """Alert notification.
 
     Alert notifications that have been sent for your account.
@@ -38,12 +42,13 @@ class Checks(ChecklyPaginatedStream):
     openapi_ref = "Check"
 
 
-class CheckAlerts(ChecklyPaginatedStream):
+class CheckAlerts(ChecklyIncrementalStream):
     """Check alerts."""
 
     name = "check_alerts"
     path = "/check-alerts"
     primary_keys = ["id"]
+    replication_key = "created_at"
     openapi_ref = "CheckAlert"
 
 

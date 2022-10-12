@@ -6491,12 +6491,12 @@
           },
           "created_at": {
             "type": "string",
-            "format": "date",
+            "format": "date-time",
             "description": "The date and time this check alert was created."
           },
           "startedAt": {
             "type": "string",
-            "format": "date",
+            "format": "date-time",
             "description": "The date and time this check alert was started."
           }
         },

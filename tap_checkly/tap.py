@@ -49,6 +49,7 @@ class TapCheckly(Tap):
             streams.EnvironmentVariables(tap=self),
             streams.Locations(tap=self),
             streams.MaintenanceWindows(tap=self),
+            streams.PrivateLocations(tap=self),
             streams.Runtimes(tap=self),
             streams.Snippets(tap=self),
         ]

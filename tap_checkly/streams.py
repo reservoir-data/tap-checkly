@@ -28,6 +28,16 @@ class AlertNotifications(ChecklyStream):
     openapi_ref = "AlertNotification"
 
 
+class Checks(ChecklyStream):
+    """Checks."""
+
+    name = "checks"
+    path = "/checks"
+    primary_keys = ["id"]
+    # replication_key = "updated_at"
+    openapi_ref = "Check"
+
+
 class CheckAlerts(ChecklyStream):
     """Check alerts."""
 
@@ -37,14 +47,13 @@ class CheckAlerts(ChecklyStream):
     openapi_ref = "CheckAlert"
 
 
-class Checks(ChecklyStream):
-    """Checks."""
+class CheckGroups(ChecklyStream):
+    """Check groups."""
 
-    name = "checks"
-    path = "/checks"
+    name = "check_groups"
+    path = "/check-groups"
     primary_keys = ["id"]
-    # replication_key = "updated_at"
-    openapi_ref = "Check"
+    openapi_ref = "CheckGroup"
 
 
 class Dashboards(ChecklyStream):
@@ -57,15 +66,6 @@ class Dashboards(ChecklyStream):
     path = "/dashboards"
     primary_keys = ["dashboardId"]
     openapi_ref = "Dashboard"
-
-
-class CheckGroups(ChecklyStream):
-    """Check groups."""
-
-    name = "check_groups"
-    path = "/check-groups"
-    primary_keys = ["id"]
-    openapi_ref = "CheckGroup"
 
 
 class EnvironmentVariables(ChecklyStream):
@@ -93,6 +93,15 @@ class MaintenanceWindows(ChecklyStream):
     path = "/maintenance-windows"
     primary_keys = ["id"]
     openapi_ref = "MaintenanceWindow"
+
+
+class PrivateLocations(ChecklyStream):
+    """Private locations."""
+
+    name = "private_locations"
+    path = "/private-locations"
+    primary_keys = ["id"]
+    openapi_ref = "privateLocationsSchema"
 
 
 class Runtimes(ChecklyStream):

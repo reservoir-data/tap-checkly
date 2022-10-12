@@ -38,7 +38,7 @@ Built with the [Meltano SDK](https://sdk.meltano.com) for Singer Taps and Target
 | `/v1/dashboards`              |    ✅     |       |
 | `/v1/locations`               |    ✅     |       |
 | `/v1/maintenance-windows`     |    ✅     |       |
-| `/v1/private-locations`       |    N/A    |       |
+| `/v1/private-locations`       |    ✅     |       |
 | `/v1/runtimes`                |    ✅     |       |
 | `/v1/snippets`                |    ✅     |       |
 | `/v1/variables`               |    ✅     |       |

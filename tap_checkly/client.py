@@ -176,3 +176,29 @@ class ChecklyPaginatedStream(ChecklyStream):
             "page": next_page_token,
             "limit": PAGE_SIZE,
         }
+
+
+class ChecklyIncrementalStream(ChecklyPaginatedStream):
+    """Checkly incremental stream class."""
+
+    def get_url_params(
+        self,
+        context: dict | None,
+        next_page_token: Any | None,
+    ) -> dict[str, Any]:
+        """Get URL query parameters.
+
+        Args:
+            context: Stream sync context.
+            next_page_token: Next offset.
+
+        Returns:
+            Mapping of URL query parameters.
+        """
+        params = super().get_url_params(context, next_page_token)
+
+        start_date = self.get_starting_timestamp(context)
+        if start_date:
+            params["from"] = start_date.timestamp()
+
+        return params

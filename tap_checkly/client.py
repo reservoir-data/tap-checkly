@@ -2,13 +2,34 @@
 
 from __future__ import annotations
 
+import json
+import sys
+from abc import ABCMeta, abstractmethod
+from functools import lru_cache
 from typing import Any
 
 from singer_sdk import RESTStream
+from singer_sdk._singerlib import resolve_schema_references
 from singer_sdk.authenticators import BearerTokenAuthenticator
 
+if sys.version_info >= (3, 9):
+    import importlib.resources as importlib_resources
+else:
+    import importlib_resources
 
-class ChecklyStream(RESTStream):
+
+@lru_cache(maxsize=None)
+def load_openapi() -> dict[str, Any]:
+    """Load the OpenAPI specification from the package.
+
+    Returns:
+        The OpenAPI specification as a dict.
+    """
+    with importlib_resources.files("tap_checkly").joinpath("openapi.json").open() as f:
+        return json.load(f)
+
+
+class ChecklyStream(RESTStream, metaclass=ABCMeta):
     """Checkly stream class."""
 
     url_base = "https://api.checklyhq.com/v1"
@@ -56,3 +77,29 @@ class ChecklyStream(RESTStream):
         """
         params: dict = {}
         return params
+
+    def _resolve_openapi_ref(self) -> dict[str, Any]:
+        schema = {"$ref": f"#/components/schemas/{self.openapi_ref}"}
+        openapi = load_openapi()
+        schema["components"] = openapi["components"]
+        return resolve_schema_references(schema)
+
+    @property
+    @lru_cache(maxsize=None)
+    def schema(self) -> dict[str, Any]:
+        """Return the schema for this stream.
+
+        Returns:
+            The schema for this stream.
+        """
+        return self._resolve_openapi_ref()
+
+    @property
+    @abstractmethod
+    def openapi_ref(self) -> str:
+        """Return the OpenAPI component name for this stream.
+
+        Returns:
+            The OpenAPI reference for this stream.
+        """
+        ...

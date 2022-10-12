@@ -196,5 +196,9 @@ class ChecklyIncrementalStream(ChecklyPaginatedStream):
             Mapping of URL query parameters.
         """
         params = super().get_url_params(context, next_page_token)
-        params["from"] = self.get_starting_timestamp(context).timestamp()
+
+        start_date = self.get_starting_timestamp(context)
+        if start_date:
+            params["from"] = start_date.timestamp()
+
         return params

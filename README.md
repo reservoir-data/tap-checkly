@@ -27,21 +27,21 @@ Built with the [Meltano SDK](https://sdk.meltano.com) for Singer Taps and Target
 
 ## API Coverage
 
-| API Endpoint                  | Supported | Notes |
-| :---------------------------- | :-------: | :---- |
-| `/v1/alert-channels`          |    ✅     |       |
-| `/v1/alert-notifications`     |    ✅     |       |
-| `/v1/checks`                  |    ✅     |       |
-| `/v1/check-alerts`            |    ✅     |       |
-| `/v1/check-groups`            |    ✅     |       |
-| `/v1/check-results/{checkId}` |    N/A    |       |
-| `/v1/dashboards`              |    ✅     |       |
-| `/v1/locations`               |    ✅     |       |
-| `/v1/maintenance-windows`     |    ✅     |       |
-| `/v1/private-locations`       |    ✅     |       |
-| `/v1/runtimes`                |    ✅     |       |
-| `/v1/snippets`                |    ✅     |       |
-| `/v1/variables`               |    ✅     |       |
+| API Endpoint                  | Supported | Notes                     |
+| :---------------------------- | :-------: | :------------------------ |
+| `/v1/alert-channels`          |    ✅     |                            |
+| `/v1/alert-notifications`     |    ✅     |  Payment required          |
+| `/v1/checks`                  |    ✅     |                            |
+| `/v1/check-alerts`            |    ✅     |                            |
+| `/v1/check-groups`            |    ✅     |                            |
+| `/v1/check-results/{checkId}` |    N/A    | [Heavily rate-limited][1] |
+| `/v1/dashboards`              |    ✅     |                            |
+| `/v1/locations`               |    ✅     |                            |
+| `/v1/maintenance-windows`     |    ✅     |                            |
+| `/v1/private-locations`       |    ✅     |                            |
+| `/v1/runtimes`                |    ✅     |                            |
+| `/v1/snippets`                |    ✅     |                            |
+| `/v1/variables`               |    ✅     |                            |
 
 A full list of supported settings and capabilities is available by running: `tap-checkly --about`
 
@@ -115,5 +115,6 @@ meltano elt tap-checkly target-jsonl
 
 ### SDK Dev Guide
 
-See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the SDK to
-develop your own taps and targets.
+See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the SDK to develop your own taps and targets.
+
+[1]: https://developers.checklyhq.com/reference/getv1checkresultscheckid

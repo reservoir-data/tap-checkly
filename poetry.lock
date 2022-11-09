@@ -566,7 +566,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "types-requests"
-version = "2.28.11.2"
+version = "2.28.11.3"
 description = "Typing stubs for requests"
 category = "dev"
 optional = false
@@ -619,7 +619,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "<3.11,>=3.7.1"
-content-hash = "6077e4ab1474b0814e65a08367953035c6576ac0c495fe138d84bd37f5e219a4"
+content-hash = "2c065089e2c947fd76203f7333b1273d8340f65c634d8929596886cc10ad1ef7"
 
 [metadata.files]
 appdirs = [
@@ -1181,8 +1181,8 @@ typed-ast = [
     {file = "typed_ast-1.5.4.tar.gz", hash = "sha256:39e21ceb7388e4bb37f4c679d72707ed46c2fbf2a5609b8b8ebc4b067d977df2"},
 ]
 types-requests = [
-    {file = "types-requests-2.28.11.2.tar.gz", hash = "sha256:fdcd7bd148139fb8eef72cf4a41ac7273872cad9e6ada14b11ff5dfdeee60ed3"},
-    {file = "types_requests-2.28.11.2-py3-none-any.whl", hash = "sha256:14941f8023a80b16441b3b46caffcbfce5265fd14555844d6029697824b5a2ef"},
+    {file = "types-requests-2.28.11.3.tar.gz", hash = "sha256:be9007affb17f0a09bb48e77db18bb6e0be9f82609c78f1dae6db30259d721d6"},
+    {file = "types_requests-2.28.11.3-py3-none-any.whl", hash = "sha256:b39c23011f389ce842e7d025b8386854fefdaa2f8ce628d7a8f1ea486f158acf"},
 ]
 types-urllib3 = [
     {file = "types-urllib3-1.26.25.tar.gz", hash = "sha256:5aef0e663724eef924afa8b320b62ffef2c1736c1fa6caecfc9bc6c8ae2c3def"},

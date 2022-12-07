@@ -19,7 +19,7 @@ python = "<3.11,>=3.7.1"
 singer-sdk = "0.13.0"
 
 # TODO: Remove this dependency once the SDK is updated to include the latest
-importlib-resources = {version = "^5.9.0", markers = "python_version < \"3.9\""}
+importlib-resources = {version = "^5.10.1", markers = "python_version < \"3.9\""}
 
 [tool.poetry.dev-dependencies]
 mypy = ">=0.950"

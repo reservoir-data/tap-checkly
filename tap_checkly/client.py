@@ -97,27 +97,31 @@ class ChecklyStream(RESTStream, metaclass=ABCMeta):
         Returns:
             A dictionary of HTTP headers.
         """
-        headers = {
+        return {
             "User-Agent": f"{self.tap_name}/{self._tap.plugin_version}",
             "X-Checkly-Account": self.config["account_id"],
         }
-        return headers
 
     def get_url_params(
         self,
         context: dict | None,
-        next_page_token: Any | None,
+        _: Any | None,
     ) -> dict[str, Any]:
         """Get URL query parameters.
 
         Args:
             context: Stream sync context.
-            next_page_token: Next offset.
 
         Returns:
             Mapping of URL query parameters.
         """
         params: dict = {}
+
+        if self.replication_key:
+            start_date = self.get_starting_timestamp(context)
+            if start_date:
+                params["from"] = start_date.timestamp()
+
         return params
 
     def _resolve_openapi_ref(self) -> dict[str, Any]:
@@ -127,7 +131,7 @@ class ChecklyStream(RESTStream, metaclass=ABCMeta):
         return resolve_schema_references(schema)
 
     @property
-    @lru_cache(maxsize=None)  # type: ignore
+    @lru_cache(maxsize=None)  # type: ignore # noqa: B019
     def schema(self) -> dict[str, Any]:
         """Return the schema for this stream.
 
@@ -161,30 +165,7 @@ class ChecklyPaginatedStream(ChecklyStream):
     def get_url_params(
         self,
         context: dict | None,
-        next_page_token: Any | None,
-    ) -> dict[str, Any]:
-        """Get URL query parameters.
-
-        Args:
-            context: Stream sync context.
-            next_page_token: Next offset.
-
-        Returns:
-            Mapping of URL query parameters.
-        """
-        return {
-            "page": next_page_token,
-            "limit": PAGE_SIZE,
-        }
-
-
-class ChecklyIncrementalStream(ChecklyPaginatedStream):
-    """Checkly incremental stream class."""
-
-    def get_url_params(
-        self,
-        context: dict | None,
-        next_page_token: Any | None,
+        next_page_token: int | None,
     ) -> dict[str, Any]:
         """Get URL query parameters.
 
@@ -196,9 +177,6 @@ class ChecklyIncrementalStream(ChecklyPaginatedStream):
             Mapping of URL query parameters.
         """
         params = super().get_url_params(context, next_page_token)
-
-        start_date = self.get_starting_timestamp(context)
-        if start_date:
-            params["from"] = start_date.timestamp()
-
+        params["page"] = next_page_token
+        params["limit"] = PAGE_SIZE
         return params

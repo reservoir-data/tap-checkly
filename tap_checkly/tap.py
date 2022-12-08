@@ -31,6 +31,12 @@ class TapCheckly(Tap):
             th.DateTimeType,
             description="Earliest datetime to get data from",
         ),
+        th.Property(
+            "include_paid_streams",
+            th.BooleanType,
+            default=False,
+            description="Include streams that require a paid Checkly plan",
+        ),
     ).to_dict()
 
     def discover_streams(self) -> list[Stream]:
@@ -39,9 +45,8 @@ class TapCheckly(Tap):
         Returns:
             A list of Checkly streams.
         """
-        return [
+        included_streams: list[Stream] = [
             streams.AlertChannels(tap=self),
-            streams.AlertNotifications(tap=self),
             streams.Checks(tap=self),
             streams.CheckAlerts(tap=self),
             streams.CheckGroups(tap=self),
@@ -53,3 +58,10 @@ class TapCheckly(Tap):
             streams.Runtimes(tap=self),
             streams.Snippets(tap=self),
         ]
+
+        if self.config.get("include_paid_streams", False):
+            included_streams += [
+                streams.AlertNotifications(tap=self),
+            ]
+
+        return included_streams

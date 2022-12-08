@@ -27,15 +27,15 @@ plugins:
       kind: date_iso8601
       label: Start Date
       description: Earliest datetime to get data from
+    - name: include_paid_streams
+      kind: boolean
+      label: Include Paid Streams
+      description: Include paid streams in the catalog
+      value: false
     config:
-      start_date: "2022-10-11"
+      start_date: "2022-01-01"
     repo: https://github.com/edgarrmondragon/tap-checkly
-    select:
-    - "!alert_notifications.*"
   loaders:
-  - name: target-jsonl
-    variant: andyh1203
-    pip_url: target-jsonl
   - name: target-duckdb
     variant: jwills
     pip_url: target-duckdb~=0.4

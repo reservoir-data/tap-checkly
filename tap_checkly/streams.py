@@ -2,11 +2,7 @@
 
 from __future__ import annotations
 
-from tap_checkly.client import (
-    ChecklyIncrementalStream,
-    ChecklyPaginatedStream,
-    ChecklyStream,
-)
+from tap_checkly.client import ChecklyPaginatedStream, ChecklyStream
 
 
 class AlertChannels(ChecklyPaginatedStream):
@@ -15,11 +11,10 @@ class AlertChannels(ChecklyPaginatedStream):
     name = "alert_channels"
     path = "/alert-channels"
     primary_keys = ["id"]
-    # replication_key = "updated_at"
     openapi_ref = "AlertChannel"
 
 
-class AlertNotifications(ChecklyIncrementalStream):
+class AlertNotifications(ChecklyPaginatedStream):
     """Alert notification.
 
     Alert notifications that have been sent for your account.
@@ -28,8 +23,8 @@ class AlertNotifications(ChecklyIncrementalStream):
     name = "alert_notifications"
     path = "/alert-notifications"
     primary_keys = ["id"]
-    replication_key = "timestamp"
     openapi_ref = "AlertNotification"
+    replication_key = "timestamp"
 
 
 class Checks(ChecklyPaginatedStream):
@@ -38,18 +33,33 @@ class Checks(ChecklyPaginatedStream):
     name = "checks"
     path = "/checks"
     primary_keys = ["id"]
-    # replication_key = "updated_at"
     openapi_ref = "Check"
 
+    def get_child_context(
+        self,
+        record: dict,
+        context: dict | None,  # noqa: ARG002
+    ) -> dict:
+        """Return a dictionary of child context.
 
-class CheckAlerts(ChecklyIncrementalStream):
+        Args:
+            record: A dictionary of the record.
+            context: A dictionary of the parent context.
+
+        Returns:
+            A dictionary of the child context.
+        """
+        return {"checkId": record["id"]}
+
+
+class CheckAlerts(ChecklyPaginatedStream):
     """Check alerts."""
 
     name = "check_alerts"
     path = "/check-alerts"
     primary_keys = ["id"]
-    replication_key = "created_at"
     openapi_ref = "CheckAlert"
+    replication_key = "created_at"
 
 
 class CheckGroups(ChecklyPaginatedStream):
@@ -59,6 +69,17 @@ class CheckGroups(ChecklyPaginatedStream):
     path = "/check-groups"
     primary_keys = ["id"]
     openapi_ref = "CheckGroup"
+
+
+class CheckResults(ChecklyPaginatedStream):
+    """Check results."""
+
+    name = "check_results"
+    path = "/checks-results/{checkId}"
+    primary_keys = ["id"]
+    openapi_ref = "CheckResult"
+    replication_key = "created_at"
+    parent_stream_type = Checks
 
 
 class Dashboards(ChecklyPaginatedStream):
@@ -127,5 +148,4 @@ class Snippets(ChecklyPaginatedStream):
     name = "snippets"
     path = "/snippets"
     primary_keys = ["id"]
-    replication_key = "updated_at"
     openapi_ref = "Snippet"

@@ -1,8 +1,19 @@
-# `tap-checkly`
+<div align="center">
 
-Singer tap for Checkly.
+# tap-checkly
 
-Built with the [Meltano SDK](https://sdk.meltano.com) for Singer Taps and Targets.
+<div>
+  <a href="https://results.pre-commit.ci/latest/github/edgarrmondragon/tap-checkly/main">
+    <img alt="pre-commit.ci status" src="https://results.pre-commit.ci/badge/github/edgarrmondragon/tap-checkly/main.svg"/>
+  </a>
+  <a href="https://github.com/edgarrmondragon/tap-checkly/blob/main/LICENSE">
+    <img alt="License" src="https://img.shields.io/github/license/edgarrmondragon/tap-checkly"/>
+  </a>
+</div>
+
+Singer Tap for [Checkly](https://www.checklyhq.com/). Built with the [Meltano Singer SDK](https://sdk.meltano.com).
+
+</div>
 
 ## Capabilities
 
@@ -15,15 +26,18 @@ Built with the [Meltano SDK](https://sdk.meltano.com) for Singer Taps and Target
 
 ## Settings
 
-| Setting             | Required | Default | Description                                                                   |
-|:--------------------|:--------:|:-------:|:------------------------------------------------------------------------------|
-| account_id          | True     | None    | Checkly Account ID                                                            |
-| token               | True     | None    | API Token for Checkly                                                         |
-| start_date          | False    | None    | Earliest datetime to get data from                                            |
+| Setting             | Required | Default | Description |
+|:--------------------|:--------:|:-------:|:------------|
+| account_id          | True     | None    | Checkly Account ID |
+| token               | True     | None    | API Token for Checkly |
+| start_date          | False    | None    | Earliest datetime to get data from |
+| include_paid_streams| False    |       0 | Include streams that require a paid Checkly plan |
 | stream_maps         | False    | None    | Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html). |
-| stream_map_config   | False    | None    | User-defined config values to be used within map expressions.                  |
+| stream_map_config   | False    | None    | User-defined config values to be used within map expressions. |
 | flattening_enabled  | False    | None    | 'True' to enable schema flattening and automatically expand nested properties. |
-| flattening_max_depth| False    | None    | The max depth to flatten schemas.                                              |
+| flattening_max_depth| False    | None    | The max depth to flatten schemas. |
+
+A full list of supported settings and capabilities is available by running: `tap-checkly --about`
 
 ## API Coverage
 
@@ -47,8 +61,6 @@ A full list of supported settings and capabilities is available by running: `tap
 
 ### Source Authentication and Authorization
 
-- [ ] `Developer TODO:` If your tap requires special access on the source system, or any special authentication requirements, provide those here.
-
 ## Usage
 
 You can easily run `tap-checkly` by itself or in a pipeline using [Meltano](https://meltano.com/).
@@ -62,8 +74,6 @@ tap-checkly --config CONFIG --discover > ./catalog.json
 ```
 
 ## Developer Resources
-
-- [ ] `Developer TODO:` As a first step, scan the entire project for the text "`TODO:`" and complete any recommended steps, deleting the "TODO" references once completed.
 
 ### Initialize your Development Environment
 
@@ -91,10 +101,8 @@ poetry run tap-checkly --help
 _**Note:** This tap will work in any Singer environment and does not require Meltano.
 Examples here are for convenience and to streamline end-to-end orchestration scenarios._
 
-Your project comes with a custom `meltano.yml` project file already created. Open the `meltano.yml` and follow any _"TODO"_ items listed in
-the file.
-
-Next, install Meltano (if you haven't already) and any needed plugins:
+Your project comes with a custom `meltano.yml` project file already created.
+Install Meltano (if you haven't already) and any needed plugins:
 
 ```bash
 # Install meltano

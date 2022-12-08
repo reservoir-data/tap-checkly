@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "tap-checkly"
 version = "0.0.0"
-description = "`tap-checkly` is a Singer tap for Checkly, built with the Meltano SDK for Singer Taps."
+description = "Singer tap for Checkly, built with the Meltano SDK for Singer Taps."
 license = "Apache-2.0"
 authors = ["Edgar Ramírez-Mondragón <edgarrm358@gmail.com>"]
 maintainers = ["Edgar Ramírez-Mondragón <edgarrm358@gmail.com>"]

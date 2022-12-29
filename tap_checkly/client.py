@@ -131,8 +131,8 @@ class ChecklyStream(RESTStream, metaclass=ABCMeta):
         return resolve_schema_references(schema)
 
     @property
-    @lru_cache(maxsize=None)  # type: ignore # noqa: B019
-    def schema(self) -> dict[str, Any]:
+    @lru_cache(maxsize=None)  # noqa: B019
+    def schema(self) -> dict[str, Any]:  # type: ignore[override]
         """Return the schema for this stream.
 
         Returns:

@@ -17,6 +17,8 @@ except ImportError:
     {sys.executable} -m pip install nox-poetry"""
     raise SystemExit(dedent(message)) from None
 
+GITHUB_ACTIONS = "GITHUB_ACTIONS"
+
 package = "tap-checkly"
 src_dir = "tap_checkly"
 tests_dir = "tests"
@@ -48,7 +50,7 @@ def mypy(session: Session) -> None:
 def tests(session: Session) -> None:
     """Execute pytest tests and compute coverage."""
     deps = ["pytest"]
-    if "GITHUB_ACTIONS" in os.environ:
+    if GITHUB_ACTIONS in os.environ:
         deps.append("pytest-github-actions-annotate-failures")
 
     session.install(".")

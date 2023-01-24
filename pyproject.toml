@@ -68,65 +68,23 @@ style = "pep440"
 vcs = "git"
 
 [tool.ruff]
-extend-ignore = [
-  # equivalent to `--docstring-convention=google`
-  "D203",
-  "D204",
-  "D213",
-  "D215",
-  "D400",
-  "D404",
-  "D406",
-  "D407",
-  "D408",
-  "D409",
-  "D413",
-]
 ignore = [
   "ANN101",
 ]
 line-length = 88
-select = [
-  "F", # Pyflakes
-  "E", # pycodestyle (error)
-  "W", # pycodestyle (warning)
-  "C9", # mccabe
-  "I0", # isort
-  "D", # pydocstyle (with google style docstring convention)
-  "UP", # pyupgrade
-  "N8", # pep8-naming
-  "YTT", # flake8-2020
-  "ANN", # flake8-annotations
-  "S", # flake8-bandit
-  "BLE", # flake8-blind-except
-  "FBT", # flake8-boolean-trap
-  "B0", # flake8-bugbear
-  "A0", # flake8-builtins
-  "C4", # flake8-comprehensions
-  "T1", # flake8-debugger
-  "ICN", # flake8-import-conventions
-  "T2", # flake8-print
-  "Q", # flake8-quotes
-  "RET", # flake8-return
-  "TID", # flake8-tidy-imports
-  "ARG", # flake8-unused-arguments
-  "ERA", # eradicate
-  "PGH", # pygrep-hooks
-  "PLC", # Pylint
-  "PLE", # Pylint
-  "PLR", # Pylint
-  "PLW", # Pylint
-  "RUF", # Ruff-specific rules
-]
+select = ["ALL"]
 src = ["tap_checkly", "tests"]
 target-version = "py37"
 
 [tool.ruff.per-file-ignores]
-"noxfile.py" = ["ANN"]
+"noxfile.py" = ["ANN", "INP001"]
 "tests/*" = [
   "ANN201",
   "S101",
 ]
+
+[tool.ruff.pydocstyle]
+convention = "google"
 
 [tool.ruff.isort]
 known-first-party = ["tap_checkly"]

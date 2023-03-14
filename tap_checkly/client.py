@@ -52,7 +52,7 @@ class ChecklyPaginator(BasePageNumberPaginator):
                 extract_jsonpath(
                     self.records_jsonpath,
                     response.json(),
-                )
+                ),
             )
         except StopIteration:
             return False

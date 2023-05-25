@@ -9,6 +9,9 @@
   <a href="https://github.com/edgarrmondragon/tap-checkly/blob/main/LICENSE">
     <img alt="License" src="https://img.shields.io/github/license/edgarrmondragon/tap-checkly"/>
   </a>
+  <a href="https://github.com/edgarrmondragon/tap-checkly/">
+    <img alt="License" src="https://img.shields.io/pypi/pyversions/tap-checkly"/>
+  </a>
 </div>
 
 Singer Tap for [Checkly](https://www.checklyhq.com/). Built with the [Meltano Singer SDK](https://sdk.meltano.com).

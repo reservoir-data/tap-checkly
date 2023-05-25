@@ -91,3 +91,4 @@ convention = "google"
 
 [tool.ruff.isort]
 known-first-party = ["tap_checkly"]
+required-imports = ["from __future__ import annotations"]

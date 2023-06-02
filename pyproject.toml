@@ -45,8 +45,10 @@ ignore_missing_imports = true
 module = ["backoff.*"]
 
 [build-system]
-requires = ["poetry-core>=1,<2"]
 build-backend = "poetry.core.masonry.api"
+requires = [
+  "poetry-core<2,>=1",
+]
 
 [tool.poetry.scripts]
 # CLI declaration

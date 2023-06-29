@@ -10,7 +10,7 @@ class AlertChannels(ChecklyPaginatedStream):
 
     name = "alert_channels"
     path = "/alert-channels"
-    primary_keys = ["id"]
+    primary_keys = ("id",)  # type: ignore[assignment]
     openapi_ref = "AlertChannel"
 
 
@@ -22,7 +22,7 @@ class AlertNotifications(ChecklyPaginatedStream):
 
     name = "alert_notifications"
     path = "/alert-notifications"
-    primary_keys = ["id"]
+    primary_keys = ("id",)  # type: ignore[assignment]
     openapi_ref = "AlertNotification"
     replication_key = "timestamp"
 
@@ -32,7 +32,7 @@ class Checks(ChecklyPaginatedStream):
 
     name = "checks"
     path = "/checks"
-    primary_keys = ["id"]
+    primary_keys = ("id",)  # type: ignore[assignment]
     openapi_ref = "Check"
 
     def get_child_context(
@@ -57,7 +57,7 @@ class CheckAlerts(ChecklyPaginatedStream):
 
     name = "check_alerts"
     path = "/check-alerts"
-    primary_keys = ["id"]
+    primary_keys = ("id",)  # type: ignore[assignment]
     openapi_ref = "CheckAlert"
     replication_key = "created_at"
 
@@ -67,7 +67,7 @@ class CheckGroups(ChecklyPaginatedStream):
 
     name = "check_groups"
     path = "/check-groups"
-    primary_keys = ["id"]
+    primary_keys = ("id",)  # type: ignore[assignment]
     openapi_ref = "CheckGroup"
 
 
@@ -76,7 +76,7 @@ class CheckResults(ChecklyPaginatedStream):
 
     name = "check_results"
     path = "/checks-results/{checkId}"
-    primary_keys = ["id"]
+    primary_keys = ("id",)  # type: ignore[assignment]
     openapi_ref = "CheckResult"
     replication_key = "created_at"
     parent_stream_type = Checks
@@ -90,7 +90,7 @@ class Dashboards(ChecklyPaginatedStream):
 
     name = "dashboards"
     path = "/dashboards"
-    primary_keys = ["dashboardId"]
+    primary_keys = ("dashboardId",)  # type: ignore[assignment]
     openapi_ref = "Dashboard"
 
 
@@ -102,7 +102,7 @@ class EnvironmentVariables(ChecklyStream):
 
     name = "variables"
     path = "/variables"
-    primary_keys = ["key"]
+    primary_keys = ("key",)  # type: ignore[assignment]
     openapi_ref = "EnvironmentVariable"
 
 
@@ -111,7 +111,7 @@ class Locations(ChecklyStream):
 
     name = "locations"
     path = "/locations"
-    primary_keys = ["region"]
+    primary_keys = ("region",)  # type: ignore[assignment]
     openapi_ref = "Location"
 
 
@@ -120,7 +120,7 @@ class MaintenanceWindows(ChecklyPaginatedStream):
 
     name = "maintenance_windows"
     path = "/maintenance-windows"
-    primary_keys = ["id"]
+    primary_keys = ("id",)  # type: ignore[assignment]
     openapi_ref = "MaintenanceWindow"
 
 
@@ -129,7 +129,7 @@ class PrivateLocations(ChecklyStream):
 
     name = "private_locations"
     path = "/private-locations"
-    primary_keys = ["id"]
+    primary_keys = ("id",)  # type: ignore[assignment]
     openapi_ref = "privateLocationsSchema"
 
 
@@ -138,7 +138,7 @@ class Runtimes(ChecklyStream):
 
     name = "runtimes"
     path = "/runtimes"
-    primary_keys = ["name"]
+    primary_keys = ("name",)  # type: ignore[assignment]
     openapi_ref = "Runtime"
 
 
@@ -147,5 +147,5 @@ class Snippets(ChecklyPaginatedStream):
 
     name = "snippets"
     path = "/snippets"
-    primary_keys = ["id"]
+    primary_keys = ("id",)  # type: ignore[assignment]
     openapi_ref = "Snippet"

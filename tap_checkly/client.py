@@ -105,7 +105,7 @@ class ChecklyStream(RESTStream, metaclass=ABCMeta):
     def get_url_params(
         self,
         context: dict | None,
-        _: Any | None,
+        _: Any | None,  # noqa: ANN401
     ) -> dict[str, Any]:
         """Get URL query parameters.
 

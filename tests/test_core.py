@@ -4,15 +4,23 @@ from __future__ import annotations
 
 from typing import Any
 
-from singer_sdk.testing import get_standard_tap_tests
+from singer_sdk.testing import SuiteConfig, get_tap_test_class
 
 from tap_checkly.tap import TapCheckly
 
 SAMPLE_CONFIG: dict[str, Any] = {}
 
-
-def test_standard_tap_tests():
-    """Run standard tap tests from the SDK."""
-    tests = get_standard_tap_tests(TapCheckly, config=SAMPLE_CONFIG)
-    for test in tests:
-        test()
+TestTapCheckly = get_tap_test_class(
+    TapCheckly,
+    config=SAMPLE_CONFIG,
+    suite_config=SuiteConfig(
+        ignore_no_records_for_streams=[
+            "check_alerts",
+            "check_groups",
+            "dashboards",
+            "maintenance_windows",
+            "private_locations",
+            "snippets",
+        ],
+    ),
+)

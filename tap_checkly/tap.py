@@ -62,6 +62,7 @@ class TapCheckly(Tap):
         if self.config.get("include_paid_streams", False):
             included_streams += [
                 streams.AlertNotifications(tap=self),
+                streams.CheckResults(tap=self),
             ]
 
         return included_streams

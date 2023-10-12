@@ -75,7 +75,7 @@ class CheckResults(ChecklyPaginatedStream):
     """Check results."""
 
     name = "check_results"
-    path = "/checks-results/{checkId}"
+    path = "/check-results/{checkId}"
     primary_keys = ("id",)  # type: ignore[assignment]
     openapi_ref = "CheckResult"
     replication_key = "created_at"

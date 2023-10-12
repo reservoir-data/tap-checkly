@@ -6067,7 +6067,7 @@
             }
           },
           "groupId": {
-            "type": "number",
+            "type": ["number", "null"],
             "example": "null",
             "x-constraint": {
               "sign": "positive"
@@ -6136,7 +6136,7 @@
             "format": "date-time"
           },
           "updated_at": {
-            "type": "string",
+            "type": ["string", "null"],
             "format": "date-time"
           }
         }
@@ -6951,34 +6951,35 @@
             "$ref": "#/components/schemas/AlertChannelSubscriptionCreateList"
           },
           "setupSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the setup phase of an API check in this group.",
             "example": "null"
           },
           "tearDownSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the teardown phase of an API check in this group.",
             "example": "null"
           },
           "localSetupScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the setup phase of an API check in this group.",
             "example": "null"
           },
           "localTearDownScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the teardown phase of an API check in this group.",
             "example": "null"
           },
           "runtimeId": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The runtime version, i.e. fixed set of runtime dependencies, used to execute checks in this group.",
             "example": "null",
             "enum": [
               "2022.02",
               "2021.10",
               "2021.06",
-              "2020.01"
+              "2020.01",
+              null
             ]
           },
           "privateLocations": {
@@ -7118,13 +7119,14 @@
             "$ref": "#/components/schemas/CheckGroupCreateBrowserCheckDefaults"
           },
           "runtimeId": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The runtime version, i.e. fixed set of runtime dependencies, used to execute checks in this group.",
             "enum": [
               "2022.02",
               "2021.10",
               "2021.06",
-              "2020.01"
+              "2020.01",
+              null
             ]
           },
           "environmentVariables": {
@@ -7147,22 +7149,22 @@
             "$ref": "#/components/schemas/Model2"
           },
           "setupSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the setup phase of an API check in this group.",
             "example": "null"
           },
           "tearDownSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the teardown phase of an API check in this group.",
             "example": "null"
           },
           "localSetupScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the setup phase of an API check in this group.",
             "example": "null"
           },
           "localTearDownScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the teardown phase of an API check in this group.",
             "example": "null"
           },
@@ -7470,24 +7472,25 @@
             "default": true
           },
           "groupId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The id of the check group this check is part of.",
             "example": "null"
           },
           "groupOrder": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The position of this check in a check group. It determines in what order checks are run when a group is triggered from the API or from CI/CD.",
             "example": "null",
             "minimum": 0
           },
           "runtimeId": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The runtime version, i.e. fixed set of runtime dependencies, used to execute this check.",
             "enum": [
               "2022.02",
               "2021.10",
               "2021.06",
-              "2020.01"
+              "2020.01",
+              null
             ]
           },
           "alertChannelSubscriptions": {
@@ -7514,25 +7517,25 @@
             "$ref": "#/components/schemas/CheckRequest"
           },
           "script": {
-            "type": "string"
+            "type": ["string", "null"]
           },
           "environmentVariables": {
             "$ref": "#/components/schemas/CheckEnvironmentVariableList"
           },
           "setupSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the setup phase of an API check."
           },
           "tearDownSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the teardown phase of an API check."
           },
           "localSetupScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the setup phase."
           },
           "localTearDownScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the teardown phase."
           },
           "degradedResponseTime": {
@@ -7655,13 +7658,14 @@
             "$ref": "#/components/schemas/CheckGroupCreateBrowserCheckDefaults"
           },
           "runtimeId": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The runtime version, i.e. fixed set of runtime dependencies, used to execute checks in this group.",
             "enum": [
               "2022.02",
               "2021.10",
               "2021.06",
-              "2020.01"
+              "2020.01",
+              null
             ]
           },
           "environmentVariables": {
@@ -7684,22 +7688,22 @@
             "$ref": "#/components/schemas/Model6"
           },
           "setupSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the setup phase of an API check in this group.",
             "example": "null"
           },
           "tearDownSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the teardown phase of an API check in this group.",
             "example": "null"
           },
           "localSetupScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the setup phase of an API check in this group.",
             "example": "null"
           },
           "localTearDownScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the teardown phase of an API check in this group.",
             "example": "null"
           },
@@ -8101,24 +8105,25 @@
             "default": true
           },
           "groupId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The id of the check group this check is part of.",
             "example": "null"
           },
           "groupOrder": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The position of this check in a check group. It determines in what order checks are run when a group is triggered from the API or from CI/CD.",
             "example": "null",
             "minimum": 0
           },
           "runtimeId": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The runtime version, i.e. fixed set of runtime dependencies, used to execute this check.",
             "enum": [
               "2022.02",
               "2021.10",
               "2021.06",
-              "2020.01"
+              "2020.01",
+              null
             ]
           },
           "alertChannelSubscriptions": {
@@ -8145,25 +8150,25 @@
             "$ref": "#/components/schemas/CheckRequest"
           },
           "script": {
-            "type": "string"
+            "type": ["string", "null"]
           },
           "environmentVariables": {
             "$ref": "#/components/schemas/CheckEnvironmentVariableList"
           },
           "setupSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the setup phase of an API check."
           },
           "tearDownSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the teardown phase of an API check."
           },
           "localSetupScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the setup phase."
           },
           "localTearDownScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the teardown phase."
           },
           "degradedResponseTime": {
@@ -8259,24 +8264,25 @@
             "default": true
           },
           "groupId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The id of the check group this check is part of.",
             "example": "null"
           },
           "groupOrder": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The position of this check in a check group. It determines in what order checks are run when a group is triggered from the API or from CI/CD.",
             "example": "null",
             "minimum": 0
           },
           "runtimeId": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The runtime version, i.e. fixed set of runtime dependencies, used to execute this check.",
             "enum": [
               "2022.02",
               "2021.10",
               "2021.06",
-              "2020.01"
+              "2020.01",
+              null
             ]
           },
           "alertChannelSubscriptions": {
@@ -8304,25 +8310,25 @@
             "$ref": "#/components/schemas/CheckRequest"
           },
           "script": {
-            "type": "string"
+            "type": ["string", "null"]
           },
           "environmentVariables": {
             "$ref": "#/components/schemas/CheckEnvironmentVariableList"
           },
           "setupSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the setup phase of an API check."
           },
           "tearDownSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the teardown phase of an API check."
           },
           "localSetupScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the setup phase."
           },
           "localTearDownScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the teardown phase."
           },
           "degradedResponseTime": {
@@ -8476,24 +8482,25 @@
             "default": true
           },
           "groupId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The id of the check group this check is part of.",
             "example": "null"
           },
           "groupOrder": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The position of this check in a check group. It determines in what order checks are run when a group is triggered from the API or from CI/CD.",
             "example": "null",
             "minimum": 0
           },
           "runtimeId": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The runtime version, i.e. fixed set of runtime dependencies, used to execute this check.",
             "enum": [
               "2022.02",
               "2021.10",
               "2021.06",
-              "2020.01"
+              "2020.01",
+              null
             ]
           },
           "alertChannelSubscriptions": {
@@ -8523,12 +8530,12 @@
             ]
           },
           "tearDownSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the teardown phase of an API check.",
             "example": "null"
           },
           "setupSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the setup phase of an API check.",
             "example": "null"
           },
@@ -8538,12 +8545,12 @@
             "minimum": 1
           },
           "localSetupScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the setup phase.",
             "example": ""
           },
           "localTearDownScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the teardown phase.",
             "example": ""
           },
@@ -8693,24 +8700,25 @@
             "default": true
           },
           "groupId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The id of the check group this check is part of.",
             "example": "null"
           },
           "groupOrder": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The position of this check in a check group. It determines in what order checks are run when a group is triggered from the API or from CI/CD.",
             "example": "null",
             "minimum": 0
           },
           "runtimeId": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The runtime version, i.e. fixed set of runtime dependencies, used to execute this check.",
             "enum": [
               "2022.02",
               "2021.10",
               "2021.06",
-              "2020.01"
+              "2020.01",
+              null
             ]
           },
           "alertChannelSubscriptions": {
@@ -8745,20 +8753,20 @@
             "minimum": 1
           },
           "tearDownSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the teardown phase of an API check."
           },
           "setupSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the setup phase of an API check."
           },
           "localSetupScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the setup phase.",
             "example": ""
           },
           "localTearDownScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the teardown phase.",
             "example": ""
           },
@@ -8928,24 +8936,25 @@
             "default": true
           },
           "groupId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The id of the check group this check is part of.",
             "example": "null"
           },
           "groupOrder": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The position of this check in a check group. It determines in what order checks are run when a group is triggered from the API or from CI/CD.",
             "example": "null",
             "minimum": 0
           },
           "runtimeId": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The runtime version, i.e. fixed set of runtime dependencies, used to execute this check.",
             "enum": [
               "2022.02",
               "2021.10",
               "2021.06",
-              "2020.01"
+              "2020.01",
+              null
             ]
           },
           "alertChannelSubscriptions": {
@@ -8975,12 +8984,12 @@
             ]
           },
           "tearDownSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the teardown phase of an API check.",
             "example": "null"
           },
           "setupSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the setup phase of an API check.",
             "example": "null"
           },
@@ -8990,12 +8999,12 @@
             "minimum": 1
           },
           "localSetupScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the setup phase.",
             "example": ""
           },
           "localTearDownScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the teardown phase.",
             "example": ""
           },
@@ -9077,24 +9086,25 @@
             "default": true
           },
           "groupId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The id of the check group this check is part of.",
             "example": "null"
           },
           "groupOrder": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The position of this check in a check group. It determines in what order checks are run when a group is triggered from the API or from CI/CD.",
             "example": "null",
             "minimum": 0
           },
           "runtimeId": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The runtime version, i.e. fixed set of runtime dependencies, used to execute this check.",
             "enum": [
               "2022.02",
               "2021.10",
               "2021.06",
-              "2020.01"
+              "2020.01",
+              null
             ]
           },
           "alertChannelSubscriptions": {
@@ -9123,7 +9133,7 @@
             ]
           },
           "script": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js javascript code describing a browser interaction with the Puppeteer or Playwright frameworks.",
             "example": "const { chromium } = require(\"playwright\");\n(async () => {\n\n  // launch the browser and open a new page\n  const browser = await chromium.launch();\n  const page = await browser.newPage();\n\n  // navigate to our target web page\n  await page.goto(\"https://danube-webshop.herokuapp.com/\");\n\n  // click on the login button and go through the login procedure\n  await page.click(\"#login\");\n  await page.type(\"#n-email\", \"user@email.com\");\n  await page.type(\"#n-password2\", \"supersecure1\");\n  await page.click(\"#goto-signin-btn\");\n\n  // wait until the login confirmation message is shown\n  await page.waitForSelector(\"#login-message\", { visible: true });\n\n  // close the browser and terminate the session\n  await browser.close();\n})();"
           },
@@ -9184,24 +9194,25 @@
             "default": true
           },
           "groupId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The id of the check group this check is part of.",
             "example": "null"
           },
           "groupOrder": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The position of this check in a check group. It determines in what order checks are run when a group is triggered from the API or from CI/CD.",
             "example": "null",
             "minimum": 0
           },
           "runtimeId": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The runtime version, i.e. fixed set of runtime dependencies, used to execute this check.",
             "enum": [
               "2022.02",
               "2021.10",
               "2021.06",
-              "2020.01"
+              "2020.01",
+              null
             ]
           },
           "alertChannelSubscriptions": {
@@ -9233,7 +9244,7 @@
             ]
           },
           "script": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js javascript code describing a browser interaction with the Puppeteer or Playwright frameworks."
           },
           "privateLocations": {
@@ -9308,24 +9319,25 @@
             "default": true
           },
           "groupId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The id of the check group this check is part of.",
             "example": "null"
           },
           "groupOrder": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The position of this check in a check group. It determines in what order checks are run when a group is triggered from the API or from CI/CD.",
             "example": "null",
             "minimum": 0
           },
           "runtimeId": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The runtime version, i.e. fixed set of runtime dependencies, used to execute this check.",
             "enum": [
               "2022.02",
               "2021.10",
               "2021.06",
-              "2020.01"
+              "2020.01",
+              null
             ]
           },
           "alertChannelSubscriptions": {
@@ -9354,7 +9366,7 @@
             ]
           },
           "script": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js javascript code describing a browser interaction with the Puppeteer or Playwright frameworks.",
             "example": "const { chromium } = require(\"playwright\");\n(async () => {\n\n  // launch the browser and open a new page\n  const browser = await chromium.launch();\n  const page = await browser.newPage();\n\n  // navigate to our target web page\n  await page.goto(\"https://danube-webshop.herokuapp.com/\");\n\n  // click on the login button and go through the login procedure\n  await page.click(\"#login\");\n  await page.type(\"#n-email\", \"user@email.com\");\n  await page.type(\"#n-password2\", \"supersecure1\");\n  await page.click(\"#goto-signin-btn\");\n\n  // wait until the login confirmation message is shown\n  await page.waitForSelector(\"#login-message\", { visible: true });\n\n  // close the browser and terminate the session\n  await browser.close();\n})();"
           },
@@ -9419,19 +9431,20 @@
             "example": "null"
           },
           "groupOrder": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The position of this check in a check group. It determines in what order checks are run when a group is triggered from the API or from CI/CD.",
             "example": "null",
             "minimum": 0
           },
           "runtimeId": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The runtime version, i.e. fixed set of runtime dependencies, used to execute this check.",
             "enum": [
               "2022.02",
               "2021.10",
               "2021.06",
-              "2020.01"
+              "2020.01",
+              null
             ]
           },
           "alertChannelSubscriptions": {
@@ -9459,25 +9472,25 @@
             "$ref": "#/components/schemas/CheckRequest"
           },
           "script": {
-            "type": "string"
+            "type": ["string", "null"]
           },
           "environmentVariables": {
             "$ref": "#/components/schemas/CheckEnvironmentVariableList"
           },
           "setupSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the setup phase of an API check."
           },
           "tearDownSnippetId": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "An ID reference to a snippet to use in the teardown phase of an API check."
           },
           "localSetupScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the setup phase."
           },
           "localTearDownScript": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A valid piece of Node.js code to run in the teardown phase."
           },
           "degradedResponseTime": {
@@ -10335,7 +10348,6 @@
         },
         "required": [
           "name",
-          "default",
           "dependencies"
         ]
       },
@@ -10358,7 +10370,7 @@
             "example": "Snippet"
           },
           "script": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "Your Node.js code that interacts with the API check lifecycle, or functions as a partial for browser checks.",
             "example": "request.url = request.url + '/extra'"
           },
@@ -10387,7 +10399,7 @@
             "example": "Snippet"
           },
           "script": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "Your Node.js code that interacts with the API check lifecycle, or functions as a partial for browser checks.",
             "example": "request.url = request.url + '/extra'"
           }

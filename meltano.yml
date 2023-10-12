@@ -9,9 +9,10 @@ plugins:
   - name: tap-checkly
     namespace: checkly
     label: Checkly
-    description: Delightful Active Monitoring for Developers
     docs: https://github.com/edgarrmondragon/tap-checkly#readme
+    repo: https://github.com/edgarrmondragon/tap-checkly
     pip_url: -e .
+    description: Delightful Active Monitoring for Developers
     capabilities:
     - state
     - catalog
@@ -29,12 +30,11 @@ plugins:
       description: Earliest datetime to get data from
     - name: include_paid_streams
       kind: boolean
+      value: false
       label: Include Paid Streams
       description: Include paid streams in the catalog
-      value: false
     config:
-      start_date: "2022-01-01"
-    repo: https://github.com/edgarrmondragon/tap-checkly
+      start_date: '2022-01-01'
   loaders:
   - name: target-duckdb
     variant: jwills
@@ -42,3 +42,6 @@ plugins:
     config:
       filepath: output/wh.duckdb
       default_target_schema: ${MELTANO_ENVIRONMENT}_${MELTANO_EXTRACTOR_NAMESPACE}
+  - name: target-jsonl
+    variant: andyh1203
+    pip_url: target-jsonl

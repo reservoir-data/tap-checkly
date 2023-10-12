@@ -7286,7 +7286,7 @@
         }
       },
       "CheckRequest": {
-        "type": "object"
+        "type": ["object", "null"]
       },
       "CheckEnvironmentVariableList": {
         "type": "array",
@@ -7410,7 +7410,7 @@
         }
       },
       "CheckAlertChannels": {
-        "type": "object",
+        "type": ["object", "null"],
         "properties": {
           "email": {
             "$ref": "#/components/schemas/CheckAlertEmailList"
@@ -8042,7 +8042,7 @@
           },
           "created_at": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
           },
           "updated_at": {
             "type": "string",
@@ -8193,7 +8193,7 @@
           },
           "created_at": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
           },
           "updated_at": {
             "type": "string",
@@ -8798,7 +8798,7 @@
           },
           "created_at": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
           },
           "updated_at": {
             "type": "string",
@@ -9255,7 +9255,7 @@
           },
           "created_at": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
           },
           "updated_at": {
             "type": "string",
@@ -10300,12 +10300,12 @@
             ]
           },
           "runtimeEndOfLife": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "Date which a runtime will be removed from our platform.",
             "example": "12/31/2022"
           },
           "default": {
-            "type": "boolean",
+            "type": ["boolean", "null"],
             "description": "Indicates if this is the current default runtime provided by Checkly."
           },
           "description": {

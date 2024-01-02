@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import typing as t
+
 from tap_checkly.client import ChecklyPaginatedStream, ChecklyStream
 
 
@@ -37,9 +39,9 @@ class Checks(ChecklyPaginatedStream):
 
     def get_child_context(
         self,
-        record: dict,
-        context: dict | None,  # noqa: ARG002
-    ) -> dict:
+        record: dict[str, t.Any],
+        context: dict[str, t.Any] | None,  # noqa: ARG002
+    ) -> dict[str, t.Any]:
         """Return a dictionary of child context.
 
         Args:

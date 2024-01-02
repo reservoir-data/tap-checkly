@@ -68,10 +68,10 @@ def load_openapi() -> dict[str, Any]:
         The OpenAPI specification as a dict.
     """
     with importlib_resources.files("tap_checkly").joinpath("openapi.json").open() as f:
-        return json.load(f)
+        return json.load(f)  # type: ignore[no-any-return]
 
 
-class ChecklyStream(RESTStream, metaclass=ABCMeta):
+class ChecklyStream(RESTStream[int], metaclass=ABCMeta):
     """Checkly stream class."""
 
     url_base = "https://api.checklyhq.com/v1"
@@ -91,7 +91,7 @@ class ChecklyStream(RESTStream, metaclass=ABCMeta):
         )
 
     @property
-    def http_headers(self) -> dict:
+    def http_headers(self) -> dict[str, str]:
         """Return the http headers needed.
 
         Returns:
@@ -104,7 +104,7 @@ class ChecklyStream(RESTStream, metaclass=ABCMeta):
 
     def get_url_params(
         self,
-        context: dict | None,
+        context: dict[str, Any] | None,
         _: Any | None,  # noqa: ANN401
     ) -> dict[str, Any]:
         """Get URL query parameters.
@@ -115,7 +115,7 @@ class ChecklyStream(RESTStream, metaclass=ABCMeta):
         Returns:
             Mapping of URL query parameters.
         """
-        params: dict = {}
+        params: dict[str, Any] = {}
 
         if self.replication_key:
             start_date = self.get_starting_timestamp(context)
@@ -164,7 +164,7 @@ class ChecklyPaginatedStream(ChecklyStream):
 
     def get_url_params(
         self,
-        context: dict | None,
+        context: dict[str, Any] | None,
         next_page_token: int | None,
     ) -> dict[str, Any]:
         """Get URL query parameters.

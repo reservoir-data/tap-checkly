@@ -6,58 +6,18 @@ import json
 import sys
 from abc import ABCMeta, abstractmethod
 from functools import lru_cache
-from typing import TYPE_CHECKING, Any
+from typing import Any
 
 from singer_sdk import RESTStream
 from singer_sdk._singerlib import resolve_schema_references
 from singer_sdk.authenticators import BearerTokenAuthenticator
-from singer_sdk.helpers.jsonpath import extract_jsonpath
-from singer_sdk.pagination import BasePageNumberPaginator, first
 
 if sys.version_info >= (3, 9):
     import importlib.resources as importlib_resources
 else:
     import importlib_resources
 
-if TYPE_CHECKING:
-    from requests import Response
-
 PAGE_SIZE = 100
-
-
-class ChecklyPaginator(BasePageNumberPaginator):
-    """Checkly API paginator."""
-
-    def __init__(self, page: int, records_jsonpath: str) -> None:
-        """Initialize paginator.
-
-        Args:
-            page: The page number.
-            records_jsonpath: The JSON path to the records.
-        """
-        super().__init__(page)
-        self.records_jsonpath = records_jsonpath
-
-    def has_more(self, response: Response) -> bool:
-        """Check if response has any items.
-
-        Args:
-            response: API response object.
-
-        Returns:
-            True if response contains at least one item.
-        """
-        try:
-            first(
-                extract_jsonpath(
-                    self.records_jsonpath,
-                    response.json(),
-                ),
-            )
-        except StopIteration:
-            return False
-
-        return True
 
 
 @lru_cache(maxsize=None)
@@ -153,14 +113,6 @@ class ChecklyStream(RESTStream[int], metaclass=ABCMeta):
 
 class ChecklyPaginatedStream(ChecklyStream):
     """Checkly paginated stream class."""
-
-    def get_new_paginator(self) -> ChecklyPaginator:
-        """Get a new paginator instance.
-
-        Returns:
-            A paginator instance.
-        """
-        return ChecklyPaginator(1, self.records_jsonpath)
 
     def get_url_params(
         self,

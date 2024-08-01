@@ -8,31 +8,42 @@ updates:
   - package-ecosystem: pip
     directory: "/"
     schedule:
-      interval: "weekly"
-      timezone: "America/Mexico_City"
-      time: "07:00"
+      interval: weekly
+      timezone: "Etc/UTC"
+      time: "10:00"
     reviewers:
       - "edgarrmondragon"
+    versioning-strategy: increase-if-necessary
     commit-message:
       prefix: "feat(deps): "
       prefix-development: "chore(deps-dev): "
-    versioning-strategy: increase-if-necessary
+    groups:
+      development-dependencies:
+        dependency-type: development
+      runtime-dependencies:
+        dependency-type: production
+        update-types:
+          - "patch"
   - package-ecosystem: pip
     directory: "/.github/workflows"
     schedule:
-      interval: "monthly"
-      timezone: "America/Mexico_City"
-      time: "07:00"
+      interval: monthly
+      timezone: "Etc/UTC"
+      time: "10:00"
     reviewers:
       - "edgarrmondragon"
     commit-message:
       prefix: "ci: "
+    groups:
+      ci:
+        patterns:
+          - "*"
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: "monthly"
-      timezone: "America/Mexico_City"
-      time: "07:00"
+      interval: monthly
+      timezone: "Etc/UTC"
+      time: "10:00"
     reviewers:
       - "edgarrmondragon"
     commit-message:

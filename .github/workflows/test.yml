@@ -28,7 +28,13 @@ jobs:
       fail-fast: false
       matrix:
         script: ["test:integration"]
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version:
+        - "3.8"
+        - "3.9"
+        - "3.10"
+        - "3.11"
+        - "3.12"
+        - "3.13"
         include:
         - { script: "test:dependencies", python-version: "3.12" }
         - { script: "typing:check",      python-version: "3.12" }
@@ -54,6 +60,8 @@ jobs:
 
     - name: Run
       env:
+        HATCH_PYTHON: ${{ matrix.python-version }}
+        HATCH_VERBOSE: "1"
         TAP_CHECKLY_ACCOUNT_ID: ${{ secrets.TAP_CHECKLY_ACCOUNT_ID }}
         TAP_CHECKLY_TOKEN: ${{ secrets.TAP_CHECKLY_TOKEN }}
         TAP_CHECKLY_START_DATE: ${{ secrets.TAP_CHECKLY_START_DATE }}

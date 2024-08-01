@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import json
 import sys
+import typing as t
 from abc import ABCMeta, abstractmethod
 from functools import lru_cache
-from typing import Any
 
 from singer_sdk import RESTStream
 from singer_sdk._singerlib import resolve_schema_references
@@ -17,11 +17,14 @@ if sys.version_info >= (3, 9):
 else:
     import importlib_resources
 
+if t.TYPE_CHECKING:
+    from singer_sdk.helpers.types import Context
+
 PAGE_SIZE = 100
 
 
 @lru_cache(maxsize=None)
-def load_openapi() -> dict[str, Any]:
+def load_openapi() -> dict[str, t.Any]:
     """Load the OpenAPI specification from the package.
 
     Returns:
@@ -64,9 +67,9 @@ class ChecklyStream(RESTStream[int], metaclass=ABCMeta):
 
     def get_url_params(
         self,
-        context: dict[str, Any] | None,
-        _: Any | None,  # noqa: ANN401
-    ) -> dict[str, Any]:
+        context: Context | None,
+        _: t.Any | None,  # noqa: ANN401
+    ) -> dict[str, t.Any]:
         """Get URL query parameters.
 
         Args:
@@ -75,7 +78,7 @@ class ChecklyStream(RESTStream[int], metaclass=ABCMeta):
         Returns:
             Mapping of URL query parameters.
         """
-        params: dict[str, Any] = {}
+        params: dict[str, t.Any] = {}
 
         if self.replication_key:
             start_date = self.get_starting_timestamp(context)
@@ -84,7 +87,7 @@ class ChecklyStream(RESTStream[int], metaclass=ABCMeta):
 
         return params
 
-    def _resolve_openapi_ref(self) -> dict[str, Any]:
+    def _resolve_openapi_ref(self) -> dict[str, t.Any]:
         schema = {"$ref": f"#/components/schemas/{self.openapi_ref}"}
         openapi = load_openapi()
         schema["components"] = openapi["components"]
@@ -92,7 +95,7 @@ class ChecklyStream(RESTStream[int], metaclass=ABCMeta):
 
     @property
     @lru_cache(maxsize=None)  # noqa: B019
-    def schema(self) -> dict[str, Any]:
+    def schema(self) -> dict[str, t.Any]:
         """Return the schema for this stream.
 
         Returns:
@@ -116,9 +119,9 @@ class ChecklyPaginatedStream(ChecklyStream):
 
     def get_url_params(
         self,
-        context: dict[str, Any] | None,
+        context: Context | None,
         next_page_token: int | None,
-    ) -> dict[str, Any]:
+    ) -> dict[str, t.Any]:
         """Get URL query parameters.
 
         Args:

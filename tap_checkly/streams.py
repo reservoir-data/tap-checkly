@@ -6,6 +6,9 @@ import typing as t
 
 from tap_checkly.client import ChecklyPaginatedStream, ChecklyStream
 
+if t.TYPE_CHECKING:
+    from singer_sdk.helpers.types import Context, Record
+
 
 class AlertChannels(ChecklyPaginatedStream):
     """Alert channels."""
@@ -39,8 +42,8 @@ class Checks(ChecklyPaginatedStream):
 
     def get_child_context(
         self,
-        record: dict[str, t.Any],
-        context: dict[str, t.Any] | None,  # noqa: ARG002
+        record: Record,
+        context: Context | None,  # noqa: ARG002
     ) -> dict[str, t.Any]:
         """Return a dictionary of child context.
 

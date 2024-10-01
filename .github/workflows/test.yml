@@ -40,14 +40,15 @@ jobs:
         - "3.12"
         - "3.13"
         include:
-        - { script: "test:dependencies", python-version: "3.12" }
-        - { script: "typing:check",      python-version: "3.12" }
+        - { script: "test:dependencies", python-version: "3.x" }
+        - { script: "typing:check",      python-version: "3.x" }
 
     steps:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
     - uses: actions/setup-python@v5
+      id: setup-python
       with:
         python-version: ${{ matrix.python-version }}
         allow-prereleases: true
@@ -60,12 +61,12 @@ jobs:
 
     - name: Install Hatch
       run: |
-        pipx install hatch --python "python${{ matrix.python-version }}"
+        pipx install hatch --python "${{ steps.setup-python.outputs.python-path }}"
         hatch --version
 
     - name: Run
       env:
-        HATCH_PYTHON: ${{ matrix.python-version }}
+        HATCH_PYTHON: ${{ steps.setup-python.outputs.python-version }}
         HATCH_VERBOSE: "1"
         TAP_CHECKLY_ACCOUNT_ID: ${{ secrets.TAP_CHECKLY_ACCOUNT_ID }}
         TAP_CHECKLY_TOKEN: ${{ secrets.TAP_CHECKLY_TOKEN }}

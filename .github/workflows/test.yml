@@ -66,7 +66,7 @@ jobs:
 
     - name: Run
       env:
-        HATCH_PYTHON: ${{ steps.setup-python.outputs.python-version }}
+        HATCH_PYTHON: ${{ steps.setup-python.outputs.python-path }}
         HATCH_VERBOSE: "1"
         TAP_CHECKLY_ACCOUNT_ID: ${{ secrets.TAP_CHECKLY_ACCOUNT_ID }}
         TAP_CHECKLY_TOKEN: ${{ secrets.TAP_CHECKLY_TOKEN }}

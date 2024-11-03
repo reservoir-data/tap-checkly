@@ -2,20 +2,15 @@
 
 from __future__ import annotations
 
+import importlib.resources
 import json
-import sys
 import typing as t
 from abc import ABCMeta, abstractmethod
-from functools import lru_cache
+from functools import cache
 
 from singer_sdk import RESTStream
 from singer_sdk._singerlib import resolve_schema_references
 from singer_sdk.authenticators import BearerTokenAuthenticator
-
-if sys.version_info >= (3, 9):
-    import importlib.resources as importlib_resources
-else:
-    import importlib_resources
 
 if t.TYPE_CHECKING:
     from singer_sdk.helpers.types import Context
@@ -23,14 +18,14 @@ if t.TYPE_CHECKING:
 PAGE_SIZE = 100
 
 
-@lru_cache(maxsize=None)
+@cache
 def load_openapi() -> dict[str, t.Any]:
     """Load the OpenAPI specification from the package.
 
     Returns:
         The OpenAPI specification as a dict.
     """
-    with importlib_resources.files("tap_checkly").joinpath("openapi.json").open() as f:
+    with importlib.resources.files("tap_checkly").joinpath("openapi.json").open() as f:
         return json.load(f)  # type: ignore[no-any-return]
 
 
@@ -94,7 +89,7 @@ class ChecklyStream(RESTStream[int], metaclass=ABCMeta):
         return resolve_schema_references(schema)
 
     @property
-    @lru_cache(maxsize=None)  # noqa: B019
+    @cache  # noqa: B019
     def schema(self) -> dict[str, t.Any]:
         """Return the schema for this stream.
 

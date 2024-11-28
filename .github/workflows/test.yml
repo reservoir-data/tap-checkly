@@ -22,6 +22,9 @@ on:
   # Run weekly on Monday at 12:00 PM UTC
   - cron: "0 12 * * 1"
 
+env:
+  FORCE_COLOR: "1"
+
 jobs:
   tests:
     runs-on: ubuntu-latest

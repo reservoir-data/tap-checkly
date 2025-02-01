@@ -15,6 +15,7 @@ keywords = [
   "singer.io",
 ]
 license = "Apache-2.0"
+license-files = [ "LICENSE" ]
 maintainers = [
   { name = "Edgar Ramírez-Mondragón", email = "edgarrm358@gmail.com" },
 ]

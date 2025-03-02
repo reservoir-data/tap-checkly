@@ -6,10 +6,11 @@
     "configurations": [
         {
             "name": "tap-checkly",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "program": "tap_checkly",
+            "justMyCode": false,
             "args": [
                 "--config",
                 ".secrets/config.json",

@@ -9,7 +9,7 @@ from abc import ABCMeta, abstractmethod
 from functools import cache
 
 from singer_sdk import RESTStream
-from singer_sdk._singerlib import resolve_schema_references
+from singer_sdk.singerlib import resolve_schema_references
 from singer_sdk.authenticators import BearerTokenAuthenticator
 
 if t.TYPE_CHECKING:

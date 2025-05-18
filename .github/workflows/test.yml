@@ -29,7 +29,7 @@ env:
   # renovate: datasource=pypi depName=uv
   UV_VERSION: "0.6.17"
   # renovate: datasource=pypi depName=tox
-  TOX_VERSION: "4.25.0"
+  TOX_VERSION: "4.26.0"
   # renovate: datasource=pypi depName=tox-uv
   TOX_UV_VERSION: "1.25.0"
 
@@ -46,6 +46,7 @@ jobs:
         - "3.11"
         - "3.12"
         - "3.13"
+        - "3.14"
 
     steps:
     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2

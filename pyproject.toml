@@ -38,9 +38,9 @@ dynamic = [
 dependencies = [
   "singer-sdk~=0.47.0",
 ]
-urls.Documentation = "https://github.com/edgarrmondragon/tap-checkly/#readme"
-urls.Homepage = "https://github.com/edgarrmondragon/tap-checkly"
-urls.Repository = "https://github.com/edgarrmondragon/tap-checkly"
+urls.Documentation = "https://github.com/reservoir-data/tap-checkly/#readme"
+urls.Homepage = "https://github.com/reservoir-data/tap-checkly"
+urls.Repository = "https://github.com/reservoir-data/tap-checkly"
 scripts."tap-checkly" = "tap_checkly.tap:TapCheckly.cli"
 
 [dependency-groups]

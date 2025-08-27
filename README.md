@@ -3,13 +3,13 @@
 # tap-checkly
 
 <div>
-  <a href="https://results.pre-commit.ci/latest/github/edgarrmondragon/tap-checkly/main">
-    <img alt="pre-commit.ci status" src="https://results.pre-commit.ci/badge/github/edgarrmondragon/tap-checkly/main.svg"/>
+  <a href="https://results.pre-commit.ci/latest/github/reservoir-data/tap-checkly/main">
+    <img alt="pre-commit.ci status" src="https://results.pre-commit.ci/badge/github/reservoir-data/tap-checkly/main.svg"/>
   </a>
-  <a href="https://github.com/edgarrmondragon/tap-checkly/blob/main/LICENSE">
-    <img alt="License" src="https://img.shields.io/github/license/edgarrmondragon/tap-checkly"/>
+  <a href="https://github.com/reservoir-data/tap-checkly/blob/main/LICENSE">
+    <img alt="License" src="https://img.shields.io/github/license/reservoir-data/tap-checkly"/>
   </a>
-  <a href="https://github.com/edgarrmondragon/tap-checkly/">
+  <a href="https://github.com/reservoir-data/tap-checkly/">
     <img alt="License" src="https://img.shields.io/pypi/pyversions/tap-checkly"/>
   </a>
 </div>

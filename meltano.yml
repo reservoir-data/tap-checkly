@@ -9,8 +9,8 @@ plugins:
   - name: tap-checkly
     namespace: checkly
     label: Checkly
-    docs: https://github.com/edgarrmondragon/tap-checkly#readme
-    repo: https://github.com/edgarrmondragon/tap-checkly
+    docs: https://github.com/reservoir-data/tap-checkly#readme
+    repo: https://github.com/reservoir-data/tap-checkly
     pip_url: -e .
     description: Delightful Active Monitoring for Developers
     capabilities:

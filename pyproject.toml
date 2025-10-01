@@ -35,7 +35,8 @@ dynamic = [
   "version",
 ]
 dependencies = [
-  "singer-sdk~=0.49.1",
+  "singer-sdk~=0.50.0",
+  "typing-extensions>=4.15; python_full_version<'3.12'",
 ]
 urls.Documentation = "https://github.com/reservoir-data/tap-checkly/#readme"
 urls.Homepage = "https://github.com/reservoir-data/tap-checkly"
@@ -53,14 +54,16 @@ testing = [
   "singer-sdk[testing]",
 ]
 typing = [
-  "mypy",
+  "mypy>=1.18",
+  "ty>=0.0.1a21",
+  { include-group = "testing" },
 ]
 
 [tool.hatch.version]
 source = "vcs"
 
 [tool.ruff]
-line-length = 88
+line-length = 120
 src = [
   "tap_checkly",
   "tests",
@@ -97,6 +100,7 @@ lint.pydocstyle.convention = "google"
 
 [tool.deptry.package_module_name_map]
 mypy = "mypy"
+ty = "ty"
 
 [tool.deptry.per_rule_ignores]
 DEP002 = [
@@ -144,7 +148,10 @@ commands = [ [ "tap-checkly", { replace = "posargs", default = [ "--config=ENV" 
 
 [tool.tox.env.typing]
 dependency_groups = [ "testing", "typing" ]
-commands = [ [ "mypy", "--strict", { replace = "posargs", default = [ "tap_checkly", "tests" ], extend = true } ] ]
+commands = [
+  [ "mypy", "--strict", { replace = "posargs", default = [ "tap_checkly", "tests" ], extend = true } ],
+  [ "ty", "check", { replace = "posargs", default = [ "tap_checkly", "tests" ], extend = true } ],
+]
 
 [tool.mypy]
 warn_redundant_casts = true
@@ -152,12 +159,6 @@ warn_unreachable = true
 warn_unused_configs = true
 warn_unused_ignores = true
 
-[[tool.mypy.overrides]]
-ignore_missing_imports = true
-module = [
-  "backoff.*",
-]
-
 [tool.uv]
 prerelease = "allow"
-required-version = ">=0.5.19"
+required-version = ">=0.8"

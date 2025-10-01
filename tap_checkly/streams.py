@@ -2,11 +2,17 @@
 
 from __future__ import annotations
 
-import typing as t
+import sys
+from typing import TYPE_CHECKING, Any
 
 from tap_checkly.client import ChecklyPaginatedStream, ChecklyStream
 
-if t.TYPE_CHECKING:
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
+
+if TYPE_CHECKING:
     from singer_sdk.helpers.types import Context, Record
 
 
@@ -40,20 +46,8 @@ class Checks(ChecklyPaginatedStream):
     primary_keys = ("id",)
     openapi_ref = "Check"
 
-    def get_child_context(
-        self,
-        record: Record,
-        context: Context | None,  # noqa: ARG002
-    ) -> dict[str, t.Any]:
-        """Return a dictionary of child context.
-
-        Args:
-            record: A dictionary of the record.
-            context: A dictionary of the parent context.
-
-        Returns:
-            A dictionary of the child context.
-        """
+    @override
+    def get_child_context(self, record: Record, context: Context | None) -> dict[str, Any]:
         return {"checkId": record["id"]}
 
 

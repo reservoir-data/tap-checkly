@@ -52,7 +52,7 @@ class ChecklyStream(RESTStream[int], metaclass=ABCMeta):
         }
 
     @override
-    def get_url_params(self, context: Context | None, _: Any | None) -> dict[str, Any]:
+    def get_url_params(self, context: Context | None, next_page_token: Any | None) -> dict[str, Any]:
         params: dict[str, Any] = {}
 
         if self.replication_key:

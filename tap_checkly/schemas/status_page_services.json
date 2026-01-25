@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "x-format": {
+        "guid": true
+      }
+    },
+    "accountId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-format": {
+        "guid": true
+      }
+    },
+    "created_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "name",
+    "id",
+    "accountId",
+    "created_at"
+  ]
+}

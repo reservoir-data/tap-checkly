@@ -1,0 +1,80 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID of this alert notification."
+    },
+    "type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The type of alert channel (SMS, Slack, Webhook, etc)."
+    },
+    "status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The status of the alert."
+    },
+    "alertConfig": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The configuration which was used to send the alert."
+    },
+    "notificationResult": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The result of sending the alert notification.For example, this could be the response body of the Webhook."
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "The time that the alert was sent."
+    },
+    "checkType": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The type of the check."
+    },
+    "checkId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The ID of the check."
+    },
+    "checkAlertId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The ID of the check alert."
+    },
+    "alertChannelId": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "The ID of the alert channel which this alert was sent to."
+    },
+    "checkResultId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The ID of the corresponding check result."
+    }
+  }
+}

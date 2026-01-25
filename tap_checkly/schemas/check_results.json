@@ -1,0 +1,504 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID of this result."
+    },
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The name of the check."
+    },
+    "checkId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The ID of the check."
+    },
+    "hasFailures": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Describes if any failure has occurred during this check run. This is should be your mainmain focus for assessing API or browser check behaviour. Assertions that fail, timeouts or failing scripts all resolve tothis value being true."
+    },
+    "hasErrors": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Describes if an internal error has occured in Checkly's backend. This should be false in almost all cases."
+    },
+    "isDegraded": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "A check is degraded if it is over the degradation limit set by the \"degradedResponseTime\" field on the check. Applies only to API checks."
+    },
+    "overMaxResponseTime": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Set to true if the response time is over the limit set by the \"maxResponseTime\" field on the check. Applies only to API checks."
+    },
+    "runLocation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "What data center location this check result originated from."
+    },
+    "startedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "stoppedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "created_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "responseTime": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Describes the time it took to execute relevant parts of this check. Any setup timeor system time needed to start executing this check in the Checkly backend is not part of this."
+    },
+    "apiCheckResult": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The response data for an API check.",
+      "properties": {
+        "assertions": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "List of API check assertions.",
+          "example": [
+            {
+              "source": "STATUS_CODE",
+              "target": 200
+            }
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "request": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "The request for the API.",
+          "properties": {
+            "method": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "GET"
+            },
+            "url": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "https://api.checklyhq.com"
+            },
+            "data": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": ""
+            },
+            "headers": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "params": {
+              "type": [
+                "object",
+                "null"
+              ]
+            }
+          }
+        },
+        "response": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "The API response.",
+          "properties": {
+            "status": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "example": 200
+            },
+            "statusText": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "OK"
+            },
+            "body": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "<title> Checkly Public API </title>"
+            },
+            "headers": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "timings": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "timingPhases": {
+              "type": [
+                "object",
+                "null"
+              ]
+            }
+          }
+        },
+        "requestError": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Describes if an error occurred on the request.",
+          "example": "null"
+        },
+        "jobLog": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Check run log results."
+        },
+        "jobAssets": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Assets generated from the check run.",
+          "example": "null",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pcapDataUrl": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Packet capture data if available as redirect/download URL."
+        }
+      }
+    },
+    "browserCheckResult": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The response data for a browser check.",
+      "example": "null",
+      "properties": {
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The type of framework the check is using.",
+          "example": "PLAYWRIGHT"
+        },
+        "traceSummary": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "The summary of errors in the check run."
+        },
+        "pages": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "List of pages used on the check run.",
+          "example": [
+            {
+              "url": "https://www.checklyhq.com/",
+              "webVitals": {
+                "CLS": {
+                  "score": "GOOD",
+                  "value": 0.000146484375
+                }
+              }
+            }
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "playwrightTestVideos": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "List of Playwright Test videos.",
+          "example": [
+            "https://api.checklyhq.com/v1/assets/checkRunData/eu-central-1/00000000-0000-0000-0000-0000000000/00000000-0000-0000-0000-0000000000/1675691025832/visit-page-and-take-screenshot-1675691043856.webm"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "errors": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "List of errors on the check run.",
+          "example": [],
+          "items": {
+            "type": "string"
+          }
+        },
+        "endTime": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "End time of the check run.",
+          "example": 1648573423995
+        },
+        "startTime": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Start time of the check run.",
+          "example": 1648573423994
+        },
+        "runtimeVersion": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Active runtime version.",
+          "example": "2023.09"
+        },
+        "jobLog": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Check run log results.",
+          "example": {
+            "time": 1648573423995,
+            "msg": "Starting job",
+            "level": "DEBUG"
+          },
+          "items": {
+            "type": "string"
+          }
+        },
+        "jobAssets": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Assets generated from the check run.",
+          "example": "null",
+          "items": {
+            "type": "string"
+          }
+        },
+        "playwrightTestTraces": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "List of Playwright Test traces.",
+          "example": [
+            "https://api.checklyhq.com/v1/assets/checkRunData/eu-central-1/00000000-0000-0000-0000-0000000000/00000000-0000-0000-0000-0000000000/1675691025832/visit-page-and-take-screenshot.zip"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "playwrightTestJsonReportFile": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Playwright Test JSON report.",
+          "example": "https://api.checklyhq.com/v1/assets/checkRunData/eu-central-1/00000000-0000-0000-0000-0000000000/00000000-0000-0000-0000-0000000000/1675691025832/report.json"
+        }
+      }
+    },
+    "multiStepCheckResult": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The response data for a multi-step check.",
+      "example": "null",
+      "properties": {
+        "errors": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "List of errors on the check run.",
+          "example": [],
+          "items": {
+            "type": "string"
+          }
+        },
+        "endTime": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "End time of the check run.",
+          "example": 1648573423995
+        },
+        "startTime": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Start time of the check run.",
+          "example": 1648573423994
+        },
+        "runtimeVersion": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Active runtime version.",
+          "example": "2023.09"
+        },
+        "jobLog": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Check run log results.",
+          "example": {
+            "time": 1648573423995,
+            "msg": "Starting job",
+            "level": "DEBUG"
+          },
+          "items": {
+            "type": "string"
+          }
+        },
+        "jobAssets": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Assets generated from the check run.",
+          "example": "null",
+          "items": {
+            "type": "string"
+          }
+        },
+        "playwrightTestTraces": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "List of Playwright Test traces.",
+          "example": [
+            "https://api.checklyhq.com/v1/assets/checkRunData/eu-central-1/00000000-0000-0000-0000-0000000000/00000000-0000-0000-0000-0000000000/1675691025832/visit-page-and-take-screenshot.zip"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "playwrightTestJsonReportFile": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Playwright Test JSON report.",
+          "example": "https://api.checklyhq.com/v1/assets/checkRunData/eu-central-1/00000000-0000-0000-0000-0000000000/00000000-0000-0000-0000-0000000000/1675691025832/report.json"
+        }
+      }
+    },
+    "checkRunId": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "The id of the specific check run that created this check result."
+    },
+    "attempts": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "How often this check was retried. This will be larger than 0 when double checking is enabled."
+    },
+    "resultType": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The type of result. FINAL means this is the final result of the check run. ATTEMPT means this is a result of a double check attempt.",
+      "example": "FINAL",
+      "default": "FINAL"
+    },
+    "sequenceId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The sequence ID of the check run. This is used to group check runs with multiple attempts together.",
+      "example": "2dbfa2a3-5477-45ea-ac33-ee55b8ea66ff",
+      "x-format": {
+        "guid": true
+      }
+    }
+  },
+  "required": [
+    "resultType"
+  ]
+}

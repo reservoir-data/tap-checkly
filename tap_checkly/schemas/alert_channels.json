@@ -1,0 +1,141 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number",
+      "example": 1,
+      "x-constraint": {
+        "sign": "positive"
+      }
+    },
+    "type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "example": "SMS"
+    },
+    "config": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The configuration details for this alert channel. These can be very different based on the type of the channel."
+    },
+    "subscriptions": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "All checks subscribed to this channel.",
+      "example": [],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "id": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "example": 1
+          },
+          "checkId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "47ccf418-6224-429c-a096-637364249882",
+            "x-format": {
+              "guid": true
+            }
+          },
+          "groupId": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "example": "null",
+            "x-constraint": {
+              "sign": "positive"
+            }
+          },
+          "activated": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "activated"
+        ]
+      }
+    },
+    "sendRecovery": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "sendFailure": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "sendDegraded": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "sslExpiry": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Determines if an alert should be sent for expiring SSL certificates.",
+      "default": false
+    },
+    "sslExpiryThreshold": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "At what moment in time to start alerting on SSL certificates.",
+      "default": 30,
+      "minimum": 1,
+      "maximum": 30
+    },
+    "autoSubscribe": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Automatically subscribe newly created checks to this alert channel.",
+      "default": false
+    },
+    "created_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "config"
+  ]
+}

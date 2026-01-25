@@ -1,0 +1,237 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "example": "0baf2a80-7266-44af-b56c-2af7086782ee",
+      "x-format": {
+        "guid": true
+      }
+    },
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The name assigned to the private location.",
+      "example": "New Private Location"
+    },
+    "slugName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Valid slug name.",
+      "example": "new-private-location"
+    },
+    "icon": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The private location icon.",
+      "example": "location"
+    },
+    "created_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "updated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "checkAssignments": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "The check this private location has assigned.",
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "4295d566-18bd-47ef-b22b-129a64ffd589",
+            "x-format": {
+              "guid": true
+            }
+          },
+          "checkId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The ID of the check.",
+            "example": "25039e6d-8631-4ee8-950a-bf7c893c3c1c",
+            "x-format": {
+              "guid": true
+            }
+          },
+          "privateLocationId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The ID of the assigned private location.",
+            "example": "cc3f943d-7a99-49f4-94aa-bddbaaad6eb0",
+            "x-format": {
+              "guid": true
+            }
+          }
+        },
+        "required": [
+          "id",
+          "checkId",
+          "privateLocationId"
+        ]
+      }
+    },
+    "groupAssignments": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "The group this private location has assigned.",
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "450d2f06-2300-46ed-8982-b63cd53fc494",
+            "x-format": {
+              "guid": true
+            }
+          },
+          "groupId": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "The ID of the group.",
+            "example": 10
+          },
+          "privateLocationId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The ID of the assigned private location.",
+            "example": "895c13cc-7de2-46df-9985-cb01b995a3cf",
+            "x-format": {
+              "guid": true
+            }
+          }
+        },
+        "required": [
+          "id",
+          "groupId",
+          "privateLocationId"
+        ]
+      }
+    },
+    "keys": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "fed3ada8-7d9b-4634-a0fe-471afe0518b6",
+            "x-format": {
+              "guid": true
+            }
+          },
+          "rawKey": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "pl_a89026d28a0c45cf9e11b4c3637f3912"
+          },
+          "maskedKey": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The masked key value.",
+            "example": "...6a1e"
+          },
+          "created_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "updated_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          }
+        },
+        "required": [
+          "id",
+          "rawKey",
+          "maskedKey",
+          "created_at"
+        ]
+      }
+    },
+    "proxyUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A proxy for outgoing API check HTTP calls from your private location.",
+      "example": "https://user:password@164.92.149.127:3128"
+    },
+    "lastSeen": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "agentCount": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "slugName",
+    "created_at"
+  ]
+}

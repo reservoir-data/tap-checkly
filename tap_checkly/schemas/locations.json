@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "properties": {
+    "region": {
+      "type": "string",
+      "description": "The unique identifier of this location.",
+      "example": "us-east-1"
+    },
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Friendly name of this location.",
+      "example": "N. Virginia"
+    }
+  },
+  "required": [
+    "region",
+    "name"
+  ]
+}

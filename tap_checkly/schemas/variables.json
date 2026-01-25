@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "The key of the environment variable (this value cannot be changed).",
+      "example": "API_KEY"
+    },
+    "value": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "locked": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Used only in the UI to hide the value like a password.",
+      "default": false
+    },
+    "secret": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Set an environment variable as secret. Once set, its value cannot be unlocked.",
+      "default": false
+    }
+  },
+  "required": [
+    "key",
+    "value"
+  ]
+}

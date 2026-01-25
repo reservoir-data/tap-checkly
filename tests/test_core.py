@@ -21,6 +21,7 @@ TestTapCheckly = get_tap_test_class(
             "maintenance_windows",
             "private_locations",
             "snippets",
+            "status_page_incidents",
         ],
     ),
 )

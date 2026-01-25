@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number",
+      "example": 1
+    },
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The snippet name.",
+      "example": "Snippet"
+    },
+    "script": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Your Node.js code that interacts with the API check lifecycle, or functions as a partial for browser checks.",
+      "example": "request.url = request.url + '/extra'"
+    },
+    "created_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    }
+  }
+}

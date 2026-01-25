@@ -43,11 +43,7 @@ class TapCheckly(Tap):
 
     @override
     def discover_streams(self) -> list[Stream]:
-        """Return a list of discovered streams.
-
-        Returns:
-            A list of Checkly streams.
-        """
+        """Return a list of discovered streams."""
         included_streams: list[Stream] = [
             streams.AlertChannels(tap=self),
             streams.Checks(tap=self),
@@ -60,6 +56,9 @@ class TapCheckly(Tap):
             streams.PrivateLocations(tap=self),
             streams.Runtimes(tap=self),
             streams.Snippets(tap=self),
+            streams.StatusPages(tap=self),
+            streams.StatusPageIncidents(tap=self),
+            streams.StatusPageServices(tap=self),
         ]
 
         if self.config.get("include_paid_streams", False):

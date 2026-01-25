@@ -1,0 +1,275 @@
+{
+  "type": "object",
+  "properties": {
+    "customDomain": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A custom user domain, e.g. \"status.example.com\". See the docs on updating your DNS and SSL usage.",
+      "example": "https://status.mycompany.com/"
+    },
+    "customUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A subdomain name under \"checklyhq.com\". Needs to be unique across all users.",
+      "example": "status"
+    },
+    "logo": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A URL pointing to an image file.",
+      "example": "https://static.mycompany.com/static/images/logo.svg"
+    },
+    "favicon": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A URL pointing to an image file used as dashboard favicon.",
+      "example": "https://static.mycompany.com/static/images/icon.svg"
+    },
+    "link": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A URL link to redirect when dashboard logo is clicked on.",
+      "example": "https://www.mycompany.com/"
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A piece of text displayed below the header or title of your dashboard.",
+      "example": "My dashboard description"
+    },
+    "width": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Determines whether to use the full screen or focus in the center.",
+      "default": "FULL"
+    },
+    "refreshRate": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "How often to refresh the dashboard in seconds.",
+      "default": 60
+    },
+    "paginate": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Determines of pagination is on or off.",
+      "default": true
+    },
+    "paginationRate": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "How often to trigger pagination in seconds.",
+      "default": 60
+    },
+    "checksPerPage": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Number of checks displayed per page.",
+      "default": 15,
+      "minimum": 1,
+      "maximum": 20
+    },
+    "useTagsAndOperator": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "When to use AND operator for tags lookup.",
+      "default": false
+    },
+    "hideTags": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Show or hide the tags on the dashboard.",
+      "default": false
+    },
+    "enableIncidents": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Enable or disable incidents on the dashboard.",
+      "default": false
+    },
+    "expandChecks": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Expand or collapse checks on the dashboard.",
+      "default": false
+    },
+    "tags": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "A list of one or more tags that filter which checks to display on the dashboard.",
+      "example": [
+        "production"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "showHeader": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Show or hide header and description on the dashboard.",
+      "default": true
+    },
+    "showCheckRunLinks": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Show or hide check run links on the dashboard.",
+      "default": false
+    },
+    "customCSS": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Custom CSS to be applied to the dashboard.",
+      "default": ""
+    },
+    "isPrivate": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Determines if the dashboard is public or private.",
+      "default": false
+    },
+    "showP95": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Show or hide the P95 stats on the dashboard.",
+      "default": true
+    },
+    "showP99": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Show or hide the P99 stats on the dashboard.",
+      "default": true
+    },
+    "keys": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "Show key for private dashboard.",
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-format": {
+              "guid": true
+            }
+          },
+          "rawKey": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "da_a89026d28a0c45cf9e11b4c3637f3912"
+          },
+          "maskedKey": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The masked key value.",
+            "example": "...6a1e"
+          },
+          "created_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "updated_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          }
+        },
+        "required": [
+          "id",
+          "rawKey",
+          "maskedKey",
+          "created_at"
+        ]
+      }
+    },
+    "id": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "dashboardId": {
+      "type": "string",
+      "example": "1"
+    },
+    "created_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "header": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "dashboardId",
+    "created_at"
+  ]
+}

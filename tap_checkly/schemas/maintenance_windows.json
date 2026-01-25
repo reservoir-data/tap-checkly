@@ -1,0 +1,101 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number",
+      "description": "The id of the maintenance window.",
+      "example": 1
+    },
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The maintenance window name.",
+      "example": "Maintenance Window"
+    },
+    "tags": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "The names of the checks and groups maintenance window should apply to.",
+      "example": [
+        "production"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "startsAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "The start date of the maintenance window.",
+      "example": "2022-08-24"
+    },
+    "endsAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "The end date of the maintenance window.",
+      "example": "2022-08-25"
+    },
+    "repeatInterval": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "The repeat interval of the maintenance window from the first occurance.",
+      "example": "null",
+      "default": null,
+      "minimum": 1
+    },
+    "repeatUnit": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The repeat strategy for the maintenance window.",
+      "example": "DAY"
+    },
+    "repeatEndsAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "The end date where the maintenance window should stop repeating.",
+      "example": "null"
+    },
+    "created_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "The creation date of the maintenance window."
+    },
+    "updated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "The last date that the maintenance window was updated."
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "startsAt",
+    "endsAt",
+    "repeatUnit",
+    "created_at",
+    "updated_at"
+  ]
+}

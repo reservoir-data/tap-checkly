@@ -2,35 +2,37 @@
 
 from __future__ import annotations
 
-import importlib.resources
+import sys
 from abc import ABCMeta, abstractmethod
-from typing import TYPE_CHECKING, Any, override
+from typing import TYPE_CHECKING, Any, Generic, override
 
-from singer_sdk import OpenAPISchema, RESTStream, StreamSchema
+from singer_sdk import RESTStream, SchemaDirectory, StreamSchema
 from singer_sdk.authenticators import BearerTokenAuthenticator
+from singer_sdk.pagination import BasePageNumberPaginator
+
+from tap_checkly import schemas
+
+if sys.version_info >= (3, 13):
+    from typing import TypeVar
+else:
+    from typing_extensions import TypeVar
 
 if TYPE_CHECKING:
     from singer_sdk.helpers.types import Context
 
 PAGE_SIZE = 100
-OPENAPI_SCHEMA = OpenAPISchema(importlib.resources.files("tap_checkly") / "openapi.json")
+SCHEMAS_DIR = SchemaDirectory(schemas)
+
+T = TypeVar("T", default=Any)
 
 
-class ChecklySchema(StreamSchema):
-    """Checkly schema class."""
-
-    @override
-    def get_stream_schema(self, stream: ChecklyStream, stream_class: type[ChecklyStream]) -> dict[str, Any]:  # type: ignore[override]
-        return self.schema_source.get_schema(stream.openapi_ref)
-
-
-class ChecklyStream(RESTStream[int], metaclass=ABCMeta):
+class ChecklyStream(RESTStream[T], Generic[T], metaclass=ABCMeta):  # noqa: UP046
     """Checkly stream class."""
 
     url_base = "https://api.checklyhq.com/v1"
     records_jsonpath = "$[*]"  # Or override `parse_response`.
 
-    schema = ChecklySchema(OPENAPI_SCHEMA)
+    schema = StreamSchema(SCHEMAS_DIR)
 
     @override
     @property
@@ -46,7 +48,7 @@ class ChecklyStream(RESTStream[int], metaclass=ABCMeta):
         }
 
     @override
-    def get_url_params(self, context: Context | None, next_page_token: Any | None) -> dict[str, Any]:
+    def get_url_params(self, context: Context | None, next_page_token: T | None) -> dict[str, Any]:
         params: dict[str, Any] = {}
 
         if self.replication_key:
@@ -67,12 +69,30 @@ class ChecklyStream(RESTStream[int], metaclass=ABCMeta):
         ...
 
 
-class ChecklyPaginatedStream(ChecklyStream):
+class ChecklyPaginatedStream(ChecklyStream[int]):
     """Checkly paginated stream class."""
+
+    @override
+    def get_new_paginator(self) -> BasePageNumberPaginator | None:
+        return BasePageNumberPaginator(start_value=1)
 
     @override
     def get_url_params(self, context: Context | None, next_page_token: int | None) -> dict[str, Any]:
         params = super().get_url_params(context, next_page_token)
-        params["page"] = next_page_token
         params["limit"] = PAGE_SIZE
+        params["page"] = next_page_token or 1
+        return params
+
+
+class ChecklyNextIDPaginatedStream(ChecklyStream[str]):
+    """Checkly next ID paginated stream class."""
+
+    records_jsonpath = "$.entries[*]"
+    next_page_token_jsonpath = "$.nextId"  # noqa: S105
+
+    @override
+    def get_url_params(self, context: Context | None, next_page_token: str | None) -> dict[str, Any]:
+        params = super().get_url_params(context, next_page_token)
+        if next_page_token:
+            params["nextId"] = next_page_token
         return params

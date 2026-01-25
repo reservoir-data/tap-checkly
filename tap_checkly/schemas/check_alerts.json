@@ -1,0 +1,93 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID of this alert.",
+      "example": "1"
+    },
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The name of the check.",
+      "example": "API Check"
+    },
+    "checkId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The ID of check this alert belongs to.",
+      "example": "db147a95-6ed6-44c9-a584-c5dca2db3aaa"
+    },
+    "alertType": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The type of alert.",
+      "example": "ALERT_FAILURE"
+    },
+    "checkType": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The type of the check.",
+      "example": "API"
+    },
+    "runLocation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "What data center location this check alert was triggered from.",
+      "example": "us-east-1"
+    },
+    "responseTime": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Describes the time it took to execute relevant parts of this check. Any setup timeor system time needed to start executing this check in the Checkly backend is not part of this.",
+      "example": 10
+    },
+    "error": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Any specific error messages that were part of the failing check triggering the alert.",
+      "example": "OK"
+    },
+    "statusCode": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The status code of the response. Only applies to API checks.",
+      "example": "200"
+    },
+    "created_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "The date and time this check alert was created."
+    },
+    "startedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "The date and time this check alert was started."
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

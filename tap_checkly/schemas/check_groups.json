@@ -1,0 +1,641 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number",
+      "example": 1
+    },
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The name of the check group.",
+      "example": "Check group"
+    },
+    "activated": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Determines if the checks in the  group are running or not."
+    },
+    "muted": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Determines if any notifications will be send out when a check in this group fails and/or recovers."
+    },
+    "tags": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "Tags for organizing and filtering checks.",
+      "example": [
+        "production"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "locations": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "An array of one or more data center locations where to run the checks.",
+      "example": [
+        "us-east-1",
+        "eu-central-1"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "concurrency": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Determines how many checks are invoked concurrently when triggering a check group from CI/CD or through the API.",
+      "default": 3,
+      "minimum": 1,
+      "x-constraint": {
+        "sign": "positive"
+      }
+    },
+    "apiCheckDefaults": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The base url for this group which you can reference with the {{GROUP_BASE_URL}} variable in all group checks.",
+          "example": "https://api.example.com/v1",
+          "default": ""
+        },
+        "headers": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "example": [
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            }
+          ],
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "key": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "value": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "default": ""
+              },
+              "locked": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "default": false
+              }
+            },
+            "required": [
+              "key",
+              "value"
+            ]
+          }
+        },
+        "queryParameters": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "example": [
+            {
+              "key": "Page",
+              "value": "1"
+            }
+          ],
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "key": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "value": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "default": ""
+              },
+              "locked": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "default": false
+              }
+            },
+            "required": [
+              "key",
+              "value"
+            ]
+          }
+        },
+        "assertions": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Check the main Checkly documentation on assertions for specific values like regular expressions and JSON path descriptors you can use in the \"property\" field.",
+          "example": [
+            {
+              "source": "STATUS_CODE",
+              "comparison": "NOT_EMPTY",
+              "target": "200"
+            }
+          ],
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "source": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "comparison": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "property": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "default": ""
+              },
+              "target": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "default": ""
+              },
+              "regex": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "default": ""
+              }
+            }
+          }
+        },
+        "basicAuth": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "username": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "admin",
+              "default": ""
+            },
+            "password": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "abc12345",
+              "default": ""
+            }
+          },
+          "required": [
+            "username",
+            "password"
+          ]
+        }
+      }
+    },
+    "browserCheckDefaults": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "environmentVariables": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "maxItems": 50,
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "key": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The key of the environment variable (this value cannot be changed).",
+            "example": "API_KEY"
+          },
+          "value": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "locked": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Used only in the UI to hide the value like a password.",
+            "default": false
+          },
+          "secret": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Set an environment variable as secret. Once set, its value cannot be unlocked.",
+            "default": false
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      }
+    },
+    "doubleCheck": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "[Deprecated] Retry failed check runs. This property is deprecated, and `retryStrategy` can be used instead."
+    },
+    "useGlobalAlertSettings": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "When true, the account level alert setting will be used, not the alert setting defined on this check group."
+    },
+    "alertSettings": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Alert settings.",
+      "default": {
+        "escalationType": "RUN_BASED",
+        "runBasedEscalation": {
+          "failedRunThreshold": 1
+        },
+        "reminders": {
+          "amount": 0,
+          "interval": 5
+        },
+        "parallelRunFailureThreshold": {
+          "enabled": false,
+          "percentage": 10
+        }
+      },
+      "properties": {
+        "escalationType": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Determines what type of escalation to use.",
+          "default": "RUN_BASED"
+        },
+        "reminders": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "amount": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "description": "How many reminders to send out after the initial alert notification.",
+              "default": 0
+            },
+            "interval": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "description": "At what interval the reminders should be send.",
+              "default": 5
+            }
+          }
+        },
+        "sslCertificates": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "[DEPRECATED] `sslCertificates` is deprecated and is not longer used. Please ignore it, will be removed in a future version.",
+          "properties": {
+            "enabled": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "description": "Determines if alert notifications should be send for expiring SSL certificates."
+            },
+            "alertThreshold": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "At what moment in time to start alerting on SSL certificates."
+            }
+          }
+        },
+        "runBasedEscalation": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "failedRunThreshold": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "description": "After how many failed consecutive check runs an alert notification should be send."
+            }
+          }
+        },
+        "timeBasedEscalation": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "minutesFailingThreshold": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "description": "After how many minutes after a check starts failing an alert should be send."
+            }
+          }
+        },
+        "parallelRunFailureThreshold": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "enabled": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "description": "Determines if parallel run threshold is enabled",
+              "default": false
+            },
+            "percentage": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "description": "The percentage of parallel runs that should fail before an alert is triggered",
+              "default": 10
+            }
+          }
+        }
+      }
+    },
+    "alertChannelSubscriptions": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "List of alert channel subscriptions.",
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Alert channel subscription.",
+        "properties": {
+          "alertChannelId": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "activated": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "default": true
+          }
+        },
+        "required": [
+          "alertChannelId",
+          "activated"
+        ]
+      }
+    },
+    "setupSnippetId": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "An ID reference to a snippet to use in the setup phase of an API check in this group.",
+      "example": "null"
+    },
+    "tearDownSnippetId": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "An ID reference to a snippet to use in the teardown phase of an API check in this group.",
+      "example": "null"
+    },
+    "localSetupScript": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A valid piece of Node.js code to run in the setup phase of an API check in this group.",
+      "example": "null"
+    },
+    "localTearDownScript": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A valid piece of Node.js code to run in the teardown phase of an API check in this group.",
+      "example": "null"
+    },
+    "runtimeId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The runtime version, i.e. fixed set of runtime dependencies, used to execute checks in this group.",
+      "example": "null"
+    },
+    "privateLocations": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "An array of one or more private locations where to run the check.",
+      "example": [
+        "data-center-eu"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "retryStrategy": {
+      "description": "Either a retry strategy object or the literal string \"FALLBACK\".",
+      "anyOf": [
+        {
+          "type": "object",
+          "description": "The strategy to determine how failed checks are retried.",
+          "nullable": true,
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Determines which type of retry strategy to use.",
+              "enum": [
+                "FIXED",
+                "LINEAR",
+                "EXPONENTIAL",
+                "SINGLE_RETRY"
+              ]
+            },
+            "baseBackoffSeconds": {
+              "type": "number",
+              "description": "The number of seconds to wait before the first retry attempt.",
+              "default": 60
+            },
+            "sameRegion": {
+              "type": "boolean",
+              "description": "Whether retries should be run in the same region as the initial check run.",
+              "default": true
+            },
+            "maxRetries": {
+              "type": "number",
+              "description": "The maximum number of attempts to retry the check. Not supported for SINGLE_RETRY",
+              "minimum": 1,
+              "maximum": 10
+            },
+            "maxDurationSeconds": {
+              "type": "number",
+              "description": "The total amount of time to continue retrying the check. Not supported for SINGLE_RETRY",
+              "minimum": 0,
+              "maximum": 600
+            },
+            "onlyOn": {
+              "type": "array",
+              "x-constraint": {
+                "length": 1,
+                "unique": true,
+                "single": true
+              },
+              "items": {
+                "type": "string",
+                "description": "The HTTP request could not be completed due to a network error: no response status code was received",
+                "enum": [
+                  "NETWORK_ERROR"
+                ]
+              }
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "string",
+          "enum": [
+            "FALLBACK"
+          ]
+        }
+      ]
+    },
+    "created_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "updated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "runParallel": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "When true, the checks in the group will run in parallel in all selected locations.",
+      "default": false
+    }
+  },
+  "required": [
+    "name",
+    "activated",
+    "concurrency",
+    "apiCheckDefaults"
+  ]
+}

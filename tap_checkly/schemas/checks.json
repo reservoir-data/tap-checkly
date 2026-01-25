@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "checkType": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The type of the check."
+    }
+  },
+  "required": [
+    "checkType"
+  ]
+}

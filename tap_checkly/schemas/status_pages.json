@@ -1,0 +1,608 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-convert": {
+        "case": "lower"
+      }
+    },
+    "customDomain": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A custom user domain, e.g. \"status.example.com\". See the docs on updating your DNS and SSL usage.",
+      "x-convert": {
+        "case": "lower"
+      }
+    },
+    "themeColors": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "light": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "bodyBackgroundColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "headerBackgroundColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "headerFontColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "titleFontColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "bodyFontColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "bodyFontColorMuted": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "navigationFontColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "linkFontColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "cardBackgroundColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "borderColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "primaryButtonBackgroundColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "primaryButtonFontColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            }
+          },
+          "required": [
+            "bodyBackgroundColor",
+            "headerBackgroundColor",
+            "headerFontColor",
+            "titleFontColor",
+            "bodyFontColor",
+            "bodyFontColorMuted",
+            "navigationFontColor",
+            "linkFontColor",
+            "cardBackgroundColor",
+            "borderColor",
+            "primaryButtonBackgroundColor",
+            "primaryButtonFontColor"
+          ]
+        },
+        "dark": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "bodyBackgroundColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "headerBackgroundColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "headerFontColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "titleFontColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "bodyFontColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "bodyFontColorMuted": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "navigationFontColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "linkFontColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "cardBackgroundColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "borderColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "primaryButtonBackgroundColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            },
+            "primaryButtonFontColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^#([0-9A-F]{3}|[0-9A-F]{6})$"
+            }
+          },
+          "required": [
+            "bodyBackgroundColor",
+            "headerBackgroundColor",
+            "headerFontColor",
+            "titleFontColor",
+            "bodyFontColor",
+            "bodyFontColorMuted",
+            "navigationFontColor",
+            "linkFontColor",
+            "cardBackgroundColor",
+            "borderColor",
+            "primaryButtonBackgroundColor",
+            "primaryButtonFontColor"
+          ]
+        }
+      },
+      "required": [
+        "light",
+        "dark"
+      ]
+    },
+    "logo": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "redirectTo": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-format": {
+        "uri": true
+      }
+    },
+    "favicon": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "defaultTheme": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "default": "AUTO"
+    },
+    "cards": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-format": {
+              "guid": true
+            }
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "services": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "x-format": {
+                    "guid": true
+                  }
+                },
+                "accountId": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "x-format": {
+                    "guid": true
+                  }
+                },
+                "created_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time"
+                },
+                "updated_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time"
+                }
+              },
+              "required": [
+                "name",
+                "id",
+                "accountId",
+                "created_at"
+              ]
+            }
+          },
+          "created_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "created_at"
+        ]
+      }
+    },
+    "id": {
+      "type": "string",
+      "x-format": {
+        "guid": true
+      }
+    },
+    "accountId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-format": {
+        "guid": true
+      }
+    },
+    "created_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "incidents": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 255
+          },
+          "severity": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-format": {
+              "guid": true
+            }
+          },
+          "services": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "x-format": {
+                    "guid": true
+                  }
+                },
+                "accountId": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "x-format": {
+                    "guid": true
+                  }
+                },
+                "created_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date"
+                },
+                "updated_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date"
+                }
+              },
+              "required": [
+                "name",
+                "id",
+                "accountId",
+                "created_at"
+              ]
+            }
+          },
+          "incidentUpdates": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "description": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "status": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "publicIncidentUpdateDate": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time",
+                  "default": "2026-01-25T02:52:21.209Z"
+                },
+                "notifySubscribers": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ],
+                  "default": false
+                },
+                "id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "x-format": {
+                    "guid": true
+                  }
+                },
+                "created_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date"
+                }
+              },
+              "required": [
+                "description",
+                "id",
+                "created_at"
+              ]
+            }
+          },
+          "lastUpdateStatus": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "created_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "updated_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          }
+        },
+        "required": [
+          "name",
+          "severity",
+          "id",
+          "services",
+          "lastUpdateStatus",
+          "created_at"
+        ]
+      }
+    }
+  },
+  "required": [
+    "name",
+    "url",
+    "id",
+    "accountId",
+    "created_at"
+  ]
+}

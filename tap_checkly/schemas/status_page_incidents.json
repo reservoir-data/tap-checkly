@@ -1,0 +1,173 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "severity": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "x-format": {
+        "guid": true
+      }
+    },
+    "services": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-format": {
+              "guid": true
+            }
+          },
+          "accountId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-format": {
+              "guid": true
+            }
+          },
+          "created_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "updated_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          }
+        },
+        "required": [
+          "name",
+          "id",
+          "accountId",
+          "created_at"
+        ]
+      }
+    },
+    "incidentUpdates": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "publicIncidentUpdateDate": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "default": "2026-01-25T02:52:21.209Z"
+          },
+          "notifySubscribers": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "default": false
+          },
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-format": {
+              "guid": true
+            }
+          },
+          "created_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          }
+        },
+        "required": [
+          "description",
+          "id",
+          "created_at"
+        ]
+      }
+    },
+    "lastUpdateStatus": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "updated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    }
+  },
+  "required": [
+    "name",
+    "severity",
+    "id",
+    "services",
+    "incidentUpdates",
+    "lastUpdateStatus",
+    "created_at"
+  ]
+}

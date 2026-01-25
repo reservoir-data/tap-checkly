@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, override
 
-from tap_checkly.client import ChecklyPaginatedStream, ChecklyStream
+from tap_checkly.client import ChecklyNextIDPaginatedStream, ChecklyPaginatedStream, ChecklyStream
 
 if TYPE_CHECKING:
     from singer_sdk.helpers.types import Context, Record
@@ -142,3 +142,30 @@ class Snippets(ChecklyPaginatedStream):
     path = "/snippets"
     primary_keys = ("id",)
     openapi_ref = "Snippet"
+
+
+class StatusPages(ChecklyNextIDPaginatedStream):
+    """Status pages."""
+
+    name = "status_pages"
+    path = "/status-pages"
+    primary_keys = ("id",)
+    openapi_ref = "StatusPageV2"
+
+
+class StatusPageIncidents(ChecklyNextIDPaginatedStream):
+    """Status page incidents."""
+
+    name = "status_page_incidents"
+    path = "/status-pages/incidents"
+    primary_keys = ("id",)
+    openapi_ref = "StatusPageV2Incident"
+
+
+class StatusPageServices(ChecklyNextIDPaginatedStream):
+    """Status page services."""
+
+    name = "status_page_services"
+    path = "/status-pages/services"
+    primary_keys = ("id",)
+    openapi_ref = "StatusPageV2Service"

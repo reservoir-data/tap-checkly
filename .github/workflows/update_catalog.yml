@@ -1,0 +1,80 @@
+name: Update Catalog for tap-checkly
+
+on:
+  workflow_dispatch:
+  schedule:
+  # On Fridays
+  - cron: '0 12 * * 5'
+
+env:
+  FORCE_COLOR: "1"
+  # renovate: datasource=pypi depName=llm
+  LLM_VERSION: 0.28
+  # renovate: datasource=pypi depName=llm-github-models
+  LLM_GITHUB_MODELS_VERSION: 0.18.0
+  # renovate: datasource=pypi depName=uv
+  UV_VERSION: 0.9.26
+
+jobs:
+  update_openapi_specification:
+    name: Update Catalog
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write  # Required by peter-evans/create-pull-request
+      models: read  # Required by llm-github-models
+      pull-requests: write  # Required by peter-evans/create-pull-request
+    steps:
+    - uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+      id: generate-token
+      with:
+        app-id: ${{ vars.RESERVOIR_GITHUB_APP_ID }}
+        private-key: ${{ secrets.RESERVOIR_GITHUB_APP_PKEY }}
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+    - uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b # v7.2.0
+      with:
+        version: ${{ env.UV_VERSION }}
+    - run: uv run scripts/update_catalog.py
+    - id: check_schema_changes
+      continue-on-error: true
+      run: git diff --quiet tap_checkly/schemas
+    - name: Install LLM with GitHub Models
+      if: steps.check_schema_changes.outcome == 'failure'
+      run: uv tool install --with llm-github-models==${{ env.LLM_GITHUB_MODELS_VERSION }} --with llm==${{ env.LLM_VERSION }} llm
+    - name: Review catalog changes
+      if: steps.check_schema_changes.outcome == 'failure'
+      id: review-catalog-changes
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WORKSPACE_PATH: ${{ github.workspace }}
+      run: |
+        SYSTEM_PROMPT=$(cat $WORKSPACE_PATH/.github/prompts/update_catalog_prompt.txt)
+        GENERATED_CONTENT=$(git --no-pager diff -p --no-color HEAD tests/__snapshots__ | llm prompt -m github/gpt-4o-mini -s "$SYSTEM_PROMPT")
+
+        PR_TITLE=$(echo "$GENERATED_CONTENT" | head -n 1)
+        PR_BODY=$(echo "$GENERATED_CONTENT" | tail -n +3)
+
+        {
+            echo 'title<<EOF'
+            echo "$PR_TITLE"
+            echo 'EOF'
+        } >> "$GITHUB_OUTPUT"
+
+        {
+            echo 'body<<EOF'
+            echo "$PR_BODY"
+            echo 'EOF'
+        } >> "$GITHUB_OUTPUT"
+
+        {
+            echo 'commit_message<<EOF'
+            echo "$PR_TITLE"
+            echo 'EOF'
+        } >> "$GITHUB_OUTPUT"
+    - uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8.1.0
+      if: steps.check_schema_changes.outcome == 'failure'
+      with:
+        title: ${{ steps.review-catalog-changes.outputs.title }}
+        commit-message: ${{ steps.review-catalog-changes.outputs.commit_message }}
+        body: ${{ steps.review-catalog-changes.outputs.body }}
+        token: ${{ steps.generate-token.outputs.token }}
+        signoff: true

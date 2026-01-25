@@ -35,6 +35,7 @@ env:
 
 jobs:
   tests:
+    name: Integration
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
@@ -68,6 +69,7 @@ jobs:
         tox -e ${{ matrix.python-version }}
 
   lint:
+    name: Lint
     runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -87,6 +89,7 @@ jobs:
       run: tox -e dependencies
 
   pre-commit:
+    name: pre-commit
     runs-on: ubuntu-24.04
     steps:
     - name: Checkout code

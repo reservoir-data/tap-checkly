@@ -3,12 +3,15 @@ name: Build
 on:
   push:
 
-permissions:
-  contents: write
-  id-token: write
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
 
 jobs:
   build:
+    name: Build and inspect package
     runs-on: ubuntu-latest
     outputs:
       package_version: ${{ steps.baipp.outputs.package_version }}
@@ -16,16 +19,20 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
+          persist-credentials: false
       - uses: hynek/build-and-inspect-python-package@efb823f52190ad02594531168b7a2d5790e66516 # v2.14.0
         id: baipp
 
   publish:
+    name: Publish to PyPI
     runs-on: ubuntu-latest
     needs: build
+    if: startsWith(github.ref, 'refs/tags/')
     environment:
       name: pypi
       url: https://pypi.org/project/tap-checkly/${{ needs.build.outputs.package_version }}
-    if: startsWith(github.ref, 'refs/tags/')
+    permissions:
+      id-token: write # Required by pypa/gh-action-pypi-publish for trusted publishing
     steps:
       - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:

@@ -25,6 +25,10 @@ on:
   # Run weekly on Monday at 12:00 PM UTC
   - cron: "0 12 * * 1"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   FORCE_COLOR: "1"
   # renovate: datasource=pypi depName=prek
@@ -51,6 +55,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      with:
+        persist-credentials: false
     - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
       id: setup-python
       with:
@@ -62,20 +68,23 @@ jobs:
     - name: Run
       env:
         UV_PYTHON: ${{ steps.setup-python.outputs.python-path }}
+        PYTHON_VERSION: ${{ matrix.python-version }}
         TAP_CHECKLY_ACCOUNT_ID: ${{ secrets.TAP_CHECKLY_ACCOUNT_ID }}
         TAP_CHECKLY_TOKEN: ${{ secrets.TAP_CHECKLY_TOKEN }}
         TAP_CHECKLY_START_DATE: ${{ secrets.TAP_CHECKLY_START_DATE }}
       run: >
         uvx
-        --with tox-uv==${{ env.TOX_UV_VERSION }}
-        --with tox==${{ env.TOX_VERSION }}
-        tox -e ${{ matrix.python-version }}
+        --with tox-uv==${TOX_UV_VERSION}
+        --with tox==${TOX_VERSION}
+        tox -e $PYTHON_VERSION
 
   lint:
     name: Lint
     runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      with:
+        persist-credentials: false
     - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
       id: setup-python
       with:
@@ -85,7 +94,7 @@ jobs:
         version: ${{ env.UV_VERSION }}
     - env:
         UV_PYTHON: ${{ steps.setup-python.outputs.python-path }}
-      run: uv tool install --with tox-uv==${{ env.TOX_UV_VERSION }} --from tox==${{ env.TOX_VERSION }} tox
+      run: uv tool install --with tox-uv==${TOX_UV_VERSION} --from tox==${TOX_VERSION} tox
     - name: Static type checking
       run: tox -e typing
     - name: Unused, missing and transitive dependencies
@@ -97,6 +106,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      with:
+        persist-credentials: false
 
     - name: Install the latest version of uv
       uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b # v7.2.0
@@ -105,5 +116,5 @@ jobs:
 
     - run: >
         uvx
-        --with prek==${{ env.PREK_VERSION }}
+        --with prek==${PREK_VERSION}
         prek run --show-diff-on-failure --all-files

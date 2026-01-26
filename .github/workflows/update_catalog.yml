@@ -6,6 +6,12 @@ on:
   # On Fridays
   - cron: '0 12 * * 5'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
 env:
   FORCE_COLOR: "1"
   # renovate: datasource=pypi depName=llm
@@ -30,6 +36,8 @@ jobs:
         app-id: ${{ vars.RESERVOIR_GITHUB_APP_ID }}
         private-key: ${{ secrets.RESERVOIR_GITHUB_APP_PKEY }}
     - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      with:
+        persist-credentials: false
     - uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b # v7.2.0
       with:
         version: ${{ env.UV_VERSION }}
@@ -39,7 +47,7 @@ jobs:
       run: git diff --quiet tap_checkly/schemas
     - name: Install LLM with GitHub Models
       if: steps.check_schema_changes.outcome == 'failure'
-      run: uv tool install --with llm-github-models==${{ env.LLM_GITHUB_MODELS_VERSION }} --with llm==${{ env.LLM_VERSION }} llm
+      run: uv tool install --with llm-github-models==${LLM_GITHUB_MODELS_VERSION} --with llm==${LLM_VERSION} llm
     - name: Review catalog changes
       if: steps.check_schema_changes.outcome == 'failure'
       id: review-catalog-changes

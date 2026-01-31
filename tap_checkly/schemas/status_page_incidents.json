@@ -60,14 +60,14 @@
               "string",
               "null"
             ],
-            "format": "date"
+            "format": "date-time"
           },
           "updated_at": {
             "type": [
               "string",
               "null"
             ],
-            "format": "date"
+            "format": "date-time"
           }
         },
         "required": [
@@ -130,7 +130,7 @@
               "string",
               "null"
             ],
-            "format": "date"
+            "format": "date-time"
           }
         },
         "required": [
@@ -151,14 +151,14 @@
         "string",
         "null"
       ],
-      "format": "date"
+      "format": "date-time"
     },
     "updated_at": {
       "type": [
         "string",
         "null"
       ],
-      "format": "date"
+      "format": "date-time"
     }
   },
   "required": [

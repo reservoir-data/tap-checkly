@@ -21,7 +21,7 @@ SCHEMAS_DIR = "tap_checkly/schemas"
 OPENAPI_URL = "https://www.checklyhq.com/docs/api-reference/openapi.json"
 
 
-def main() -> None:  # noqa: C901, PLR0912
+def main() -> None:  # noqa: C901, PLR0912, PLR0915
     """Main function."""
     response = requests.get(OPENAPI_URL, timeout=60)
     response.raise_for_status()
@@ -122,6 +122,17 @@ def main() -> None:  # noqa: C901, PLR0912
             if get_in(path, resolved_schema) == "date":  # type: ignore[no-untyped-call]
                 resolved_schema = assoc_in(resolved_schema, path, "date-time")  # type: ignore[no-untyped-call]
 
+        if name == "status_page_incidents":
+            paths = [
+                ["properties", "created_at", "format"],
+                ["properties", "updated_at", "format"],
+                ["properties", "services", "items", "properties", "created_at", "format"],
+                ["properties", "services", "items", "properties", "updated_at", "format"],
+                ["properties", "incidentUpdates", "items", "properties", "created_at", "format"],
+            ]
+            for path in paths:
+                if get_in(path, resolved_schema) == "date":  # type: ignore[no-untyped-call]
+                    resolved_schema = assoc_in(resolved_schema, path, "date-time")  # type: ignore[no-untyped-call]
         if name == "status_page_services":
             path = [
                 "properties",

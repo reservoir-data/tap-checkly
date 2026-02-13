@@ -21,15 +21,11 @@ SCHEMAS_DIR = "tap_checkly/schemas"
 OPENAPI_URL = "https://www.checklyhq.com/docs/api-reference/openapi.json"
 
 
-def main() -> None:  # noqa: C901, PLR0912, PLR0915
+def main() -> None:  # noqa: C901, PLR0912
     """Main function."""
     response = requests.get(OPENAPI_URL, timeout=60)
     response.raise_for_status()
-
-    content = response.text
-    content = content.replace("\n", "\\n")
-
-    spec = json.loads(content)
+    spec = response.json()
 
     tap = TapCheckly(config={"include_paid_streams": True}, validate_config=False)
     normalizer = OpenAPISchemaNormalizer()

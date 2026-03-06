@@ -533,7 +533,7 @@
                     "null"
                   ],
                   "format": "date-time",
-                  "default": "2026-01-25T02:52:21.209Z"
+                  "default": "2026-02-04T22:28:09.995Z"
                 },
                 "notifySubscribers": {
                   "type": [
@@ -593,6 +593,61 @@
           "id",
           "services",
           "lastUpdateStatus",
+          "created_at"
+        ]
+      }
+    },
+    "isPrivate": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "default": false
+    },
+    "keys": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-format": {
+              "guid": true
+            }
+          },
+          "maskedKey": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "created_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "updated_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          }
+        },
+        "required": [
+          "id",
+          "maskedKey",
           "created_at"
         ]
       }

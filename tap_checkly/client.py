@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Any, Generic, override
 
 from singer_sdk import RESTStream, SchemaDirectory, StreamSchema
 from singer_sdk.authenticators import BearerTokenAuthenticator
-from singer_sdk.pagination import BasePageNumberPaginator
+from singer_sdk.pagination import PageNumberPaginator
 
 from tap_checkly import schemas
 
@@ -73,8 +73,8 @@ class ChecklyPaginatedStream(ChecklyStream[int]):
     """Checkly paginated stream class."""
 
     @override
-    def get_new_paginator(self) -> BasePageNumberPaginator | None:
-        return BasePageNumberPaginator(start_value=1)
+    def get_new_paginator(self) -> PageNumberPaginator | None:
+        return PageNumberPaginator(start_value=1)
 
     @override
     def get_url_params(self, context: Context | None, next_page_token: int | None) -> dict[str, Any]:

@@ -34,7 +34,7 @@ dynamic = [
   "version",
 ]
 dependencies = [
-  "singer-sdk~=0.53.2",
+  "singer-sdk~=0.54.0a3",
   "typing-extensions>=4.15; python_full_version<'3.13'",
 ]
 urls.Documentation = "https://github.com/reservoir-data/tap-checkly/#readme"

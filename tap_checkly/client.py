@@ -26,7 +26,7 @@ SCHEMAS_DIR = SchemaDirectory(schemas)
 T = TypeVar("T", default=Any)
 
 
-class ChecklyStream(RESTStream[T], Generic[T], metaclass=ABCMeta):  # noqa: UP046
+class ChecklyStream(RESTStream[T], Generic[T], metaclass=ABCMeta):
     """Checkly stream class."""
 
     url_base = "https://api.checklyhq.com/v1"

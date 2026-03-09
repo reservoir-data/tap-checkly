@@ -2,9 +2,8 @@
 
 from __future__ import annotations
 
-import sys
 from abc import ABCMeta, abstractmethod
-from typing import TYPE_CHECKING, Any, Generic, override
+from typing import TYPE_CHECKING, Any, override
 
 from singer_sdk import RESTStream, SchemaDirectory, StreamSchema
 from singer_sdk.authenticators import BearerTokenAuthenticator
@@ -12,21 +11,14 @@ from singer_sdk.pagination import BasePageNumberPaginator
 
 from tap_checkly import schemas
 
-if sys.version_info >= (3, 13):
-    from typing import TypeVar
-else:
-    from typing_extensions import TypeVar
-
 if TYPE_CHECKING:
     from singer_sdk.helpers.types import Context
 
 PAGE_SIZE = 100
 SCHEMAS_DIR = SchemaDirectory(schemas)
 
-T = TypeVar("T", default=Any)
 
-
-class ChecklyStream(RESTStream[T], Generic[T], metaclass=ABCMeta):
+class ChecklyStream[T = Any](RESTStream[T], metaclass=ABCMeta):
     """Checkly stream class."""
 
     url_base = "https://api.checklyhq.com/v1"

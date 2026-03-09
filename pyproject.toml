@@ -16,11 +16,10 @@ keywords = [
 ]
 license = "Apache-2.0"
 license-files = [ "LICENSE" ]
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 classifiers = [
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
 ]
@@ -29,7 +28,6 @@ dynamic = [
 ]
 dependencies = [
   "singer-sdk~=0.53.2",
-  "typing-extensions>=4.15; python_full_version<'3.13'",
 ]
 [[project.authors]]
 name = "Edgar Ramírez-Mondragón"
@@ -153,7 +151,7 @@ env_list = [
   "dependencies",
   "typing",
   { product = [
-    { prefix = "3.", start = 12 },
+    { prefix = "3.", start = 13 },
   ] },
 ]
 [tool.tox.env]
@@ -181,3 +179,6 @@ warn_redundant_casts = true
 warn_unreachable = true
 warn_unused_configs = true
 warn_unused_ignores = true
+
+[tool.ty.rules]
+unused-type-ignore-comment = "ignore"

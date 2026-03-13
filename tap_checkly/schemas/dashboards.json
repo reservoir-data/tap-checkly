@@ -23,7 +23,15 @@
         "null"
       ],
       "description": "A URL pointing to an image file.",
-      "example": "https://static.mycompany.com/static/images/logo.svg"
+      "example": "https://static.mycompany.com/static/images/logo.svg",
+      "x-format": {
+        "uri": {
+          "scheme": [
+            "http",
+            "https"
+          ]
+        }
+      }
     },
     "favicon": {
       "type": [
@@ -31,7 +39,15 @@
         "null"
       ],
       "description": "A URL pointing to an image file used as dashboard favicon.",
-      "example": "https://static.mycompany.com/static/images/icon.svg"
+      "example": "https://static.mycompany.com/static/images/icon.svg",
+      "x-format": {
+        "uri": {
+          "scheme": [
+            "http",
+            "https"
+          ]
+        }
+      }
     },
     "link": {
       "type": [
@@ -39,7 +55,15 @@
         "null"
       ],
       "description": "A URL link to redirect when dashboard logo is clicked on.",
-      "example": "https://www.mycompany.com/"
+      "example": "https://www.mycompany.com/",
+      "x-format": {
+        "uri": {
+          "scheme": [
+            "http",
+            "https"
+          ]
+        }
+      }
     },
     "description": {
       "type": [
@@ -151,6 +175,14 @@
       ],
       "description": "Show or hide check run links on the dashboard.",
       "default": false
+    },
+    "showGroupNames": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Show or hide group names on the dashboard.",
+      "default": true
     },
     "customCSS": {
       "type": [

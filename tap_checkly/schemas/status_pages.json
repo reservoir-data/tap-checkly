@@ -254,7 +254,15 @@
       "type": [
         "string",
         "null"
-      ]
+      ],
+      "x-format": {
+        "uri": {
+          "scheme": [
+            "http",
+            "https"
+          ]
+        }
+      }
     },
     "redirectTo": {
       "type": [
@@ -262,14 +270,27 @@
         "null"
       ],
       "x-format": {
-        "uri": true
+        "uri": {
+          "scheme": [
+            "http",
+            "https"
+          ]
+        }
       }
     },
     "favicon": {
       "type": [
         "string",
         "null"
-      ]
+      ],
+      "x-format": {
+        "uri": {
+          "scheme": [
+            "http",
+            "https"
+          ]
+        }
+      }
     },
     "defaultTheme": {
       "type": [
@@ -533,7 +554,7 @@
                     "null"
                   ],
                   "format": "date-time",
-                  "default": "2026-02-04T22:28:09.995Z"
+                  "default": "2026-03-13T03:00:19.547Z"
                 },
                 "notifySubscribers": {
                   "type": [

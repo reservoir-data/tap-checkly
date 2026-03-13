@@ -46,107 +46,6 @@
       ],
       "format": "date"
     },
-    "checkAssignments": {
-      "type": [
-        "array",
-        "null"
-      ],
-      "description": "The check this private location has assigned.",
-      "items": {
-        "type": [
-          "object",
-          "null"
-        ],
-        "properties": {
-          "id": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "example": "4295d566-18bd-47ef-b22b-129a64ffd589",
-            "x-format": {
-              "guid": true
-            }
-          },
-          "checkId": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "The ID of the check.",
-            "example": "25039e6d-8631-4ee8-950a-bf7c893c3c1c",
-            "x-format": {
-              "guid": true
-            }
-          },
-          "privateLocationId": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "The ID of the assigned private location.",
-            "example": "cc3f943d-7a99-49f4-94aa-bddbaaad6eb0",
-            "x-format": {
-              "guid": true
-            }
-          }
-        },
-        "required": [
-          "id",
-          "checkId",
-          "privateLocationId"
-        ]
-      }
-    },
-    "groupAssignments": {
-      "type": [
-        "array",
-        "null"
-      ],
-      "description": "The group this private location has assigned.",
-      "items": {
-        "type": [
-          "object",
-          "null"
-        ],
-        "properties": {
-          "id": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "example": "450d2f06-2300-46ed-8982-b63cd53fc494",
-            "x-format": {
-              "guid": true
-            }
-          },
-          "groupId": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "description": "The ID of the group.",
-            "example": 10
-          },
-          "privateLocationId": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "The ID of the assigned private location.",
-            "example": "895c13cc-7de2-46df-9985-cb01b995a3cf",
-            "x-format": {
-              "guid": true
-            }
-          }
-        },
-        "required": [
-          "id",
-          "groupId",
-          "privateLocationId"
-        ]
-      }
-    },
     "keys": {
       "type": [
         "array",
@@ -226,6 +125,54 @@
         "number",
         "null"
       ]
+    },
+    "minAgentVersion": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The lowest agent version currently connected to this private location."
+    },
+    "runningAgents": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "A list of agent versions and their counts currently connected to this private location.",
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "version": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "count": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "agentIds": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "version",
+          "count",
+          "agentIds"
+        ]
+      }
     }
   },
   "required": [

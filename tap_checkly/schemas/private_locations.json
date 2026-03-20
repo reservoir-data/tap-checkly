@@ -157,20 +157,41 @@
               "null"
             ]
           },
-          "agentIds": {
+          "agents": {
             "type": [
               "array",
               "null"
             ],
             "items": {
-              "type": "string"
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "lastSeenAt": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "lastSeenAt"
+              ]
             }
           }
         },
         "required": [
           "version",
           "count",
-          "agentIds"
+          "agents"
         ]
       }
     }

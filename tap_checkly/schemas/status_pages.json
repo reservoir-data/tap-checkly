@@ -554,7 +554,7 @@
                     "null"
                   ],
                   "format": "date-time",
-                  "default": "2026-03-13T03:00:19.547Z"
+                  "default": "2026-03-19T03:06:03.128Z"
                 },
                 "notifySubscribers": {
                   "type": [
@@ -590,6 +590,12 @@
           "lastUpdateStatus": {
             "type": [
               "string",
+              "null"
+            ]
+          },
+          "duration": {
+            "type": [
+              "integer",
               "null"
             ]
           },

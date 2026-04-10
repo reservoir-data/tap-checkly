@@ -463,6 +463,211 @@
         }
       }
     },
+    "agenticCheckResult": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The response data for an agentic check.",
+      "properties": {
+        "summary": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Human-readable recap of the agent run written by the agent itself.",
+          "example": "The homepage loaded correctly and all assertions passed."
+        },
+        "prompt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The prompt that was executed for this run."
+        },
+        "assertions": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "List of assertions the agent evaluated during the run.",
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "condition": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Human-readable condition the agent evaluated.",
+                "example": "The homepage returns an HTTP 200 status"
+              },
+              "passed": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "Whether the assertion passed.",
+                "example": true
+              },
+              "actual": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "What the agent actually observed.",
+                "example": "200"
+              },
+              "expected": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "What the assertion required.",
+                "example": "200"
+              }
+            }
+          }
+        },
+        "suggestions": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Suggestions the agent produced for extending the check.",
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "summary": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Human-readable summary of the agent's suggestion.",
+                "example": "Monitor the checkout flow end-to-end"
+              },
+              "prompt": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Prompt fragment the user can append to extend the check.",
+                "example": "Sign in and verify the checkout page loads"
+              },
+              "secrets": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "description": "Environment variable names the suggestion would require.",
+                "example": [
+                  "TEST_USER_EMAIL",
+                  "TEST_USER_PASSWORD"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              },
+              "category": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Category of the suggestion.",
+                "example": "credentials"
+              }
+            }
+          }
+        },
+        "steps": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Sequence of tool calls and messages emitted by the agent.",
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "type": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Kind of step emitted by the agent.",
+                "example": "tool_call"
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Name of the tool invoked (for tool_call / tool_result steps).",
+                "example": "http_request"
+              },
+              "input": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "description": "Input passed to the tool, when applicable."
+              },
+              "output": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Output text or message body."
+              },
+              "timestamp": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "ISO timestamp when the step was emitted.",
+                "example": "2026-04-06T14:15:22.000Z"
+              },
+              "sequenceNumber": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Monotonic sequence number within a run.",
+                "example": 3
+              }
+            }
+          }
+        },
+        "errors": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Errors recorded during the run, if any.",
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        },
+        "artifactManifest": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Map of artifact file paths to human-readable descriptions."
+        }
+      }
+    },
     "checkRunId": {
       "type": [
         "number",
@@ -495,6 +700,22 @@
       "example": "2dbfa2a3-5477-45ea-ac33-ee55b8ea66ff",
       "x-format": {
         "guid": true
+      }
+    },
+    "errorGroupIds": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "IDs of the error groups associated with this check result. Always an array: empty when the result has no associated error groups, single-element when there is one (typical for API/URL/TCP/ICMP checks), or multi-element for Playwright and multistep checks that can produce multiple distinct errors per run. Use these IDs to fetch the corresponding error group via the error-groups endpoint.",
+      "example": [
+        "883af87b-ac7c-44e3-9376-b4bece04e788"
+      ],
+      "items": {
+        "type": "string",
+        "x-format": {
+          "guid": true
+        }
       }
     }
   },

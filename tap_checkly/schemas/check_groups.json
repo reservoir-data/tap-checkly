@@ -265,7 +265,6 @@
         "array",
         "null"
       ],
-      "maxItems": 50,
       "items": {
         "type": [
           "object",

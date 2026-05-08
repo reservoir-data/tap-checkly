@@ -544,44 +544,58 @@
       "description": "Either a retry strategy object or the literal string \"FALLBACK\".",
       "anyOf": [
         {
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "description": "The strategy to determine how failed checks are retried.",
-          "nullable": true,
           "properties": {
             "type": {
-              "type": "string",
-              "description": "Determines which type of retry strategy to use.",
-              "enum": [
-                "FIXED",
-                "LINEAR",
-                "EXPONENTIAL",
-                "SINGLE_RETRY"
-              ]
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Determines which type of retry strategy to use."
             },
             "baseBackoffSeconds": {
-              "type": "number",
+              "type": [
+                "number",
+                "null"
+              ],
               "description": "The number of seconds to wait before the first retry attempt.",
               "default": 60
             },
             "sameRegion": {
-              "type": "boolean",
+              "type": [
+                "boolean",
+                "null"
+              ],
               "description": "Whether retries should be run in the same region as the initial check run.",
               "default": true
             },
             "maxRetries": {
-              "type": "number",
+              "type": [
+                "number",
+                "null"
+              ],
               "description": "The maximum number of attempts to retry the check. Not supported for SINGLE_RETRY",
               "minimum": 1,
               "maximum": 10
             },
             "maxDurationSeconds": {
-              "type": "number",
+              "type": [
+                "number",
+                "null"
+              ],
               "description": "The total amount of time to continue retrying the check. Not supported for SINGLE_RETRY",
               "minimum": 0,
               "maximum": 600
             },
             "onlyOn": {
-              "type": "array",
+              "type": [
+                "array",
+                "null"
+              ],
               "x-constraint": {
                 "length": 1,
                 "unique": true,
@@ -589,10 +603,7 @@
               },
               "items": {
                 "type": "string",
-                "description": "The HTTP request could not be completed due to a network error: no response status code was received",
-                "enum": [
-                  "NETWORK_ERROR"
-                ]
+                "description": "The HTTP request could not be completed due to a network error: no response status code was received"
               }
             }
           },
@@ -601,10 +612,7 @@
           ]
         },
         {
-          "type": "string",
-          "enum": [
-            "FALLBACK"
-          ]
+          "type": "string"
         }
       ]
     },

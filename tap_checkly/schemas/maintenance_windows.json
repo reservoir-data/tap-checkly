@@ -12,7 +12,8 @@
         "null"
       ],
       "description": "The maintenance window name.",
-      "example": "Maintenance Window"
+      "example": "Maintenance Window",
+      "maxLength": 200
     },
     "tags": {
       "type": [
@@ -71,6 +72,32 @@
       "format": "date",
       "description": "The end date where the maintenance window should stop repeating.",
       "example": "null"
+    },
+    "pauseAllChecks": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Whether to pause all checks in the account (overrides tag scope).",
+      "default": false
+    },
+    "silenceAlertsTags": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "Tags defining which checks have alerts silenced (when silenceAllAlerts is false).",
+      "items": {
+        "type": "string"
+      }
+    },
+    "silenceAllAlerts": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Whether to silence alerts for all checks (overrides silenceAlertsTags scope).",
+      "default": false
     },
     "created_at": {
       "type": [

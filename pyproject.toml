@@ -60,7 +60,6 @@ testing = [
 typing = [
   "mypy>=1.18",
   "ty>=0.0.1a21",
-  "types-requests>=2.32.4.20260107",
   { include-group = "scripts" },
   { include-group = "testing" },
 ]
@@ -113,7 +112,6 @@ pydocstyle.convention = "google"
 mypy = "mypy"
 toolz = "toolz"
 ty = "ty"
-types-requests = "types-requests"
 [tool.deptry.per_rule_ignores]
 DEP004 = [
   "requests",

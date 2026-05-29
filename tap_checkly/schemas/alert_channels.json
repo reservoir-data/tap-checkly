@@ -57,7 +57,7 @@
               "number",
               "null"
             ],
-            "example": "null",
+            "example": null,
             "x-constraint": {
               "sign": "positive"
             }

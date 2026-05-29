@@ -151,6 +151,12 @@
               "null"
             ]
           },
+          "isOutdated": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
           "count": {
             "type": [
               "number",
@@ -190,6 +196,7 @@
         },
         "required": [
           "version",
+          "isOutdated",
           "count",
           "agents"
         ]

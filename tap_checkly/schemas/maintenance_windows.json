@@ -10,9 +10,7 @@
       "type": [
         "string",
         "null"
-      ],
-      "description": "The maintenance window name.",
-      "example": "Maintenance Window"
+      ]
     },
     "tags": {
       "type": [
@@ -32,45 +30,149 @@
         "string",
         "null"
       ],
-      "format": "date",
-      "description": "The start date of the maintenance window.",
-      "example": "2022-08-24"
+      "format": "date"
     },
     "endsAt": {
       "type": [
         "string",
         "null"
       ],
-      "format": "date",
-      "description": "The end date of the maintenance window.",
-      "example": "2022-08-25"
+      "format": "date"
     },
     "repeatInterval": {
       "type": [
         "number",
         "null"
-      ],
-      "description": "The repeat interval of the maintenance window from the first occurance.",
-      "example": "null",
-      "default": null,
-      "minimum": 1
+      ]
     },
     "repeatUnit": {
       "type": [
         "string",
         "null"
-      ],
-      "description": "The repeat strategy for the maintenance window.",
-      "example": "DAY"
+      ]
     },
     "repeatEndsAt": {
       "type": [
         "string",
         "null"
       ],
-      "format": "date",
-      "description": "The end date where the maintenance window should stop repeating.",
-      "example": "null"
+      "format": "date"
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "statusPageVisibility": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "enabled": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "severity": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "affectAllServices": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "suppressAutoIncidents": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "notifyOnStart": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "notifyOnEnd": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "reminderMinutesBefore": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "integer"
+          }
+        },
+        "autoStart": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "autoEnd": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "statusPageIds": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "x-format": {
+              "guid": true
+            }
+          }
+        },
+        "serviceIds": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "x-format": {
+              "guid": true
+            }
+          }
+        }
+      }
+    },
+    "pauseAllChecks": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "silenceAlertsTags": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "silenceAllAlerts": {
+      "type": [
+        "boolean",
+        "null"
+      ]
     },
     "created_at": {
       "type": [
@@ -94,7 +196,6 @@
     "name",
     "startsAt",
     "endsAt",
-    "repeatUnit",
     "created_at",
     "updated_at"
   ]

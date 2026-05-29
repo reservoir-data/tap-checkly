@@ -40,6 +40,13 @@
       ],
       "description": "A check is degraded if it is over the degradation limit set by the \"degradedResponseTime\" field on the check. Applies only to API checks."
     },
+    "isCancelled": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Whether the run was cancelled before completion."
+    },
     "overMaxResponseTime": {
       "type": [
         "boolean",
@@ -201,7 +208,7 @@
             "null"
           ],
           "description": "Describes if an error occurred on the request.",
-          "example": "null"
+          "example": null
         },
         "jobLog": {
           "type": [
@@ -216,7 +223,7 @@
             "null"
           ],
           "description": "Assets generated from the check run.",
-          "example": "null",
+          "example": null,
           "items": {
             "type": "string"
           }
@@ -236,7 +243,7 @@
         "null"
       ],
       "description": "The response data for a browser check.",
-      "example": "null",
+      "example": null,
       "properties": {
         "type": {
           "type": [
@@ -343,7 +350,7 @@
             "null"
           ],
           "description": "Assets generated from the check run.",
-          "example": "null",
+          "example": null,
           "items": {
             "type": "string"
           }
@@ -377,7 +384,7 @@
         "null"
       ],
       "description": "The response data for a multi-step check.",
-      "example": "null",
+      "example": null,
       "properties": {
         "errors": {
           "type": [
@@ -435,7 +442,7 @@
             "null"
           ],
           "description": "Assets generated from the check run.",
-          "example": "null",
+          "example": null,
           "items": {
             "type": "string"
           }
@@ -559,6 +566,14 @@
                 ],
                 "description": "Prompt fragment the user can append to extend the check.",
                 "example": "Sign in and verify the checkout page loads"
+              },
+              "promptReplacement": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Full replacement prompt the user can apply when the suggestion is a correction instead of an append-only fragment.",
+                "example": "Sign in with {{TEST_USER_EMAIL}} and verify the checkout page loads"
               },
               "secrets": {
                 "type": [

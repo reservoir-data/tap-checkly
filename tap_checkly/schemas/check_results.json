@@ -683,6 +683,109 @@
         }
       }
     },
+    "playwrightCheckResult": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The response data for a Playwright check.",
+      "example": null,
+      "properties": {
+        "errors": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Per-test Playwright errors recorded during the run.",
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        },
+        "playwrightTraceFiles": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Trace file metadata recorded by the runner.",
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "url": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "filename": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "jobLog": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Check run log results.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "jobAssets": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Assets generated from the check run.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "playwrightTestVideos": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Signed URLs for Playwright test videos.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "playwrightTestTraces": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Signed URLs for Playwright test traces.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "playwrightTestJsonReportFile": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Signed URL for the Playwright JSON report."
+        }
+      }
+    },
     "checkRunId": {
       "type": [
         "number",
@@ -717,6 +820,14 @@
         "guid": true
       }
     },
+    "traceId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "OpenTelemetry trace ID associated with this check result. `null` when no trace was recorded for this run (e.g. tracing not enabled in the runner).",
+      "example": "a1b2c3d4e5f67890abcdef0123456789"
+    },
     "errorGroupIds": {
       "type": [
         "array",
@@ -735,6 +846,7 @@
     }
   },
   "required": [
-    "resultType"
+    "resultType",
+    "traceId"
   ]
 }

@@ -36,7 +36,7 @@ email = "edgarrm358@gmail.com"
 name = "Edgar Ramírez-Mondragón"
 email = "edgarrm358@gmail.com"
 [project.scripts]
-"tap-checkly" = "tap_checkly.tap:TapCheckly.cli"
+tap-checkly = "tap_checkly.tap:TapCheckly.cli"
 [project.urls]
 Documentation = "https://github.com/reservoir-data/tap-checkly/#readme"
 Homepage = "https://github.com/reservoir-data/tap-checkly"
@@ -44,6 +44,7 @@ Repository = "https://github.com/reservoir-data/tap-checkly"
 
 [dependency-groups]
 dev = [
+  "deptry>=0.25",
   { include-group = "scripts" },
   { include-group = "testing" },
   { include-group = "typing" },
@@ -53,13 +54,12 @@ scripts = [
   "toolz>=1.1",
 ]
 testing = [
-  "deptry>=0.12",
   "pytest~=9.0",
   "singer-sdk[testing]",
 ]
 typing = [
-  "mypy>=1.18",
-  "ty>=0.0.1a21",
+  "mypy>=2.1",
+  "ty>=0.0.50",
   { include-group = "scripts" },
   { include-group = "testing" },
 ]
@@ -108,25 +108,30 @@ isort.required-imports = [
 pydocstyle.convention = "google"
 
 [tool.deptry]
-[tool.deptry.package_module_name_map]
-mypy = "mypy"
-toolz = "toolz"
-ty = "ty"
-[tool.deptry.per_rule_ignores]
-DEP004 = [
-  "requests",
-  "toolz",
-]
+extend_exclude = [ "scripts" ]
 
 [tool.pyproject-fmt]
 table_format = "long"
+
+[tool.typos.files]
+extend-exclude = [ "tap_checkly/schemas/*.json" ]
+
+[tool.mypy]
+follow_untyped_imports = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unreachable = true
+enable_error_code = [ "ignore-without-code", "redundant-expr", "truthy-bool" ]
+strict = true
+warn_unused_configs = true
+
+[tool.ty.rules]
+unused-type-ignore-comment = "ignore"
 
 [tool.pytest]
 addopts = [
   "-vvv",
   "-ra",
-  "--strict-config",
-  "--strict-markers",
 ]
 filterwarnings = [
   "error",
@@ -134,49 +139,34 @@ filterwarnings = [
 ]
 log_level = "INFO"
 minversion = "9"
-xfail_strict = true
+strict = true
 testpaths = [ "tests" ]
 
 [tool.tox]
-min_version = "4.43"
 requires = [
-  # renovate: datasource=pypi depName=tox
-  "tox~=4.22",
-  # renovate: datasource=pypi depName=tox-uv
-  "tox-uv~=1.17",
+  "tox>=4.55",
+  "tox-uv>=1.35",
 ]
 env_list = [
   "dependencies",
   "typing",
-  { product = [
-    { prefix = "3.", start = 13 },
-  ] },
+  { prefix = "3.", start = 13 },
 ]
-[tool.tox.env]
-dependencies.dependency_groups = [ "testing" ]
-dependencies.commands = [ [ "deptry", "." ] ]
-sync.commands = [ [ "tap-checkly", { replace = "posargs", default = [ "--config=ENV" ], extend = true } ] ]
-typing.dependency_groups = [ "testing", "typing" ]
-typing.commands = [
+[tool.tox.env.dependencies]
+dependency_groups = [ "dev" ]
+commands = [ [ "deptry", "." ] ]
+[tool.tox.env.sync]
+commands = [ [ "tap-checkly", { replace = "posargs", default = [ "--config=ENV" ], extend = true } ] ]
+[tool.tox.env.typing]
+dependency_groups = [ "testing", "typing" ]
+commands = [
   [ "mypy", "tap_checkly", "tests", "scripts" ],
   [ "ty", "check" ],
 ]
 
 [tool.tox.env_run_base]
 runner = "uv-venv-lock-runner"
-pass_env = [ "TAP_CHECKLY_*" ]
-set_env = { "PYO3_USE_ABI3_FORWARD_COMPATIBILITY" = "1" }
 dependency_groups = [ "testing" ]
+pass_env = [ "TAP_CHECKLY_*" ]
+set_env = { PYO3_USE_ABI3_FORWARD_COMPATIBILITY = "1" }
 commands = [ [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ] ]
-
-[tool.mypy]
-enable_error_code = [ "ignore-without-code", "redundant-expr", "truthy-bool" ]
-follow_untyped_imports = true
-strict = true
-warn_redundant_casts = true
-warn_unreachable = true
-warn_unused_configs = true
-warn_unused_ignores = true
-
-[tool.ty.rules]
-unused-type-ignore-comment = "ignore"

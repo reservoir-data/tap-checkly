@@ -26,13 +26,13 @@ class ChecklyStream[T = Any](RESTStream[T], metaclass=ABCMeta):
 
     schema = StreamSchema(SCHEMAS_DIR)
 
-    @override
     @property
+    @override
     def authenticator(self) -> BearerTokenAuthenticator:
         return BearerTokenAuthenticator(token=self.config["token"])
 
-    @override
     @property
+    @override
     def http_headers(self) -> dict[str, str]:
         return {
             "X-Checkly-Account": self.config["account_id"],

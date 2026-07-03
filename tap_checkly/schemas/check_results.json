@@ -24,14 +24,14 @@
         "boolean",
         "null"
       ],
-      "description": "Describes if any failure has occurred during this check run. This is should be your mainmain focus for assessing API or browser check behaviour. Assertions that fail, timeouts or failing scripts all resolve tothis value being true."
+      "description": "Describes if any failure has occurred during this check run. This should be your main focus for assessing API or browser check behaviour. Assertions that fail, timeouts or failing scripts all resolve to this value being true."
     },
     "hasErrors": {
       "type": [
         "boolean",
         "null"
       ],
-      "description": "Describes if an internal error has occured in Checkly's backend. This should be false in almost all cases."
+      "description": "Describes if an internal error has occurred in Checkly's backend. This should be false in almost all cases."
     },
     "isDegraded": {
       "type": [

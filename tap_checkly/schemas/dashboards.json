@@ -105,6 +105,14 @@
       "description": "How often to trigger pagination in seconds.",
       "default": 60
     },
+    "sortByStatus": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Sort checks by status with failing checks first.",
+      "default": false
+    },
     "checksPerPage": {
       "type": [
         "number",

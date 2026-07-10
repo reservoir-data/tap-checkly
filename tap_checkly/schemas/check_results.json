@@ -87,7 +87,7 @@
         "number",
         "null"
       ],
-      "description": "Describes the time it took to execute relevant parts of this check. Any setup timeor system time needed to start executing this check in the Checkly backend is not part of this."
+      "description": "Time the check spent producing its result, in milliseconds. For protocol checks this is the measured operation time (a subset of the run): request time for API and URL checks, connection time for TCP, resolution time for DNS, average latency for ICMP and TRACEROUTE, request timing for GRPC, and TLS handshake time for SSL. For browser, multi-step, Playwright and agentic checks it is the run wall-clock duration. Any setup or system time before the check starts executing is not included."
     },
     "apiCheckResult": {
       "type": [
@@ -783,6 +783,538 @@
             "null"
           ],
           "description": "Signed URL for the Playwright JSON report."
+        }
+      }
+    },
+    "tracerouteCheckResult": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Failure-debug diagnostics for a traceroute check.",
+      "properties": {
+        "totalHops": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Number of hops recorded on the route.",
+          "example": 12
+        },
+        "destinationReached": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Whether the traceroute reached the destination host.",
+          "example": false
+        },
+        "finalHopLatency": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Latency statistics for the final reached hop.",
+          "example": {
+            "avgMs": 24.1,
+            "bestMs": 22,
+            "worstMs": 31.4
+          }
+        },
+        "timingPhases": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Timing phases (e.g. DNS) for the run."
+        },
+        "requestError": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Describes if an error occurred on the request."
+        },
+        "request": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "The traceroute request that was executed."
+        },
+        "assertions": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Assertions evaluated for the run.",
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        },
+        "response": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "The detailed traceroute response artifact.",
+          "properties": {
+            "hostname": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "api.checklyhq.com"
+            },
+            "resolvedIp": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "104.18.7.36"
+            },
+            "totalHops": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "example": 12
+            },
+            "destinationReached": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "example": false
+            },
+            "truncationReason": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Why the route was truncated, if it was.",
+              "example": "max-hops"
+            },
+            "finalHopLatency": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "Latency stats for the final reached hop."
+            },
+            "hops": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "description": "Per-hop results: address, loss, RTT and ASN/geo annotations.",
+              "items": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              }
+            },
+            "protocol": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "TCP"
+            },
+            "probeProtocol": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "TCP"
+            }
+          }
+        }
+      }
+    },
+    "grpcCheckResult": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Failure-debug diagnostics for a gRPC check.",
+      "properties": {
+        "grpcStatusCode": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "The gRPC status code of the call.",
+          "example": 14
+        },
+        "healthStatus": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "The numeric serving status returned by the gRPC health probe.",
+          "example": 2
+        },
+        "timingPhases": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Timing phases (dns/connect/total) for the run.",
+          "example": {
+            "dns": 1.2,
+            "connect": 16.8,
+            "total": 90
+          }
+        },
+        "requestError": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Describes if an error occurred on the request."
+        },
+        "request": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "The gRPC request that was executed."
+        },
+        "assertions": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Assertions evaluated for the run.",
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        },
+        "response": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "The detailed gRPC response artifact.",
+          "properties": {
+            "grpcMode": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "BEHAVIOR"
+            },
+            "host": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "grpc.example.com"
+            },
+            "resolvedIp": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "10.0.0.4"
+            },
+            "port": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "example": 443
+            },
+            "grpcMethod": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "grpc.health.v1.Health/Check"
+            },
+            "responseMessage": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "The decoded response message, when captured."
+            },
+            "grpcStatusCode": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "description": "gRPC status code (always captured, even on error).",
+              "example": 14
+            },
+            "grpcStatusMessage": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "gRPC status message.",
+              "example": "connection refused"
+            },
+            "healthStatus": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "description": "Numeric health serving status (HEALTH mode)."
+            },
+            "healthStatusLabel": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Human-readable health status.",
+              "example": "NOT_SERVING"
+            },
+            "metadata": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "description": "Response metadata / trailers as {key,value} entries.",
+              "items": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              }
+            },
+            "discoveredMethods": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "description": "Methods discovered via server reflection.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "requestError": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "timingPhases": {
+              "type": [
+                "object",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "sslCheckResult": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Failure-debug diagnostics for an SSL check.",
+      "properties": {
+        "tlsVersion": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Negotiated TLS protocol version.",
+          "example": "TLS 1.3"
+        },
+        "cipherSuite": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Negotiated cipher suite.",
+          "example": "TLS_AES_256_GCM_SHA384"
+        },
+        "daysUntilExpiry": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Days until the leaf certificate expires (negative if expired).",
+          "example": 12
+        },
+        "handshakeTimeMs": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "TLS handshake duration in milliseconds.",
+          "example": 48.2
+        },
+        "chainTrusted": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Whether the certificate chain was trusted.",
+          "example": false
+        },
+        "hostnameVerified": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Whether the hostname matched the certificate.",
+          "example": false
+        },
+        "baselineVerdict": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Overall security-baseline verdict.",
+          "example": "FAIL"
+        },
+        "baselineGrade": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Overall security-baseline grade.",
+          "example": "C"
+        },
+        "failureCategory": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Categorised reason the check failed (the failing reason).",
+          "example": "expired"
+        },
+        "requestError": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Describes if an error occurred on the request."
+        },
+        "request": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "The SSL request that was executed."
+        },
+        "assertions": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Assertions evaluated for the run.",
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        },
+        "response": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "The detailed SSL/TLS response artifact.",
+          "properties": {
+            "resolvedIp": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "104.18.7.36"
+            },
+            "protocol": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Negotiated TLS version.",
+              "example": "TLS 1.3"
+            },
+            "cipherSuite": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "example": "TLS_AES_256_GCM_SHA384"
+            },
+            "handshakeTimeMs": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "example": 48.2
+            },
+            "hostnameVerified": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "example": false
+            },
+            "chainTrusted": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "example": false
+            },
+            "daysUntilExpiry": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "example": 12
+            },
+            "ocspStapled": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "example": false
+            },
+            "securityBaseline": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "Per-rule security-baseline outcomes (verdict/grade plus each rule outcome)."
+            },
+            "certificate": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "Leaf certificate details: issuer, subjectCN, SANs, validity, key/signature algorithm."
+            },
+            "chain": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "description": "Summaries of the certificates in the presented chain.",
+              "items": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              }
+            }
+          }
         }
       }
     },

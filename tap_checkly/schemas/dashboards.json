@@ -1,235 +1,227 @@
 {
   "type": "object",
   "properties": {
-    "customDomain": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "description": "A custom user domain, e.g. \"status.example.com\". See the docs on updating your DNS and SSL usage.",
-      "example": "https://status.mycompany.com/"
-    },
     "customUrl": {
       "type": [
         "string",
         "null"
       ],
-      "description": "A subdomain name under \"checklyhq.com\". Needs to be unique across all users.",
-      "example": "status"
+      "description": "A subdomain name under \"checklyhq.com\". Needs to be unique across all users."
+    },
+    "customDomain": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A custom user domain, e.g. \"status.example.com\". See the docs on updating your DNS and SSL usage."
     },
     "logo": {
-      "type": [
-        "string",
-        "null"
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "string"
+        },
+        {}
       ],
-      "description": "A URL pointing to an image file.",
-      "example": "https://static.mycompany.com/static/images/logo.svg",
-      "x-format": {
-        "uri": {
-          "scheme": [
-            "http",
-            "https"
-          ]
-        }
-      }
+      "description": "A URL pointing to an image file."
     },
     "favicon": {
-      "type": [
-        "string",
-        "null"
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "string"
+        },
+        {}
       ],
-      "description": "A URL pointing to an image file used as dashboard favicon.",
-      "example": "https://static.mycompany.com/static/images/icon.svg",
-      "x-format": {
-        "uri": {
-          "scheme": [
-            "http",
-            "https"
-          ]
-        }
-      }
+      "description": "A URL pointing to an image file used as dashboard favicon."
     },
     "link": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "string"
+        },
+        {}
+      ],
+      "description": "A URL link to redirect when dashboard logo is clicked on."
+    },
+    "header": {
       "type": [
         "string",
         "null"
       ],
-      "description": "A URL link to redirect when dashboard logo is clicked on.",
-      "example": "https://www.mycompany.com/",
-      "x-format": {
-        "uri": {
-          "scheme": [
-            "http",
-            "https"
-          ]
-        }
-      }
+      "description": "A piece of text displayed at the top of your dashboard."
     },
     "description": {
       "type": [
         "string",
         "null"
       ],
-      "description": "A piece of text displayed below the header or title of your dashboard.",
-      "example": "My dashboard description"
+      "description": "A piece of text displayed below the header or title of your dashboard."
     },
     "width": {
       "type": [
         "string",
         "null"
       ],
-      "description": "Determines whether to use the full screen or focus in the center.",
-      "default": "FULL"
+      "default": "FULL",
+      "description": "Determines whether to use the full screen or focus in the center."
     },
     "refreshRate": {
       "type": [
         "number",
         "null"
       ],
-      "description": "How often to refresh the dashboard in seconds.",
-      "default": 60
+      "default": 60,
+      "description": "How often to refresh the dashboard in seconds."
     },
     "paginate": {
       "type": [
         "boolean",
         "null"
       ],
-      "description": "Determines of pagination is on or off.",
-      "default": true
+      "default": true,
+      "description": "Determines of pagination is on or off."
     },
     "paginationRate": {
       "type": [
         "number",
         "null"
       ],
-      "description": "How often to trigger pagination in seconds.",
-      "default": 60
+      "default": 60,
+      "description": "How often to trigger pagination in seconds."
     },
     "sortByStatus": {
       "type": [
         "boolean",
         "null"
       ],
-      "description": "Sort checks by status with failing checks first.",
-      "default": false
+      "default": false,
+      "description": "Sort checks by status with failing checks first."
     },
     "checksPerPage": {
       "type": [
         "number",
         "null"
       ],
-      "description": "Number of checks displayed per page.",
-      "default": 15,
       "minimum": 1,
-      "maximum": 20
+      "maximum": 20,
+      "default": 15,
+      "description": "Number of checks displayed per page."
     },
     "useTagsAndOperator": {
       "type": [
         "boolean",
         "null"
       ],
-      "description": "When to use AND operator for tags lookup.",
-      "default": false
+      "default": false,
+      "description": "When to use AND operator for tags lookup."
     },
     "hideTags": {
       "type": [
         "boolean",
         "null"
       ],
-      "description": "Show or hide the tags on the dashboard.",
-      "default": false
+      "default": false,
+      "description": "Show or hide the tags on the dashboard."
     },
     "enableIncidents": {
       "type": [
         "boolean",
         "null"
       ],
-      "description": "Enable or disable incidents on the dashboard.",
-      "default": false
+      "default": false,
+      "description": "Enable or disable incidents on the dashboard."
     },
     "expandChecks": {
       "type": [
         "boolean",
         "null"
       ],
-      "description": "Expand or collapse checks on the dashboard.",
-      "default": false
+      "default": false,
+      "description": "Expand or collapse checks on the dashboard."
     },
     "tags": {
       "type": [
         "array",
         "null"
       ],
-      "description": "A list of one or more tags that filter which checks to display on the dashboard.",
-      "example": [
-        "production"
-      ],
       "items": {
         "type": "string"
-      }
+      },
+      "default": [],
+      "description": "A list of one or more tags that filter which checks to display on the dashboard."
     },
     "showHeader": {
       "type": [
         "boolean",
         "null"
       ],
-      "description": "Show or hide header and description on the dashboard.",
-      "default": true
+      "default": true,
+      "description": "Show or hide header and description on the dashboard."
     },
     "showCheckRunLinks": {
       "type": [
         "boolean",
         "null"
       ],
-      "description": "Show or hide check run links on the dashboard.",
-      "default": false
+      "default": false,
+      "description": "Show or hide check run links on the dashboard."
     },
     "showGroupNames": {
       "type": [
         "boolean",
         "null"
       ],
-      "description": "Show or hide group names on the dashboard.",
-      "default": true
+      "default": true,
+      "description": "Show or hide group names on the dashboard."
     },
     "customCSS": {
       "type": [
         "string",
         "null"
       ],
-      "description": "Custom CSS to be applied to the dashboard.",
-      "default": ""
+      "default": "",
+      "description": "Custom CSS to be applied to the dashboard."
     },
     "isPrivate": {
       "type": [
         "boolean",
         "null"
       ],
-      "description": "Determines if the dashboard is public or private.",
-      "default": false
+      "default": false,
+      "description": "Determines if the dashboard is public or private."
     },
     "showP95": {
       "type": [
         "boolean",
         "null"
       ],
-      "description": "Show or hide the P95 stats on the dashboard.",
-      "default": true
+      "default": true,
+      "description": "Show or hide the P95 stats on the dashboard."
     },
     "showP99": {
       "type": [
         "boolean",
         "null"
       ],
-      "description": "Show or hide the P99 stats on the dashboard.",
-      "default": true
+      "default": true,
+      "description": "Show or hide the P99 stats on the dashboard."
     },
     "keys": {
       "type": [
         "array",
         "null"
       ],
-      "description": "Show key for private dashboard.",
       "items": {
         "type": [
           "object",
@@ -241,38 +233,35 @@
               "string",
               "null"
             ],
-            "x-format": {
-              "guid": true
-            }
+            "format": "uuid"
           },
           "rawKey": {
             "type": [
               "string",
               "null"
             ],
-            "example": "da_a89026d28a0c45cf9e11b4c3637f3912"
+            "description": "The raw key value."
           },
           "maskedKey": {
             "type": [
               "string",
               "null"
             ],
-            "description": "The masked key value.",
-            "example": "...6a1e"
+            "description": "The masked key value."
           },
           "created_at": {
             "type": [
               "string",
               "null"
             ],
-            "format": "date"
+            "format": "date-time"
           },
           "updated_at": {
             "type": [
               "string",
               "null"
             ],
-            "format": "date"
+            "format": "date-time"
           }
         },
         "required": [
@@ -281,7 +270,9 @@
           "maskedKey",
           "created_at"
         ]
-      }
+      },
+      "default": [],
+      "description": "Show key for private dashboard."
     },
     "id": {
       "type": [
@@ -291,7 +282,7 @@
     },
     "dashboardId": {
       "type": "string",
-      "example": "1"
+      "description": "The dashboard ID."
     },
     "created_at": {
       "type": [
@@ -299,12 +290,6 @@
         "null"
       ],
       "format": "date-time"
-    },
-    "header": {
-      "type": [
-        "string",
-        "null"
-      ]
     }
   },
   "required": [

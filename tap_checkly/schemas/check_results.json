@@ -1287,6 +1287,46 @@
               ],
               "example": false
             },
+            "ocspStatus": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Decoded stapled OCSP status: good, revoked, or unknown (empty when nothing was stapled).",
+              "example": "good"
+            },
+            "chainTrustReason": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Typed reason the chain is untrusted (present only when chainTrusted is false): missing_intermediate, untrusted_root, expired, or other.",
+              "example": "missing_intermediate"
+            },
+            "chainTrustDetail": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Human-readable explanation of why the chain is untrusted.",
+              "example": "the server did not send the intermediate certificate for issuer \"Acme Intermediate CA\"; add it to the chain."
+            },
+            "incompleteChain": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "description": "Whether the server omitted an intermediate certificate (the classic \"works in browsers, fails elsewhere\" misconfiguration).",
+              "example": true
+            },
+            "missingIntermediate": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Issuer of the intermediate certificate the server must add to its chain.",
+              "example": "Acme Intermediate CA"
+            },
             "securityBaseline": {
               "type": [
                 "object",

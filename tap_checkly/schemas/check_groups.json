@@ -541,6 +541,7 @@
       }
     },
     "retryStrategy": {
+      "description": "Either a retry strategy object or the literal string \"FALLBACK\".",
       "anyOf": [
         {
           "type": [

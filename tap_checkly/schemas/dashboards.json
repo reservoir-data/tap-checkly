@@ -27,7 +27,8 @@
         {
           "type": "null"
         }
-      ]
+      ],
+      "description": "A URL pointing to an image file."
     },
     "favicon": {
       "anyOf": [
@@ -41,7 +42,8 @@
         {
           "type": "null"
         }
-      ]
+      ],
+      "description": "A URL pointing to an image file used as dashboard favicon."
     },
     "link": {
       "anyOf": [
@@ -55,7 +57,8 @@
         {
           "type": "null"
         }
-      ]
+      ],
+      "description": "A URL link to redirect when dashboard logo is clicked on."
     },
     "header": {
       "type": [

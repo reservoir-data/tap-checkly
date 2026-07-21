@@ -24,9 +24,10 @@
         {
           "type": "string"
         },
-        {}
-      ],
-      "description": "A URL pointing to an image file."
+        {
+          "type": "null"
+        }
+      ]
     },
     "favicon": {
       "anyOf": [
@@ -37,9 +38,10 @@
         {
           "type": "string"
         },
-        {}
-      ],
-      "description": "A URL pointing to an image file used as dashboard favicon."
+        {
+          "type": "null"
+        }
+      ]
     },
     "link": {
       "anyOf": [
@@ -50,9 +52,10 @@
         {
           "type": "string"
         },
-        {}
-      ],
-      "description": "A URL link to redirect when dashboard logo is clicked on."
+        {
+          "type": "null"
+        }
+      ]
     },
     "header": {
       "type": [

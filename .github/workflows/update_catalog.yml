@@ -17,8 +17,8 @@ env:
   FORCE_COLOR: "1"
   # renovate: datasource=pypi depName=llm
   LLM_VERSION: 0.31
-  # renovate: datasource=pypi depName=llm-github-models
-  LLM_GITHUB_MODELS_VERSION: 0.18.0
+  # renovate: datasource=pypi depName=llm-github-copilot
+  LLM_GITHUB_COPILOT_VERSION: 0.3.1
   # renovate: datasource=pypi depName=uv
   UV_VERSION: 0.11.25
 
@@ -26,8 +26,6 @@ jobs:
   update_openapi_specification:
     name: Update Catalog
     runs-on: ubuntu-24.04
-    permissions:
-      models: read  # Required by llm-github-models
     steps:
     - uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
       id: generate-token
@@ -46,18 +44,18 @@ jobs:
     - id: check_schema_changes
       continue-on-error: true
       run: git diff --quiet tap_checkly/schemas
-    - name: Install LLM with GitHub Models
+    - name: Install LLM with GitHub Copilot
       if: steps.check_schema_changes.outcome == 'failure'
-      run: uv tool install --with llm-github-models=="${LLM_GITHUB_MODELS_VERSION}" --with llm=="${LLM_VERSION}" llm
+      run: uv tool install --with llm-github-copilot=="${LLM_GITHUB_COPILOT_VERSION}" --with llm=="${LLM_VERSION}" llm
     - name: Review catalog changes
       if: steps.check_schema_changes.outcome == 'failure'
       id: review-catalog-changes
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_COPILOT_TOKEN: ${{ secrets.GH_COPILOT_TOKEN }}
         WORKSPACE_PATH: ${{ github.workspace }}
       run: |
         SYSTEM_PROMPT=$(cat "$WORKSPACE_PATH"/.github/prompts/update_catalog_prompt.txt)
-        GENERATED_CONTENT=$(git --no-pager diff -p --no-color HEAD tap_checkly/schemas | llm prompt -m github/gpt-4o-mini -s "$SYSTEM_PROMPT")
+        GENERATED_CONTENT=$(git --no-pager diff -p --no-color HEAD tap_checkly/schemas | llm prompt -m github_copilot/gpt-4o-mini -s "$SYSTEM_PROMPT")
 
         PR_TITLE=$(echo "$GENERATED_CONTENT" | head -n 1)
         PR_BODY=$(echo "$GENERATED_CONTENT" | tail -n +3)

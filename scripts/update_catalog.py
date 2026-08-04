@@ -1,6 +1,9 @@
 #!/usr/bin/env -S uv run
 
-"""Update the Singer tap catalog using the OpenAPI specification from Checkly."""
+"""Update the Singer tap catalog using the OpenAPI specification from Checkly.
+
+Copyright (c) 2026 Edgar-Ramírez Mondragón
+"""
 
 from __future__ import annotations
 

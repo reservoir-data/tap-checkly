@@ -182,6 +182,13 @@
               ],
               "example": "<title> Checkly Public API </title>"
             },
+            "bodyEncoding": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Encoding of `body`. Set to `base64` when the body holds base64-encoded raw bytes (raster image responses); absent for plain text bodies."
+            },
             "headers": {
               "type": [
                 "object",

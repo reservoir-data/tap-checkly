@@ -388,6 +388,12 @@
         ]
       }
     },
+    "version": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
     "id": {
       "type": "string",
       "x-format": {
@@ -537,7 +543,7 @@
                     "null"
                   ],
                   "format": "date-time",
-                  "default": "2026-07-13T03:11:27.141Z"
+                  "default": "2026-08-03T03:10:39.158Z"
                 },
                 "notifySubscribers": {
                   "type": [

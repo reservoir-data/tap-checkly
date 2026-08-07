@@ -58,6 +58,12 @@
       ],
       "format": "date"
     },
+    "timezone": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "description": {
       "type": [
         "string",
@@ -122,6 +128,12 @@
           ]
         },
         "autoEnd": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "showAffectedServices": {
           "type": [
             "boolean",
             "null"

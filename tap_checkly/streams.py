@@ -41,7 +41,7 @@ class Checks(ChecklyPaginatedStream):
     name = "checks"
     path = "/checks"
     primary_keys = ("id",)
-    openapi_ref = "Check"
+    openapi_ref = "ChecksV1GenericCheck"
 
     @override
     def get_child_context(self, record: Record, context: Context | None) -> dict[str, Any]:
@@ -99,7 +99,7 @@ class EnvironmentVariables(ChecklyStream):
     name = "variables"
     path = "/variables"
     primary_keys = ("key",)
-    openapi_ref = "EnvironmentVariable"
+    openapi_ref = "EnvironmentVariablesV1ReadResponse"
 
 
 class Locations(ChecklyStream):
@@ -108,7 +108,7 @@ class Locations(ChecklyStream):
     name = "locations"
     path = "/locations"
     primary_keys = ("region",)
-    openapi_ref = "Location"
+    openapi_ref = "PublicLocation"
 
 
 class MaintenanceWindows(ChecklyPaginatedStream):
@@ -153,7 +153,7 @@ class StatusPages(ChecklyNextIDPaginatedStream):
     name = "status_pages"
     path = "/status-pages"
     primary_keys = ("id",)
-    openapi_ref = "StatusPageV2"
+    openapi_ref = "StatusPageV2Read"
 
 
 class StatusPageIncidents(ChecklyNextIDPaginatedStream):

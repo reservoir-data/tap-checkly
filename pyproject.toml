@@ -23,6 +23,7 @@ classifiers = [
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
   "Programming Language :: Python :: 3.15",
+  "Programming Language :: Python :: 3.16",
 ]
 dynamic = [
   "version",
@@ -30,18 +31,18 @@ dynamic = [
 dependencies = [
   "singer-sdk~=0.55.0a4",
 ]
-[[project.authors]]
-name = "Edgar Ramírez-Mondragón"
-email = "edgarrm358@gmail.com"
 [[project.maintainers]]
 name = "Edgar Ramírez-Mondragón"
 email = "edgarrm358@gmail.com"
-[project.scripts]
-tap-checkly = "tap_checkly.tap:TapCheckly.cli"
+[[project.authors]]
+name = "Edgar Ramírez-Mondragón"
+email = "edgarrm358@gmail.com"
 [project.urls]
 Documentation = "https://github.com/reservoir-data/tap-checkly/#readme"
 Homepage = "https://github.com/reservoir-data/tap-checkly"
 Repository = "https://github.com/reservoir-data/tap-checkly"
+[project.scripts]
+tap-checkly = "tap_checkly.tap:TapCheckly.cli"
 
 [dependency-groups]
 dev = [
@@ -70,10 +71,11 @@ typing = [
 source = "vcs"
 
 [tool.uv]
-required-version = ">=0.10"
+required-version = ">=0.13"
 prerelease = "allow"
 
 [tool.ruff]
+required-version = ">=0.17"
 line-length = 120
 src = [
   "tap_checkly",
@@ -112,7 +114,7 @@ pydocstyle.convention = "google"
 extend_exclude = [ "scripts" ]
 
 [tool.pyproject-fmt]
-max_supported_python = "3.15"
+max_supported_python = "3.16"
 table_format = "long"
 
 [tool.typos.files]
@@ -146,8 +148,8 @@ testpaths = [ "tests" ]
 
 [tool.tox]
 requires = [
-  "tox>=4.55",
-  "tox-uv>=1.35",
+  "tox>=4.67",
+  "tox-uv>=1.37",
 ]
 env_list = [
   "dependencies",

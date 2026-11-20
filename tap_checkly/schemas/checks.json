@@ -1,18 +1,2387 @@
 {
   "type": "object",
   "properties": {
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "activated": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "default": true
+    },
+    "muted": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "default": false
+    },
+    "doubleCheck": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "default": true
+    },
+    "shouldFail": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "default": false
+    },
+    "locations": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "tags": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "alertSettings": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "escalationType": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": "RUN_BASED"
+        },
+        "reminders": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "amount": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "default": 0
+            },
+            "interval": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "default": 5
+            }
+          }
+        },
+        "sslCertificates": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "enabled": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "alertThreshold": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          }
+        },
+        "runBasedEscalation": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "failedRunThreshold": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          }
+        },
+        "timeBasedEscalation": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "minutesFailingThreshold": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          }
+        },
+        "parallelRunFailureThreshold": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "enabled": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "default": false
+            },
+            "percentage": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "default": 10
+            }
+          }
+        }
+      },
+      "default": {
+        "escalationType": "RUN_BASED",
+        "runBasedEscalation": {
+          "failedRunThreshold": 1
+        },
+        "reminders": {
+          "amount": 0,
+          "interval": 5
+        },
+        "parallelRunFailureThreshold": {
+          "enabled": false,
+          "percentage": 10
+        }
+      }
+    },
+    "useGlobalAlertSettings": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "default": true
+    },
+    "groupId": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "default": null
+    },
+    "groupOrder": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "default": null
+    },
+    "runtimeId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "default": null
+    },
+    "alertChannelSubscriptions": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "alertChannelId": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "activated": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "alertChannelId",
+          "activated"
+        ]
+      }
+    },
+    "retryStrategy": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "baseBackoffSeconds": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "default": 60
+        },
+        "sameRegion": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "default": true
+        },
+        "maxRetries": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 10
+        },
+        "maxDurationSeconds": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 600
+        },
+        "onlyOn": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "triggerIncident": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "serviceId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "format": "uuid"
+        },
+        "severity": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notifySubscribers": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "serviceId",
+        "severity",
+        "name",
+        "description",
+        "notifySubscribers"
+      ]
+    },
+    "runParallel": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "default": false
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 500,
+      "default": null
+    },
+    "intent": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "goal": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 2000,
+          "description": "The user or system outcome this check protects."
+        },
+        "requiredOutcomes": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "maxItems": 20,
+          "default": [],
+          "description": "Observable outcomes the check must continue to prove."
+        },
+        "mustPreserve": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "maxItems": 20,
+          "default": [],
+          "description": "Guardrails an AI repair must not weaken or bypass."
+        }
+      },
+      "default": null,
+      "required": [
+        "goal"
+      ],
+      "additionalProperties": false
+    },
+    "aiAutoRepairEnabled": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "default": null
+    },
     "id": {
       "type": "string"
+    },
+    "created_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "alertChannels": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "email": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "address": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "minLength": 1,
+                "default": ""
+              }
+            }
+          }
+        },
+        "webhook": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "minLength": 1,
+                "default": ""
+              },
+              "url": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "minLength": 1,
+                "default": ""
+              },
+              "method": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "minLength": 1,
+                "default": "POST"
+              },
+              "headers": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "key": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "minLength": 1
+                    },
+                    "value": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "locked": {
+                      "type": [
+                        "boolean",
+                        "null"
+                      ],
+                      "default": false
+                    }
+                  },
+                  "required": [
+                    "key",
+                    "value"
+                  ]
+                },
+                "default": []
+              },
+              "queryParameters": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "key": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "minLength": 1
+                    },
+                    "value": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "locked": {
+                      "type": [
+                        "boolean",
+                        "null"
+                      ],
+                      "default": false
+                    }
+                  },
+                  "required": [
+                    "key",
+                    "value"
+                  ]
+                },
+                "default": []
+              }
+            }
+          }
+        },
+        "slack": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "url": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "minLength": 1,
+                "default": ""
+              }
+            }
+          }
+        },
+        "sms": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "number": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "minLength": 1,
+                "default": ""
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "name"
+            ]
+          }
+        }
+      }
+    },
+    "project": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The ID of the project that manages this check."
+        },
+        "logicalId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The logical ID of the managing project, as declared in code."
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The name of the managing project."
+        }
+      },
+      "description": "The project that manages this check, or null when the check is not managed by code. When a check has more than one binding, this reports the preferred one."
+    },
+    "logicalId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The check's logical ID within the managing project, or null when it is not managed by code."
+    },
+    "member": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "True when the project owns this check, false when it merely references a check owned outside the project. Null when not managed by code. The same relationship appears structurally in `projectBindings`: an owning project under `projectBindings.owner`, a referencing one under `projectBindings.references`."
+    },
+    "pending": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "True when the binding is reserved by an import plan that has not been deployed yet. Null when not managed by code."
+    },
+    "projectBindings": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The Checkly CLI projects that manage this resource. `owner` is null and `references` empty when the resource is not managed by code.",
+      "properties": {
+        "owner": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "The project that owns this resource \u2014 the one whose deploy can delete it. Null when no project owns it, including when other projects merely reference it. In the rare case that several projects hold an ownership record for one resource, this reports the preferred one and the rest are omitted.",
+          "properties": {
+            "project": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "The project this binding is to.",
+              "properties": {
+                "id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "The ID of the project."
+                },
+                "logicalId": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "The logical ID of the project, as declared in code."
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "The name of the project."
+                }
+              },
+              "required": [
+                "id",
+                "logicalId",
+                "name"
+              ]
+            },
+            "binding": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "The resource's side of this binding.",
+              "properties": {
+                "logicalId": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "The resource's logical ID within this project, as declared in code.",
+                  "example": "homepage-check"
+                },
+                "pending": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ],
+                  "description": "True when the binding is reserved by an import plan that has not been deployed yet."
+                },
+                "sourceFile": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "The file in the project's repository that declares this resource, or null when not recorded.",
+                  "example": "src/__checks__/homepage.check.ts"
+                }
+              },
+              "required": [
+                "logicalId",
+                "pending"
+              ]
+            }
+          },
+          "required": [
+            "project",
+            "binding"
+          ]
+        },
+        "references": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Projects that use this resource without owning it; their deploys leave it alone. Empty when there are none.",
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "project": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "description": "The project this binding is to.",
+                "properties": {
+                  "id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "The ID of the project."
+                  },
+                  "logicalId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "The logical ID of the project, as declared in code."
+                  },
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "The name of the project."
+                  }
+                },
+                "required": [
+                  "id",
+                  "logicalId",
+                  "name"
+                ]
+              },
+              "binding": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "description": "The resource's side of this binding.",
+                "properties": {
+                  "logicalId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "The resource's logical ID within this project, as declared in code.",
+                    "example": "homepage-check"
+                  },
+                  "pending": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ],
+                    "description": "True when the binding is reserved by an import plan that has not been deployed yet."
+                  },
+                  "sourceFile": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "The file in the project's repository that declares this resource, or null when not recorded.",
+                    "example": "src/__checks__/homepage.check.ts"
+                  }
+                },
+                "required": [
+                  "logicalId",
+                  "pending"
+                ]
+              }
+            },
+            "required": [
+              "project",
+              "binding"
+            ]
+          }
+        }
+      },
+      "required": [
+        "owner",
+        "references"
+      ]
+    },
+    "privateLocations": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "frequency": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "default": 10
+    },
+    "frequencyOffset": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "degradedResponseTime": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "maxResponseTime": {
+      "type": [
+        "number",
+        "null"
+      ]
     },
     "checkType": {
       "type": [
         "string",
         "null"
+      ]
+    },
+    "request": {
+      "anyOf": [
+        {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "method": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "url": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 1,
+              "maxLength": 2048
+            },
+            "followRedirects": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "skipSSL": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "default": false
+            },
+            "ipFamily": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": "IPv4"
+            },
+            "body": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": ""
+            },
+            "bodyType": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": "NONE"
+            },
+            "headers": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "key": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1
+                  },
+                  "value": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "locked": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ],
+                    "default": false
+                  }
+                },
+                "required": [
+                  "key",
+                  "value"
+                ]
+              },
+              "default": []
+            },
+            "queryParameters": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "key": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1
+                  },
+                  "value": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "locked": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ],
+                    "default": false
+                  }
+                },
+                "required": [
+                  "key",
+                  "value"
+                ]
+              },
+              "default": []
+            },
+            "assertions": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "source": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "comparison": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "property": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  },
+                  "target": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  },
+                  "regex": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  }
+                }
+              },
+              "default": []
+            },
+            "basicAuth": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "username": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "password": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "username",
+                "password"
+              ]
+            }
+          },
+          "required": [
+            "method",
+            "url"
+          ]
+        },
+        {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "url": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 1,
+              "maxLength": 2048
+            },
+            "hostname": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 1,
+              "maxLength": 2048
+            },
+            "port": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "body": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 1,
+              "default": null
+            },
+            "data": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 1,
+              "default": null
+            },
+            "assertions": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "source": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "comparison": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "property": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  },
+                  "target": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  },
+                  "regex": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  }
+                }
+              },
+              "default": []
+            },
+            "ipFamily": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": "IPv4"
+            }
+          },
+          "required": [
+            "port"
+          ]
+        },
+        {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "method": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": "GET"
+            },
+            "url": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 1,
+              "maxLength": 2048
+            },
+            "followRedirects": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "skipSSL": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "default": false
+            },
+            "ipFamily": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": "IPv4"
+            },
+            "assertions": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "source": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "comparison": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "property": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  },
+                  "target": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  },
+                  "regex": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  }
+                }
+              },
+              "default": []
+            }
+          },
+          "required": [
+            "url"
+          ]
+        },
+        {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "query": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "nameServer": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 100
+            },
+            "port": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "recordType": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "assertions": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "source": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "comparison": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "property": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  },
+                  "target": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  },
+                  "regex": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  }
+                }
+              },
+              "default": []
+            },
+            "protocol": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": "UDP"
+            }
+          },
+          "required": [
+            "query",
+            "recordType"
+          ]
+        },
+        {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "hostname": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 1,
+              "maxLength": 2048
+            },
+            "ipFamily": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": "IPv4"
+            },
+            "pingCount": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1,
+              "maximum": 50,
+              "default": 10
+            },
+            "assertions": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "source": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "comparison": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "property": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  },
+                  "target": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  },
+                  "regex": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  }
+                }
+              },
+              "default": []
+            }
+          },
+          "required": [
+            "hostname"
+          ]
+        },
+        {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "protocol": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "port": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1,
+              "maximum": 65535
+            },
+            "ipFamily": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "maxHops": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1,
+              "maximum": 64
+            },
+            "maxUnknownHops": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1,
+              "maximum": 30
+            },
+            "ptrLookup": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "timeout": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1,
+              "maximum": 30
+            },
+            "assertions": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "source": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "comparison": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "property": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  },
+                  "target": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  },
+                  "regex": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "port": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "ipFamily": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "skipSSL": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "timeout": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "grpcConfig": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "mode": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tls": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "metadata": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "key": {
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "minLength": 1,
+                        "maxLength": 256
+                      },
+                      "value": {
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "maxLength": 8192
+                      }
+                    },
+                    "required": [
+                      "key",
+                      "value"
+                    ]
+                  },
+                  "maxItems": 50,
+                  "default": []
+                },
+                "service": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "encoding": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "bfbsContent": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "serviceDefinition": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "method": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "protoContent": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "message": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "assertions": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "source": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "comparison": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "property": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  },
+                  "target": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  },
+                  "regex": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": ""
+                  }
+                }
+              },
+              "default": []
+            }
+          }
+        },
+        {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "sslConfig": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "hostname": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "minLength": 1,
+                  "maxLength": 2048
+                },
+                "port": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 1,
+                  "maximum": 65535
+                },
+                "serverName": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 2048
+                    },
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "ipFamily": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "skipChainValidation": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "handshakeTimeoutMs": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 1000,
+                  "maximum": 30000
+                },
+                "alertDaysBeforeExpiry": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 1,
+                  "maximum": 365
+                },
+                "securityBaseline": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "enabled": {
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
+                    },
+                    "minTLSVersion": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "severity": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      },
+                      "default": {}
+                    },
+                    "minKeySizeBits": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "minimum": 1024,
+                          "maximum": 16384
+                        },
+                        "severity": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      },
+                      "default": {}
+                    },
+                    "weakSignatureAlgorithm": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "severity": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      },
+                      "default": {}
+                    },
+                    "weakCipherSuite": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "severity": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      },
+                      "default": {}
+                    },
+                    "knownBadCA": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "severity": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      },
+                      "default": {}
+                    },
+                    "recommendedTLSVersion": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "severity": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      },
+                      "default": {}
+                    },
+                    "recommendedKeySizeBits": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "minimum": 1024,
+                          "maximum": 16384
+                        },
+                        "severity": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      },
+                      "default": {}
+                    },
+                    "ocspMustStapleRespected": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "severity": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      },
+                      "default": {}
+                    },
+                    "sctPresent": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "severity": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      },
+                      "default": {}
+                    }
+                  }
+                },
+                "clientCertificateMode": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "hostname"
+              ]
+            },
+            "sslClientCertificateId": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 1,
+              "format": "uuid"
+            },
+            "assertions": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "source": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "property": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "comparison": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "target": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "regex": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "source",
+                  "comparison"
+                ]
+              }
+            }
+          },
+          "required": [
+            "sslConfig"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "heartbeat": {
+      "type": [
+        "object",
+        "null"
       ],
-      "description": "The type of the check."
+      "properties": {
+        "period": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Interval expected between pings."
+        },
+        "periodUnit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "grace": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Grace added to the period."
+        },
+        "graceUnit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "pingToken": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-format": {
+            "guid": true
+          },
+          "description": "UUID token used to build a unique ping URL."
+        },
+        "pingUrl": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "period",
+        "periodUnit",
+        "grace",
+        "graceUnit"
+      ]
+    },
+    "script": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "scriptPath": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sslCheckDomain": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "environmentVariables": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "key": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1
+          },
+          "value": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "locked": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "default": false
+          },
+          "secret": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "default": false
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "maxItems": 200
+    },
+    "setupSnippetId": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "default": null
+    },
+    "tearDownSnippetId": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "default": null
+    },
+    "localSetupScript": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "default": null
+    },
+    "localTearDownScript": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "default": null
+    },
+    "dependencies": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "path": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "content": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1
+          }
+        },
+        "required": [
+          "path",
+          "content"
+        ]
+      }
+    },
+    "setupScriptDependencies": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "path": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "content": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1
+          }
+        },
+        "required": [
+          "path",
+          "content"
+        ]
+      }
+    },
+    "tearDownScriptDependencies": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "path": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "content": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1
+          }
+        },
+        "required": [
+          "path",
+          "content"
+        ]
+      }
     }
   },
   "required": [
+    "name",
     "checkType"
   ]
 }

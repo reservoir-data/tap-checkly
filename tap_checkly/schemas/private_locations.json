@@ -201,6 +201,193 @@
           "agents"
         ]
       }
+    },
+    "projectBindings": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The Checkly CLI projects that manage this resource. `owner` is null and `references` empty when the resource is not managed by code.",
+      "properties": {
+        "owner": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "The project that owns this resource \u2014 the one whose deploy can delete it. Null when no project owns it, including when other projects merely reference it. In the rare case that several projects hold an ownership record for one resource, this reports the preferred one and the rest are omitted.",
+          "properties": {
+            "project": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "The project this binding is to.",
+              "properties": {
+                "id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "The ID of the project."
+                },
+                "logicalId": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "The logical ID of the project, as declared in code."
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "The name of the project."
+                }
+              },
+              "required": [
+                "id",
+                "logicalId",
+                "name"
+              ]
+            },
+            "binding": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "The resource's side of this binding.",
+              "properties": {
+                "logicalId": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "The resource's logical ID within this project, as declared in code.",
+                  "example": "homepage-check"
+                },
+                "pending": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ],
+                  "description": "True when the binding is reserved by an import plan that has not been deployed yet."
+                },
+                "sourceFile": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "The file in the project's repository that declares this resource, or null when not recorded.",
+                  "example": "src/__checks__/homepage.check.ts"
+                }
+              },
+              "required": [
+                "logicalId",
+                "pending"
+              ]
+            }
+          },
+          "required": [
+            "project",
+            "binding"
+          ]
+        },
+        "references": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Projects that use this resource without owning it; their deploys leave it alone. Empty when there are none.",
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "project": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "description": "The project this binding is to.",
+                "properties": {
+                  "id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "The ID of the project."
+                  },
+                  "logicalId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "The logical ID of the project, as declared in code."
+                  },
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "The name of the project."
+                  }
+                },
+                "required": [
+                  "id",
+                  "logicalId",
+                  "name"
+                ]
+              },
+              "binding": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "description": "The resource's side of this binding.",
+                "properties": {
+                  "logicalId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "The resource's logical ID within this project, as declared in code.",
+                    "example": "homepage-check"
+                  },
+                  "pending": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ],
+                    "description": "True when the binding is reserved by an import plan that has not been deployed yet."
+                  },
+                  "sourceFile": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "The file in the project's repository that declares this resource, or null when not recorded.",
+                    "example": "src/__checks__/homepage.check.ts"
+                  }
+                },
+                "required": [
+                  "logicalId",
+                  "pending"
+                ]
+              }
+            },
+            "required": [
+              "project",
+              "binding"
+            ]
+          }
+        }
+      },
+      "required": [
+        "owner",
+        "references"
+      ]
     }
   },
   "required": [

@@ -19,7 +19,7 @@
         "string",
         "null"
       ],
-      "description": "The ID of check this alert belongs to.",
+      "description": "The ID of the check this alert belongs to.",
       "example": "db147a95-6ed6-44c9-a584-c5dca2db3aaa"
     },
     "alertType": {
@@ -51,7 +51,7 @@
         "number",
         "null"
       ],
-      "description": "Describes the time it took to execute relevant parts of this check. Any setup timeor system time needed to start executing this check in the Checkly backend is not part of this.",
+      "description": "Describes the time it took to execute relevant parts of this check. Any setup time or system time needed to start executing this check in the Checkly backend is not part of this.",
       "example": 10
     },
     "error": {
@@ -83,7 +83,7 @@
         "string",
         "null"
       ],
-      "format": "date",
+      "format": "date-time",
       "description": "The date and time this check alert was started."
     }
   },

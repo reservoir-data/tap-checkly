@@ -10,7 +10,12 @@ from typing import TYPE_CHECKING, Any, override
 from tap_checkly.client import ChecklyNextIDPaginatedStream, ChecklyPaginatedStream, ChecklyStream
 
 if TYPE_CHECKING:
+    from collections.abc import Iterable
+
     from singer_sdk.helpers.types import Context, Record
+
+# Maximum page size allowed by the heartbeat events endpoint
+HEARTBEAT_EVENTS_LIMIT = 10
 
 
 class AlertChannels(ChecklyPaginatedStream):
@@ -45,7 +50,7 @@ class Checks(ChecklyPaginatedStream):
 
     @override
     def get_child_context(self, record: Record, context: Context | None) -> dict[str, Any]:
-        return {"checkId": record["id"]}
+        return {"checkId": record["id"], "checkType": record["checkType"]}
 
 
 class CheckAlerts(ChecklyPaginatedStream):
@@ -76,6 +81,7 @@ class CheckResults(ChecklyPaginatedStream):
     openapi_ref = "CheckResult"
     replication_key = "created_at"
     parent_stream_type = Checks
+    state_partitioning_keys = ("checkId",)
 
 
 class Dashboards(ChecklyPaginatedStream):
@@ -172,3 +178,39 @@ class StatusPageServices(ChecklyNextIDPaginatedStream):
     path = "/status-pages/services"
     primary_keys = ("id",)
     openapi_ref = "StatusPageV2Service"
+
+
+class HeartbeatEvents(ChecklyStream):
+    """Heartbeat events.
+
+    Pings received (or missed) by heartbeat checks.
+    """
+
+    name = "heartbeat_events"
+    path = "/checks/heartbeats/{checkId}/events"
+    records_jsonpath = "$[*].events[*]"
+    primary_keys = ("id",)
+    openapi_ref = "HeartbeatsV1Event"
+    replication_key = "timestamp"
+    parent_stream_type = Checks
+    state_partitioning_keys = ("checkId",)
+
+    @override
+    def get_records(self, context: Context | None) -> Iterable[dict[str, Any]]:
+        # Only heartbeat checks have events, so skip the request for other check types
+        if context and context.get("checkType") != "HEARTBEAT":
+            return
+        yield from super().get_records(context)
+
+    @override
+    def get_url_params(self, context: Context | None, next_page_token: Any | None) -> dict[str, Any]:
+        params: dict[str, Any] = {"limit": HEARTBEAT_EVENTS_LIMIT}
+        if start_date := self.get_starting_timestamp(context):
+            params["startTime"] = int(start_date.timestamp())
+        return params
+
+    @override
+    def post_process(self, row: Record, context: Context | None = None) -> Record | None:
+        if context:
+            row["checkId"] = context["checkId"]
+        return row

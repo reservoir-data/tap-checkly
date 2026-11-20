@@ -21,6 +21,7 @@ TestTapCheckly = get_tap_test_class(
             "check_alerts",
             "check_groups",
             "dashboards",
+            "heartbeat_events",
             "maintenance_windows",
             "private_locations",
             "snippets",

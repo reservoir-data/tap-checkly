@@ -24,21 +24,21 @@
         "boolean",
         "null"
       ],
-      "description": "Describes if any failure has occurred during this check run. This should be your main focus for assessing API or browser check behaviour. Assertions that fail, timeouts or failing scripts all resolve to this value being true."
+      "description": "Describes if any failure occurred during this check run."
     },
     "hasErrors": {
       "type": [
         "boolean",
         "null"
       ],
-      "description": "Describes if an internal error has occurred in Checkly's backend. This should be false in almost all cases."
+      "description": "Describes if an internal error occurred in Checkly's backend."
     },
     "isDegraded": {
       "type": [
         "boolean",
         "null"
       ],
-      "description": "A check is degraded if it is over the degradation limit set by the \"degradedResponseTime\" field on the check. Applies only to API checks."
+      "description": "Whether the check is over its degradation limit."
     },
     "isCancelled": {
       "type": [
@@ -52,7 +52,7 @@
         "boolean",
         "null"
       ],
-      "description": "Set to true if the response time is over the limit set by the \"maxResponseTime\" field on the check. Applies only to API checks."
+      "description": "Whether the response time exceeded its limit."
     },
     "runLocation": {
       "type": [
@@ -87,100 +87,102 @@
         "number",
         "null"
       ],
-      "description": "Time the check spent producing its result, in milliseconds. For protocol checks this is the measured operation time (a subset of the run): request time for API and URL checks, connection time for TCP, resolution time for DNS, average latency for ICMP and TRACEROUTE, request timing for GRPC, and TLS handshake time for SSL. For browser, multi-step, Playwright and agentic checks it is the run wall-clock duration. Any setup or system time before the check starts executing is not included."
+      "description": "Time the check spent producing its result, in milliseconds. For protocol checks this is the measured operation time; for browser, multi-step, Playwright and agentic checks it is the run wall-clock duration."
     },
     "apiCheckResult": {
       "type": [
         "object",
         "null"
       ],
-      "description": "The response data for an API check.",
       "properties": {
         "assertions": {
           "type": [
             "array",
             "null"
           ],
-          "description": "List of API check assertions.",
-          "example": [
-            {
-              "source": "STATUS_CODE",
-              "target": 200
-            }
-          ],
           "items": {
-            "type": "string"
-          }
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {},
+            "additionalProperties": {
+              "nullable": true
+            }
+          },
+          "default": [],
+          "description": "List of API check assertions."
         },
         "request": {
           "type": [
             "object",
             "null"
           ],
-          "description": "The request for the API.",
           "properties": {
             "method": {
               "type": [
                 "string",
                 "null"
-              ],
-              "example": "GET"
+              ]
             },
             "url": {
               "type": [
                 "string",
                 "null"
-              ],
-              "example": "https://api.checklyhq.com"
+              ]
             },
             "data": {
               "type": [
                 "string",
                 "null"
-              ],
-              "example": ""
+              ]
             },
             "headers": {
               "type": [
                 "object",
                 "null"
-              ]
+              ],
+              "properties": {},
+              "additionalProperties": {
+                "nullable": true
+              }
             },
             "params": {
               "type": [
                 "object",
                 "null"
-              ]
+              ],
+              "properties": {},
+              "additionalProperties": {
+                "nullable": true
+              }
             }
-          }
+          },
+          "description": "The request for the API."
         },
         "response": {
           "type": [
             "object",
             "null"
           ],
-          "description": "The API response.",
           "properties": {
             "status": {
               "type": [
                 "number",
                 "null"
-              ],
-              "example": 200
+              ]
             },
             "statusText": {
               "type": [
                 "string",
                 "null"
-              ],
-              "example": "OK"
+              ]
             },
             "body": {
               "type": [
                 "string",
                 "null"
-              ],
-              "example": "<title> Checkly Public API </title>"
+              ]
             },
             "bodyEncoding": {
               "type": [
@@ -193,35 +195,51 @@
               "type": [
                 "object",
                 "null"
-              ]
+              ],
+              "properties": {},
+              "additionalProperties": {
+                "nullable": true
+              }
             },
             "timings": {
               "type": [
                 "object",
                 "null"
-              ]
+              ],
+              "properties": {},
+              "additionalProperties": {
+                "nullable": true
+              }
             },
             "timingPhases": {
               "type": [
                 "object",
                 "null"
-              ]
+              ],
+              "properties": {},
+              "additionalProperties": {
+                "nullable": true
+              }
             }
-          }
+          },
+          "description": "The API response."
         },
         "requestError": {
           "type": [
             "string",
             "null"
           ],
-          "description": "Describes if an error occurred on the request.",
-          "example": null
+          "description": "Describes if an error occurred on the request."
         },
         "jobLog": {
           "type": [
             "object",
             "null"
           ],
+          "properties": {},
+          "additionalProperties": {
+            "nullable": true
+          },
           "description": "Check run log results."
         },
         "jobAssets": {
@@ -229,11 +247,8 @@
             "array",
             "null"
           ],
-          "description": "Assets generated from the check run.",
-          "example": null,
-          "items": {
-            "type": "string"
-          }
+          "items": {},
+          "description": "Assets generated from the check run."
         },
         "pcapDataUrl": {
           "type": [
@@ -242,29 +257,31 @@
           ],
           "description": "Packet capture data if available as redirect/download URL."
         }
-      }
+      },
+      "description": "The response data for an API check."
     },
     "browserCheckResult": {
       "type": [
         "object",
         "null"
       ],
-      "description": "The response data for a browser check.",
-      "example": null,
       "properties": {
         "type": {
           "type": [
             "string",
             "null"
           ],
-          "description": "The type of framework the check is using.",
-          "example": "PLAYWRIGHT"
+          "description": "The type of framework the check is using."
         },
         "traceSummary": {
           "type": [
             "object",
             "null"
           ],
+          "properties": {},
+          "additionalProperties": {
+            "nullable": true
+          },
           "description": "The summary of errors in the check run."
         },
         "pages": {
@@ -272,225 +289,176 @@
             "array",
             "null"
           ],
-          "description": "List of pages used on the check run.",
-          "example": [
-            {
-              "url": "https://www.checklyhq.com/",
-              "webVitals": {
-                "CLS": {
-                  "score": "GOOD",
-                  "value": 0.000146484375
-                }
-              }
-            }
-          ],
           "items": {
-            "type": "string"
-          }
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {},
+            "additionalProperties": {
+              "nullable": true
+            }
+          },
+          "description": "List of pages used on the check run."
         },
         "playwrightTestVideos": {
           "type": [
             "array",
             "null"
           ],
-          "description": "List of Playwright Test videos.",
-          "example": [
-            "https://api.checklyhq.com/v1/assets/checkRunData/eu-central-1/00000000-0000-0000-0000-0000000000/00000000-0000-0000-0000-0000000000/1675691025832/visit-page-and-take-screenshot-1675691043856.webm"
-          ],
           "items": {
             "type": "string"
-          }
+          },
+          "description": "List of Playwright Test videos."
         },
         "errors": {
           "type": [
             "array",
             "null"
           ],
-          "description": "List of errors on the check run.",
-          "example": [],
-          "items": {
-            "type": "string"
-          }
+          "items": {},
+          "description": "List of errors on the check run."
         },
         "endTime": {
           "type": [
             "number",
             "null"
           ],
-          "description": "End time of the check run.",
-          "example": 1648573423995
+          "description": "End time of the check run."
         },
         "startTime": {
           "type": [
             "number",
             "null"
           ],
-          "description": "Start time of the check run.",
-          "example": 1648573423994
+          "description": "Start time of the check run."
         },
         "runtimeVersion": {
           "type": [
             "string",
             "null"
           ],
-          "description": "Active runtime version.",
-          "example": "2023.09"
+          "description": "Active runtime version."
         },
         "jobLog": {
           "type": [
             "array",
             "null"
           ],
-          "description": "Check run log results.",
-          "example": {
-            "time": 1648573423995,
-            "msg": "Starting job",
-            "level": "DEBUG"
-          },
-          "items": {
-            "type": "string"
-          }
+          "items": {},
+          "description": "Check run log results."
         },
         "jobAssets": {
           "type": [
             "array",
             "null"
           ],
-          "description": "Assets generated from the check run.",
-          "example": null,
-          "items": {
-            "type": "string"
-          }
+          "items": {},
+          "description": "Assets generated from the check run."
         },
         "playwrightTestTraces": {
           "type": [
             "array",
             "null"
           ],
-          "description": "List of Playwright Test traces.",
-          "example": [
-            "https://api.checklyhq.com/v1/assets/checkRunData/eu-central-1/00000000-0000-0000-0000-0000000000/00000000-0000-0000-0000-0000000000/1675691025832/visit-page-and-take-screenshot.zip"
-          ],
           "items": {
             "type": "string"
-          }
+          },
+          "description": "List of Playwright Test traces."
         },
         "playwrightTestJsonReportFile": {
           "type": [
             "string",
             "null"
           ],
-          "description": "Playwright Test JSON report.",
-          "example": "https://api.checklyhq.com/v1/assets/checkRunData/eu-central-1/00000000-0000-0000-0000-0000000000/00000000-0000-0000-0000-0000000000/1675691025832/report.json"
+          "description": "Playwright Test JSON report."
         }
-      }
+      },
+      "description": "The response data for a browser check."
     },
     "multiStepCheckResult": {
       "type": [
         "object",
         "null"
       ],
-      "description": "The response data for a multi-step check.",
-      "example": null,
       "properties": {
         "errors": {
           "type": [
             "array",
             "null"
           ],
-          "description": "List of errors on the check run.",
-          "example": [],
-          "items": {
-            "type": "string"
-          }
+          "items": {},
+          "description": "List of errors on the check run."
         },
         "endTime": {
           "type": [
             "number",
             "null"
           ],
-          "description": "End time of the check run.",
-          "example": 1648573423995
+          "description": "End time of the check run."
         },
         "startTime": {
           "type": [
             "number",
             "null"
           ],
-          "description": "Start time of the check run.",
-          "example": 1648573423994
+          "description": "Start time of the check run."
         },
         "runtimeVersion": {
           "type": [
             "string",
             "null"
           ],
-          "description": "Active runtime version.",
-          "example": "2023.09"
+          "description": "Active runtime version."
         },
         "jobLog": {
           "type": [
             "array",
             "null"
           ],
-          "description": "Check run log results.",
-          "example": {
-            "time": 1648573423995,
-            "msg": "Starting job",
-            "level": "DEBUG"
-          },
-          "items": {
-            "type": "string"
-          }
+          "items": {},
+          "description": "Check run log results."
         },
         "jobAssets": {
           "type": [
             "array",
             "null"
           ],
-          "description": "Assets generated from the check run.",
-          "example": null,
-          "items": {
-            "type": "string"
-          }
+          "items": {},
+          "description": "Assets generated from the check run."
         },
         "playwrightTestTraces": {
           "type": [
             "array",
             "null"
           ],
-          "description": "List of Playwright Test traces.",
-          "example": [
-            "https://api.checklyhq.com/v1/assets/checkRunData/eu-central-1/00000000-0000-0000-0000-0000000000/00000000-0000-0000-0000-0000000000/1675691025832/visit-page-and-take-screenshot.zip"
-          ],
           "items": {
             "type": "string"
-          }
+          },
+          "description": "List of Playwright Test traces."
         },
         "playwrightTestJsonReportFile": {
           "type": [
             "string",
             "null"
           ],
-          "description": "Playwright Test JSON report.",
-          "example": "https://api.checklyhq.com/v1/assets/checkRunData/eu-central-1/00000000-0000-0000-0000-0000000000/00000000-0000-0000-0000-0000000000/1675691025832/report.json"
+          "description": "Playwright Test JSON report."
         }
-      }
+      },
+      "description": "The response data for a multi-step check."
     },
     "agenticCheckResult": {
       "type": [
         "object",
         "null"
       ],
-      "description": "The response data for an agentic check.",
       "properties": {
         "summary": {
           "type": [
             "string",
             "null"
           ],
-          "description": "Human-readable recap of the agent run written by the agent itself.",
-          "example": "The homepage loaded correctly and all assertions passed."
+          "description": "Human-readable recap of the agent run."
         },
         "prompt": {
           "type": [
@@ -504,7 +472,6 @@
             "array",
             "null"
           ],
-          "description": "List of assertions the agent evaluated during the run.",
           "items": {
             "type": [
               "object",
@@ -516,42 +483,39 @@
                   "string",
                   "null"
                 ],
-                "description": "Human-readable condition the agent evaluated.",
-                "example": "The homepage returns an HTTP 200 status"
+                "description": "Human-readable condition the agent evaluated."
               },
               "passed": {
                 "type": [
                   "boolean",
                   "null"
                 ],
-                "description": "Whether the assertion passed.",
-                "example": true
+                "description": "Whether the assertion passed."
               },
               "actual": {
                 "type": [
                   "string",
                   "null"
                 ],
-                "description": "What the agent actually observed.",
-                "example": "200"
+                "description": "What the agent actually observed."
               },
               "expected": {
                 "type": [
                   "string",
                   "null"
                 ],
-                "description": "What the assertion required.",
-                "example": "200"
+                "description": "What the assertion required."
               }
             }
-          }
+          },
+          "default": [],
+          "description": "List of assertions evaluated by the agent."
         },
         "suggestions": {
           "type": [
             "array",
             "null"
           ],
-          "description": "Suggestions the agent produced for extending the check.",
           "items": {
             "type": [
               "object",
@@ -563,56 +527,49 @@
                   "string",
                   "null"
                 ],
-                "description": "Human-readable summary of the agent's suggestion.",
-                "example": "Monitor the checkout flow end-to-end"
+                "description": "Human-readable summary of the agent's suggestion."
               },
               "prompt": {
                 "type": [
                   "string",
                   "null"
                 ],
-                "description": "Prompt fragment the user can append to extend the check.",
-                "example": "Sign in and verify the checkout page loads"
+                "description": "Prompt fragment the user can append to extend the check."
               },
               "promptReplacement": {
                 "type": [
                   "string",
                   "null"
                 ],
-                "description": "Full replacement prompt the user can apply when the suggestion is a correction instead of an append-only fragment.",
-                "example": "Sign in with {{TEST_USER_EMAIL}} and verify the checkout page loads"
+                "description": "Full replacement prompt the user can apply when the suggestion is a correction."
               },
               "secrets": {
                 "type": [
                   "array",
                   "null"
                 ],
-                "description": "Environment variable names the suggestion would require.",
-                "example": [
-                  "TEST_USER_EMAIL",
-                  "TEST_USER_PASSWORD"
-                ],
                 "items": {
                   "type": "string"
-                }
+                },
+                "description": "Environment variable names the suggestion would require."
               },
               "category": {
                 "type": [
                   "string",
                   "null"
                 ],
-                "description": "Category of the suggestion.",
-                "example": "credentials"
+                "description": "Category of the suggestion."
               }
             }
-          }
+          },
+          "default": [],
+          "description": "Suggestions produced by the agent."
         },
         "steps": {
           "type": [
             "array",
             "null"
           ],
-          "description": "Sequence of tool calls and messages emitted by the agent.",
           "items": {
             "type": [
               "object",
@@ -624,22 +581,24 @@
                   "string",
                   "null"
                 ],
-                "description": "Kind of step emitted by the agent.",
-                "example": "tool_call"
+                "description": "Kind of step emitted by the agent."
               },
               "name": {
                 "type": [
                   "string",
                   "null"
                 ],
-                "description": "Name of the tool invoked (for tool_call / tool_result steps).",
-                "example": "http_request"
+                "description": "Name of the tool invoked."
               },
               "input": {
                 "type": [
                   "object",
                   "null"
                 ],
+                "properties": {},
+                "additionalProperties": {
+                  "nullable": true
+                },
                 "description": "Input passed to the tool, when applicable."
               },
               "output": {
@@ -654,69 +613,81 @@
                   "string",
                   "null"
                 ],
-                "description": "ISO timestamp when the step was emitted.",
-                "example": "2026-04-06T14:15:22.000Z"
+                "description": "ISO timestamp when the step was emitted."
               },
               "sequenceNumber": {
                 "type": [
                   "integer",
                   "null"
                 ],
-                "description": "Monotonic sequence number within a run.",
-                "example": 3
+                "description": "Monotonic sequence number within a run."
               }
             }
-          }
+          },
+          "default": [],
+          "description": "Sequence of tool calls and messages."
         },
         "errors": {
           "type": [
             "array",
             "null"
           ],
-          "description": "Errors recorded during the run, if any.",
           "items": {
             "type": [
               "object",
               "null"
-            ]
-          }
+            ],
+            "properties": {},
+            "additionalProperties": {
+              "nullable": true
+            }
+          },
+          "default": [],
+          "description": "Errors recorded during the run."
         },
         "artifactManifest": {
           "type": [
             "object",
             "null"
           ],
-          "description": "Map of artifact file paths to human-readable descriptions."
+          "properties": {},
+          "additionalProperties": {
+            "nullable": true
+          },
+          "description": "Map of artifact file paths to descriptions."
         }
-      }
+      },
+      "description": "The response data for an agentic check."
     },
     "playwrightCheckResult": {
       "type": [
         "object",
         "null"
       ],
-      "description": "The response data for a Playwright check.",
-      "example": null,
       "properties": {
         "errors": {
           "type": [
             "array",
             "null"
           ],
-          "description": "Per-test Playwright errors recorded during the run.",
           "items": {
             "type": [
               "object",
               "null"
-            ]
-          }
+            ],
+            "properties": {},
+            "additionalProperties": {
+              "nullable": true
+            }
+          },
+          "default": [],
+          "description": "Per-test Playwright errors recorded during the run."
         },
         "playwrightTraceFiles": {
           "type": [
             "array",
             "null"
           ],
-          "description": "Trace file metadata recorded by the runner.",
           "items": {
             "type": [
               "object",
@@ -741,48 +712,49 @@
                   "null"
                 ]
               }
+            },
+            "additionalProperties": {
+              "nullable": true
             }
-          }
+          },
+          "default": [],
+          "description": "Trace file metadata recorded by the runner."
         },
         "jobLog": {
           "type": [
             "array",
             "null"
           ],
-          "description": "Check run log results.",
-          "items": {
-            "type": "string"
-          }
+          "items": {},
+          "description": "Check run log results."
         },
         "jobAssets": {
           "type": [
             "array",
             "null"
           ],
-          "description": "Assets generated from the check run.",
-          "items": {
-            "type": "string"
-          }
+          "items": {},
+          "description": "Assets generated from the check run."
         },
         "playwrightTestVideos": {
           "type": [
             "array",
             "null"
           ],
-          "description": "Signed URLs for Playwright test videos.",
           "items": {
             "type": "string"
-          }
+          },
+          "description": "Signed URLs for Playwright test videos."
         },
         "playwrightTestTraces": {
           "type": [
             "array",
             "null"
           ],
-          "description": "Signed URLs for Playwright test traces.",
           "items": {
             "type": "string"
-          }
+          },
+          "description": "Signed URLs for Playwright test traces."
         },
         "playwrightTestJsonReportFile": {
           "type": [
@@ -791,49 +763,50 @@
           ],
           "description": "Signed URL for the Playwright JSON report."
         }
-      }
+      },
+      "description": "The response data for a Playwright check."
     },
     "tracerouteCheckResult": {
       "type": [
         "object",
         "null"
       ],
-      "description": "Failure-debug diagnostics for a traceroute check.",
       "properties": {
         "totalHops": {
           "type": [
             "number",
             "null"
           ],
-          "description": "Number of hops recorded on the route.",
-          "example": 12
+          "description": "Number of hops recorded on the route."
         },
         "destinationReached": {
           "type": [
             "boolean",
             "null"
           ],
-          "description": "Whether the traceroute reached the destination host.",
-          "example": false
+          "description": "Whether the traceroute reached the destination host."
         },
         "finalHopLatency": {
           "type": [
             "object",
             "null"
           ],
-          "description": "Latency statistics for the final reached hop.",
-          "example": {
-            "avgMs": 24.1,
-            "bestMs": 22,
-            "worstMs": 31.4
-          }
+          "properties": {},
+          "additionalProperties": {
+            "nullable": true
+          },
+          "description": "Latency statistics for the final reached hop."
         },
         "timingPhases": {
           "type": [
             "object",
             "null"
           ],
-          "description": "Timing phases (e.g. DNS) for the run."
+          "properties": {},
+          "additionalProperties": {
+            "nullable": true
+          },
+          "description": "Timing phases for the run."
         },
         "requestError": {
           "type": [
@@ -847,6 +820,10 @@
             "object",
             "null"
           ],
+          "properties": {},
+          "additionalProperties": {
+            "nullable": true
+          },
           "description": "The traceroute request that was executed."
         },
         "assertions": {
@@ -854,129 +831,129 @@
             "array",
             "null"
           ],
-          "description": "Assertions evaluated for the run.",
           "items": {
             "type": [
               "object",
               "null"
-            ]
-          }
+            ],
+            "properties": {},
+            "additionalProperties": {
+              "nullable": true
+            }
+          },
+          "description": "Assertions evaluated for the run."
         },
         "response": {
           "type": [
             "object",
             "null"
           ],
-          "description": "The detailed traceroute response artifact.",
           "properties": {
             "hostname": {
               "type": [
                 "string",
                 "null"
-              ],
-              "example": "api.checklyhq.com"
+              ]
             },
             "resolvedIp": {
               "type": [
                 "string",
                 "null"
-              ],
-              "example": "104.18.7.36"
+              ]
             },
             "totalHops": {
               "type": [
                 "number",
                 "null"
-              ],
-              "example": 12
+              ]
             },
             "destinationReached": {
               "type": [
                 "boolean",
                 "null"
-              ],
-              "example": false
+              ]
             },
             "truncationReason": {
               "type": [
                 "string",
                 "null"
               ],
-              "description": "Why the route was truncated, if it was.",
-              "example": "max-hops"
+              "description": "Why the route was truncated, if it was."
             },
             "finalHopLatency": {
               "type": [
                 "object",
                 "null"
               ],
-              "description": "Latency stats for the final reached hop."
+              "properties": {},
+              "additionalProperties": {
+                "nullable": true
+              }
             },
             "hops": {
               "type": [
                 "array",
                 "null"
               ],
-              "description": "Per-hop results: address, loss, RTT and ASN/geo annotations.",
               "items": {
                 "type": [
                   "object",
                   "null"
-                ]
+                ],
+                "properties": {},
+                "additionalProperties": {
+                  "nullable": true
+                }
               }
             },
             "protocol": {
               "type": [
                 "string",
                 "null"
-              ],
-              "example": "TCP"
+              ]
             },
             "probeProtocol": {
               "type": [
                 "string",
                 "null"
-              ],
-              "example": "TCP"
+              ]
             }
-          }
+          },
+          "description": "The detailed traceroute response artifact."
         }
-      }
+      },
+      "description": "Failure-debug diagnostics for a traceroute check."
     },
     "grpcCheckResult": {
       "type": [
         "object",
         "null"
       ],
-      "description": "Failure-debug diagnostics for a gRPC check.",
       "properties": {
         "grpcStatusCode": {
           "type": [
             "number",
             "null"
           ],
-          "description": "The gRPC status code of the call.",
-          "example": 14
+          "description": "The gRPC status code of the call."
         },
         "healthStatus": {
           "type": [
             "number",
             "null"
           ],
-          "description": "The numeric serving status returned by the gRPC health probe.",
-          "example": 2
+          "description": "The numeric serving status returned by the gRPC health probe."
         },
         "timingPhases": {
           "type": [
             "object",
             "null"
           ],
-          "description": "Timing phases (dns/connect/total) for the run.",
-          "example": {
-            "dns": 1.2,
-            "connect": 16.8,
-            "total": 90
-          }
+          "properties": {},
+          "additionalProperties": {
+            "nullable": true
+          },
+          "description": "Timing phases for the run."
         },
         "requestError": {
           "type": [
@@ -990,6 +967,10 @@
             "object",
             "null"
           ],
+          "properties": {},
+          "additionalProperties": {
+            "nullable": true
+          },
           "description": "The gRPC request that was executed."
         },
         "assertions": {
@@ -997,105 +978,98 @@
             "array",
             "null"
           ],
-          "description": "Assertions evaluated for the run.",
           "items": {
             "type": [
               "object",
               "null"
-            ]
-          }
+            ],
+            "properties": {},
+            "additionalProperties": {
+              "nullable": true
+            }
+          },
+          "description": "Assertions evaluated for the run."
         },
         "response": {
           "type": [
             "object",
             "null"
           ],
-          "description": "The detailed gRPC response artifact.",
           "properties": {
             "grpcMode": {
               "type": [
                 "string",
                 "null"
-              ],
-              "example": "BEHAVIOR"
+              ]
             },
             "host": {
               "type": [
                 "string",
                 "null"
-              ],
-              "example": "grpc.example.com"
+              ]
             },
             "resolvedIp": {
               "type": [
                 "string",
                 "null"
-              ],
-              "example": "10.0.0.4"
+              ]
             },
             "port": {
               "type": [
                 "number",
                 "null"
-              ],
-              "example": 443
+              ]
             },
             "grpcMethod": {
               "type": [
                 "string",
                 "null"
-              ],
-              "example": "grpc.health.v1.Health/Check"
+              ]
             },
             "responseMessage": {
               "type": [
                 "string",
                 "null"
-              ],
-              "description": "The decoded response message, when captured."
+              ]
             },
             "grpcStatusCode": {
               "type": [
                 "number",
                 "null"
-              ],
-              "description": "gRPC status code (always captured, even on error).",
-              "example": 14
+              ]
             },
             "grpcStatusMessage": {
               "type": [
                 "string",
                 "null"
-              ],
-              "description": "gRPC status message.",
-              "example": "connection refused"
+              ]
             },
             "healthStatus": {
               "type": [
                 "number",
                 "null"
-              ],
-              "description": "Numeric health serving status (HEALTH mode)."
+              ]
             },
             "healthStatusLabel": {
               "type": [
                 "string",
                 "null"
-              ],
-              "description": "Human-readable health status.",
-              "example": "NOT_SERVING"
+              ]
             },
             "metadata": {
               "type": [
                 "array",
                 "null"
               ],
-              "description": "Response metadata / trailers as {key,value} entries.",
               "items": {
                 "type": [
                   "object",
                   "null"
-                ]
+                ],
+                "properties": {},
+                "additionalProperties": {
+                  "nullable": true
+                }
               }
             },
             "discoveredMethods": {
@@ -1103,7 +1077,6 @@
                 "array",
                 "null"
               ],
-              "description": "Methods discovered via server reflection.",
               "items": {
                 "type": "string"
               }
@@ -1118,90 +1091,86 @@
               "type": [
                 "object",
                 "null"
-              ]
+              ],
+              "properties": {},
+              "additionalProperties": {
+                "nullable": true
+              }
             }
-          }
+          },
+          "description": "The detailed gRPC response artifact."
         }
-      }
+      },
+      "description": "Failure-debug diagnostics for a gRPC check."
     },
     "sslCheckResult": {
       "type": [
         "object",
         "null"
       ],
-      "description": "Failure-debug diagnostics for an SSL check.",
       "properties": {
         "tlsVersion": {
           "type": [
             "string",
             "null"
           ],
-          "description": "Negotiated TLS protocol version.",
-          "example": "TLS 1.3"
+          "description": "Negotiated TLS protocol version."
         },
         "cipherSuite": {
           "type": [
             "string",
             "null"
           ],
-          "description": "Negotiated cipher suite.",
-          "example": "TLS_AES_256_GCM_SHA384"
+          "description": "Negotiated cipher suite."
         },
         "daysUntilExpiry": {
           "type": [
             "number",
             "null"
           ],
-          "description": "Days until the leaf certificate expires (negative if expired).",
-          "example": 12
+          "description": "Days until the leaf certificate expires."
         },
         "handshakeTimeMs": {
           "type": [
             "number",
             "null"
           ],
-          "description": "TLS handshake duration in milliseconds.",
-          "example": 48.2
+          "description": "TLS handshake duration in milliseconds."
         },
         "chainTrusted": {
           "type": [
             "boolean",
             "null"
           ],
-          "description": "Whether the certificate chain was trusted.",
-          "example": false
+          "description": "Whether the certificate chain was trusted."
         },
         "hostnameVerified": {
           "type": [
             "boolean",
             "null"
           ],
-          "description": "Whether the hostname matched the certificate.",
-          "example": false
+          "description": "Whether the hostname matched the certificate."
         },
         "baselineVerdict": {
           "type": [
             "string",
             "null"
           ],
-          "description": "Overall security-baseline verdict.",
-          "example": "FAIL"
+          "description": "Overall security-baseline verdict."
         },
         "baselineGrade": {
           "type": [
             "string",
             "null"
           ],
-          "description": "Overall security-baseline grade.",
-          "example": "C"
+          "description": "Overall security-baseline grade."
         },
         "failureCategory": {
           "type": [
             "string",
             "null"
           ],
-          "description": "Categorised reason the check failed (the failing reason).",
-          "example": "expired"
+          "description": "Categorised reason the check failed."
         },
         "requestError": {
           "type": [
@@ -1215,6 +1184,10 @@
             "object",
             "null"
           ],
+          "properties": {},
+          "additionalProperties": {
+            "nullable": true
+          },
           "description": "The SSL request that was executed."
         },
         "assertions": {
@@ -1222,206 +1195,197 @@
             "array",
             "null"
           ],
-          "description": "Assertions evaluated for the run.",
           "items": {
             "type": [
               "object",
               "null"
-            ]
-          }
+            ],
+            "properties": {},
+            "additionalProperties": {
+              "nullable": true
+            }
+          },
+          "description": "Assertions evaluated for the run."
         },
         "response": {
           "type": [
             "object",
             "null"
           ],
-          "description": "The detailed SSL/TLS response artifact.",
           "properties": {
             "resolvedIp": {
               "type": [
                 "string",
                 "null"
-              ],
-              "example": "104.18.7.36"
+              ]
             },
             "protocol": {
               "type": [
                 "string",
                 "null"
               ],
-              "description": "Negotiated TLS version.",
-              "example": "TLS 1.3"
+              "description": "Negotiated TLS version."
             },
             "cipherSuite": {
               "type": [
                 "string",
                 "null"
-              ],
-              "example": "TLS_AES_256_GCM_SHA384"
+              ]
             },
             "handshakeTimeMs": {
               "type": [
                 "number",
                 "null"
-              ],
-              "example": 48.2
+              ]
             },
             "hostnameVerified": {
               "type": [
                 "boolean",
                 "null"
-              ],
-              "example": false
+              ]
             },
             "chainTrusted": {
               "type": [
                 "boolean",
                 "null"
-              ],
-              "example": false
+              ]
             },
             "daysUntilExpiry": {
               "type": [
                 "number",
                 "null"
-              ],
-              "example": 12
+              ]
             },
             "ocspStapled": {
               "type": [
                 "boolean",
                 "null"
-              ],
-              "example": false
+              ]
             },
             "ocspStatus": {
               "type": [
                 "string",
                 "null"
               ],
-              "description": "Decoded stapled OCSP status: good, revoked, or unknown (empty when nothing was stapled).",
-              "example": "good"
+              "description": "Decoded stapled OCSP status."
             },
             "chainTrustReason": {
               "type": [
                 "string",
                 "null"
               ],
-              "description": "Typed reason the chain is untrusted (present only when chainTrusted is false): missing_intermediate, untrusted_root, expired, or other.",
-              "example": "missing_intermediate"
+              "description": "Typed reason the chain is untrusted."
             },
             "chainTrustDetail": {
               "type": [
                 "string",
                 "null"
               ],
-              "description": "Human-readable explanation of why the chain is untrusted.",
-              "example": "the server did not send the intermediate certificate for issuer \"Acme Intermediate CA\"; add it to the chain."
+              "description": "Human-readable explanation of why the chain is untrusted."
             },
             "incompleteChain": {
               "type": [
                 "boolean",
                 "null"
               ],
-              "description": "Whether the server omitted an intermediate certificate (the classic \"works in browsers, fails elsewhere\" misconfiguration).",
-              "example": true
+              "description": "Whether the server omitted an intermediate certificate."
             },
             "missingIntermediate": {
               "type": [
                 "string",
                 "null"
               ],
-              "description": "Issuer of the intermediate certificate the server must add to its chain.",
-              "example": "Acme Intermediate CA"
+              "description": "Issuer of the missing intermediate certificate."
             },
             "securityBaseline": {
               "type": [
                 "object",
                 "null"
               ],
-              "description": "Per-rule security-baseline outcomes (verdict/grade plus each rule outcome)."
+              "properties": {},
+              "additionalProperties": {
+                "nullable": true
+              }
             },
             "certificate": {
               "type": [
                 "object",
                 "null"
               ],
-              "description": "Leaf certificate details: issuer, subjectCN, SANs, validity, key/signature algorithm."
+              "properties": {},
+              "additionalProperties": {
+                "nullable": true
+              }
             },
             "chain": {
               "type": [
                 "array",
                 "null"
               ],
-              "description": "Summaries of the certificates in the presented chain.",
               "items": {
                 "type": [
                   "object",
                   "null"
-                ]
+                ],
+                "properties": {},
+                "additionalProperties": {
+                  "nullable": true
+                }
               }
             }
-          }
+          },
+          "description": "The detailed SSL/TLS response artifact."
         }
-      }
+      },
+      "description": "Failure-debug diagnostics for an SSL check."
     },
     "checkRunId": {
       "type": [
         "number",
         "null"
       ],
-      "description": "The id of the specific check run that created this check result."
+      "description": "The id of the specific check run that created this result."
     },
     "attempts": {
       "type": [
         "number",
         "null"
       ],
-      "description": "How often this check was retried. This will be larger than 0 when double checking is enabled."
+      "description": "How often this check was retried."
     },
     "resultType": {
       "type": [
         "string",
         "null"
       ],
-      "description": "The type of result. FINAL means this is the final result of the check run. ATTEMPT means this is a result of a double check attempt.",
-      "example": "FINAL",
-      "default": "FINAL"
+      "description": "The type of result."
     },
     "sequenceId": {
       "type": [
         "string",
         "null"
       ],
-      "description": "The sequence ID of the check run. This is used to group check runs with multiple attempts together.",
-      "example": "2dbfa2a3-5477-45ea-ac33-ee55b8ea66ff",
-      "x-format": {
-        "guid": true
-      }
+      "format": "uuid",
+      "description": "The sequence ID of the check run."
     },
     "traceId": {
       "type": [
         "string",
         "null"
       ],
-      "description": "OpenTelemetry trace ID associated with this check result. `null` when no trace was recorded for this run (e.g. tracing not enabled in the runner).",
-      "example": "a1b2c3d4e5f67890abcdef0123456789"
+      "description": "OpenTelemetry trace ID associated with this check result."
     },
     "errorGroupIds": {
       "type": [
         "array",
         "null"
       ],
-      "description": "IDs of the error groups associated with this check result. Always an array: empty when the result has no associated error groups, single-element when there is one (typical for API/URL/TCP/ICMP checks), or multi-element for Playwright and multistep checks that can produce multiple distinct errors per run. Use these IDs to fetch the corresponding error group via the error-groups endpoint.",
-      "example": [
-        "883af87b-ac7c-44e3-9376-b4bece04e788"
-      ],
       "items": {
         "type": "string",
-        "x-format": {
-          "guid": true
-        }
-      }
+        "format": "uuid"
+      },
+      "default": [],
+      "description": "IDs of error groups associated with this check result."
     }
   },
   "required": [

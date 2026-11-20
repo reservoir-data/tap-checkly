@@ -1,0 +1,47 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "state": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Describe the event state, if the ping was received or not."
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "UTC timestamp on which we received the event."
+    },
+    "source": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Source which triggered the event."
+    },
+    "userAgent": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "User agent from the ping."
+    },
+    "checkId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "id"
+  ]
+}

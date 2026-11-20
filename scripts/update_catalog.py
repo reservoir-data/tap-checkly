@@ -24,7 +24,7 @@ SCHEMAS_DIR = "tap_checkly/schemas"
 OPENAPI_URL = "https://www.checklyhq.com/docs/api-reference/openapi.json"
 
 
-def main() -> None:  # noqa: C901, PLR0912
+def main() -> None:  # noqa: C901, PLR0912, PLR0915
     """Main function."""
     response = requests.get(OPENAPI_URL, timeout=60)
     response.raise_for_status()
@@ -148,6 +148,14 @@ def main() -> None:  # noqa: C901, PLR0912
             ]
             if get_in(path, resolved_schema) == "date":  # type: ignore[no-untyped-call]
                 resolved_schema = assoc_in(resolved_schema, path, "date-time")  # type: ignore[no-untyped-call]
+
+        if name == "heartbeat_events":
+            path = ["properties", "timestamp", "format"]
+            if get_in(path, resolved_schema) == "date":  # type: ignore[no-untyped-call]
+                resolved_schema = assoc_in(resolved_schema, path, "date-time")  # type: ignore[no-untyped-call]
+
+            # Not part of the API response, injected from the parent check
+            resolved_schema = assoc_in(resolved_schema, ["properties", "checkId"], {"type": "string"})  # type: ignore[no-untyped-call]
 
         resolved_schema = normalizer.preprocess_schema(resolved_schema, key_properties=stream.primary_keys)
 

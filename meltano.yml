@@ -21,9 +21,10 @@ plugins:
     - name: account_id
       description: Checkly Account ID
     - name: token
-      kind: password
+      kind: string
       label: API Token
       description: API Token for Checkly
+      sensitive: true
     - name: start_date
       kind: date_iso8601
       label: Start Date
@@ -37,8 +38,8 @@ plugins:
       start_date: '2022-01-01'
   loaders:
   - name: target-duckdb
-    variant: jwills
-    pip_url: target-duckdb~=0.4
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/target-duckdb.git@v0.12.0 duckdb==2.0.1
     config:
       filepath: output/wh.duckdb
       default_target_schema: ${MELTANO_ENVIRONMENT}_${MELTANO_EXTRACTOR_NAMESPACE}

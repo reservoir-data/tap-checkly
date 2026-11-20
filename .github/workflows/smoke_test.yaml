@@ -1,0 +1,85 @@
+name: Smoke test tap-checkly
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - tap_checkly/**
+      - tests/smoke/**
+      - meltano.yml
+      - plugins/**
+      - pyproject.toml
+      - uv.lock
+      - .github/workflows/smoke_test.yaml
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - tap_checkly/**
+      - tests/smoke/**
+      - meltano.yml
+      - plugins/**
+      - pyproject.toml
+      - uv.lock
+      - .github/workflows/smoke_test.yaml
+  workflow_dispatch:
+  schedule:
+  # Every 6 hours, matching the period of the Checkly heartbeat monitor (30 minute grace).
+  # Offset from the top of the hour, when scheduled runs are most likely to be delayed.
+  - cron: "17 */6 * * *"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  # Never cancel a run on main, so a successful one always gets to ping the heartbeat
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+env:
+  FORCE_COLOR: "1"
+  # renovate: datasource=pypi depName=uv
+  UV_VERSION: 0.13.9
+  # renovate: datasource=pypi depName=meltano
+  MELTANO_VERSION: 4.4.1
+  # Keep in sync with the duckdb pin in the target-duckdb pip_url in meltano.yml
+  # renovate: datasource=pypi depName=duckdb-cli
+  DUCKDB_CLI_VERSION: 2.0.1
+
+jobs:
+  smoke-test:
+    name: Meltano smoke test
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    # Secrets are not available to pull requests from forks
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    env:
+      TAP_CHECKLY_ACCOUNT_ID: ${{ secrets.TAP_CHECKLY_ACCOUNT_ID }}
+      TAP_CHECKLY_TOKEN: ${{ secrets.TAP_CHECKLY_TOKEN }}
+    steps:
+    - uses: actions/checkout@v7.0.1
+      with:
+        persist-credentials: false
+    - uses: astral-sh/setup-uv@v10.4.0
+      with:
+        version: ${{ env.UV_VERSION }}
+    - name: Install Meltano
+      # --no-config: don't apply this project's uv settings (e.g. prerelease = "allow") to Meltano itself
+      run: uv tool install --no-config meltano=="${MELTANO_VERSION}"
+    - name: Install plugins
+      run: meltano install tap-checkly target-duckdb
+    - name: Run tap-checkly to target-duckdb
+      run: meltano run tap-checkly target-duckdb
+    - name: Validate landed data
+      # Explicit bash enables pipefail, so a failed validation still fails the step
+      shell: bash
+      run: >
+        uvx --no-config --from duckdb-cli=="${DUCKDB_CLI_VERSION}"
+        duckdb -bail -readonly output/wh.duckdb
+        < tests/smoke/validate.sql
+        | tee -a "$GITHUB_STEP_SUMMARY"
+    - name: Ping Checkly heartbeat
+      # Only healthy runs of main count towards the heartbeat monitor
+      if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+      env:
+        CHECKLY_HEARTBEAT_URL: ${{ secrets.CHECKLY_HEARTBEAT_URL }}
+      run: curl --fail --silent --show-error --retry 3 --max-time 10 "$CHECKLY_HEARTBEAT_URL"

@@ -48,7 +48,7 @@ env:
 jobs:
   smoke-test:
     name: Meltano smoke test
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     # Secrets are not available to pull requests from forks
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository

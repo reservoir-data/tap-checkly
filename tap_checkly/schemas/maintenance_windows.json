@@ -164,6 +164,64 @@
               "guid": true
             }
           }
+        },
+        "componentConfigs": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "statusPageId": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "x-format": {
+                  "guid": true
+                }
+              },
+              "affectAllComponents": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "components": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "componentId": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "x-format": {
+                        "guid": true
+                      }
+                    },
+                    "status": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },

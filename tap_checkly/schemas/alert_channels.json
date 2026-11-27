@@ -118,6 +118,27 @@
       "description": "Automatically subscribe newly created checks to this alert channel.",
       "default": false
     },
+    "sendErrorGroupCreated": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Whether the channel is notified when an error group is created in Errors. Null means the default: on. Left out on a create it is the default; left out on an update the stored value stays."
+    },
+    "sendErrorGroupRegression": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Whether the channel is notified when a resolved error group receives new errors again in Errors. Null means the default: on. Left out on a create it is the default; left out on an update the stored value stays."
+    },
+    "sendErrorGroupResolved": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Whether the channel is notified when an error group it was notified about is resolved in Errors. Null means the default: on for PagerDuty, Opsgenie and a webhook whose error template reads `{{ALERT_STATUS}}`, off for any other channel. Left out on a create it is the default; left out on an update the stored value stays."
+    },
     "created_at": {
       "type": [
         "string",

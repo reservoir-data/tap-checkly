@@ -89,6 +89,13 @@
       ],
       "description": "Time the check spent producing its result, in milliseconds. For protocol checks this is the measured operation time; for browser, multi-step, Playwright and agentic checks it is the run wall-clock duration."
     },
+    "responseTimeWithoutDns": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Response time without the DNS lookup, in milliseconds: the total time of the request minus its DNS lookup. For a request that failed after it connected, such as a timeout, this is the time until the failure. Only returned when requested through the `fields` parameter of the v2 list. `null` when the result has no timing phases or no connection was attempted, for example after a failed DNS lookup; API checks and URL monitors record them."
+    },
     "apiCheckResult": {
       "type": [
         "object",
